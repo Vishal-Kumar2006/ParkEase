@@ -1,0 +1,96 @@
+
+.parking-details {
+
+    background-color: #000f3b;
+    margin: 5% 10% 5% 10%;
+}
+
+.parking-img {
+    border-radius: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.parking-info {
+    margin: 0.5rem;
+    color: white;
+}
+
+.detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.parking-status {
+    font-size: 1.5rem;
+}
+.open {
+    color: rgb(48, 255, 48);
+}
+
+.close {
+    color: red;
+}
+
+.p-d {
+    margin: 0.3rem;
+}
+
+.parking-update-btn {
+    display: flex;
+    align-items: center;
+    margin: 0% 10% 10% 10%;
+    width: 80%;
+    justify-content: space-between;
+}
+
+#parking-update {
+    font-size: 2.3rem;
+    background-color: #000f3bfa;
+    color: #a7a7a7;
+    padding: 0 1rem 0 1rem;
+    border-radius: 0.3rem;
+    transition: 0.2s;
+    border: none;
+}
+
+#parking-update:hover {
+    background-color: #000f3b;
+    color: #ffffff;
+    padding: 0 1rem 0 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgb(90, 25, 255);
+}
+
+#parking-delete {
+    font-size: 2.3rem;
+    background-color: #3b0000fa;
+    color: #a7a7a7;
+    padding: 0 1rem 0 1rem;
+    border-radius: 0.3rem;
+    transition: 0.2s;
+    border: none;
+}
+
+#parking-delete:hover {
+    background-color: #3b0000;
+    color: #ffffff;
+    padding: 0 1rem 0 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgb(135, 0, 0);
+}
+
+
+@media (max-width: 840px) {
+    .parking-update-btn {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .parking-update-btn {
+       gap: 1rem; 
+    }
+}
