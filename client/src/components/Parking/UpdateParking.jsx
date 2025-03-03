@@ -1,17 +1,22 @@
 import { useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import "./NewParking.css";
 
-const NewParking = () => {
+const UpdateParking = () => {
+  const { id } = useParams();
+  const location = useLocation();
+  const parking = location.state?.parking; // Get parking data from state
+
   const [parkingData, setParkingData] = useState({
-    name: "",
-    image: "",
-    location: "",
-    totalSlots: "",
-    availableSlots: "",
-    pricePerHour: "",
-    isOpen: true,
-    isElectric:true,
+    name: parking?.name || "",
+    image: parking?.image || "",
+    location: parking?.location || "",
+    totalSlots: parking?.totalSlots || "",
+    availableSlots: parking?.availableSlots || "",
+    pricePerHour: parking?.pricePerHour || "",
+    isOpen: parking?.isOpen || false,
+    isElectric: parking?.isElectric || false,
   });
 
   const handleChange = (e) => {
@@ -24,36 +29,23 @@ const NewParking = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post(
-        "http://localhost:5000/parkings/new",
+      const response = await axios.put(
+        `http://localhost:5000/parkings/${id}/update`,
         parkingData
       );
-      alert("Parking Created Successfully!");
-      window.location.href = "http://localhost:5173/parkings";
+      alert("Parking Updated Successfully!");
       console.log(response.data);
-
-      // Reset form after submission
-      setParkingData({
-        name: "",
-        image: "",
-        location: "",
-        totalSlots: "",
-        availableSlots: "",
-        pricePerHour: "",
-        isOpen: true,
-        isElectric:true,
-      });
+      window.location.href = "http://localhost:5173/parkings";
     } catch (error) {
-      console.error("Error creating parking:", error);
-      alert("Failed to create parking.");
+      console.error("Error updating parking:", error);
+      alert("Failed to update parking.");
     }
   };
 
   return (
     <div className="NewParking">
-      <h2 className="NewParking-heading">Create New Parking</h2>
+      <h2 className="NewParking-heading">Update Parking</h2>
       <form onSubmit={handleSubmit}>
         <div className="newParking-input">
           <label>Parking Name:</label>
@@ -103,7 +95,7 @@ const NewParking = () => {
               required
             />
           </div>
-      
+
           <div className="newParking-input">
             <label>Available Slots:</label>
             <input
@@ -115,7 +107,6 @@ const NewParking = () => {
               required
             />
           </div>
-      
         </div>
 
         <div className="newParking-input">
@@ -129,34 +120,35 @@ const NewParking = () => {
             required
           />
         </div>
+
         <div className="newParking-dual-input">
           <div className="newParking-input check">
             <label>Open Status</label>
             <input
-                type="checkbox"
-                name="isOpen"
-                className="check-input"
-                checked={parkingData.isOpen}
-                onChange={handleChange}
+              type="checkbox"
+              name="isOpen"
+              className="check-input"
+              checked={parkingData.isOpen}
+              onChange={handleChange}
             />
           </div>
-          
+
           <div className="newParking-input check">
             <label>Is Electric Parking</label>
             <input
-                type="checkbox"
-                name="isElectric"
-                className="check-input"
-                checked={parkingData.isElectric}
-                onChange={handleChange}
+              type="checkbox"
+              name="isElectric"
+              className="check-input"
+              checked={parkingData.isElectric}
+              onChange={handleChange}
             />
-            </div>
+          </div>
         </div>
 
-        <button type="submit" className="newParking-btn">Create Parking</button>
+        <button type="submit" className="newParking-btn">Update Parking</button>
       </form>
     </div>
   );
 };
 
-export default NewParking;
+export default UpdateParking;

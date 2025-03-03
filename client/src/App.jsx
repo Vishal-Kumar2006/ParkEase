@@ -4,6 +4,7 @@ import Navbar from "./components/Body/Navbar.jsx";
 import Footer from "./components/Body/Footer.jsx";
 import "./App.css";
 
+
 // Lazy Loading Components for Performance
 const Home = lazy(() => import("./components/Parking/Home.jsx"));
 const AllParking = lazy(() => import("./components/Parking/allParkings.jsx"));
@@ -12,6 +13,7 @@ const ParkingDetails = lazy(() => import("./components/Parking/Parking.jsx"));
 const Profile = lazy(() => import("./components/User/Profile.jsx"));
 const NotFound = lazy(() => import("./components/Body/NotFound.jsx")); // Handle unknown routes
 const NewParking = lazy(()=> import("./components/Parking/NewParking.jsx"));
+const UpdateParking = lazy(()=> import("./components/Parking/UpdateParking.jsx"));
 
 const App = () => {
   return (
@@ -30,6 +32,9 @@ const App = () => {
             
             {/* Dynamic Route for Individual Parking Details */}
             <Route path="/parkings/:id" element={<ParkingDetails />} />
+
+            {/* Update Route */}
+            <Route path="/parkings/:id/update" element={<UpdateParking />} />
             
             {/* Catch-All Route for 404 Pages */}
             <Route path="*" element={<NotFound />} />

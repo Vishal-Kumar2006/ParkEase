@@ -33,7 +33,7 @@ const Navbar = () => {
 
         <NavLink to="/parkings" className="nav-option">
           <DirectionsCarIcon /> 
-          <p>Parkings</p>
+          <p>All Parkings</p>
         </NavLink>
 
         <NavLink to="/electricParking" className="nav-option">

@@ -1,4 +1,4 @@
-.Parkings {
+.Electric-Parkings {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three cards per row */
     gap: 1rem;
@@ -6,9 +6,10 @@
     padding: 1rem;
 }
 
-.parking-card {
+.Electric-parking-card {
+    /* border: 2px solid white; */
     text-align: center;
-    background-color: #7c8ba3;
+    background-color: #003ba0;
     border-radius: 1rem 1rem 0 0;
     animation: appear 1s ease-in-out;
     animation-timeline: view();
@@ -16,49 +17,49 @@
     transition: 0.2s ease-in-out;
 }
 
-.parking-card:hover{
+.Electric-parking-card:hover{
     box-shadow: 0 0 20px rgb(0, 12, 92);
     cursor: pointer;
 }
 
-.parking-name {
+.Electric-parking-name {
     display: flex;
     align-items: flex-start;
     text-align: left;
     margin-bottom: 1rem;
 }
 
-.parking-img {
+.Electric-parking-img {
    width: 100%;
    border-radius:10px 10px 0 0;
 }
 
-.parking-name {
+.Electric-parking-name {
     text-align: start;
     margin-top: 1rem;
     padding-left: 0.5rem;
     margin-bottom: 0.1rem;
 }
 
-.parking-address {
+.Electric-parking-address {
     text-align: start;
     padding-left: 0.5rem;
     
 }
 
-.detail {
+.Electric-detail {
     display: flex;
     justify-content: space-between;
 }
 
 
-.parkings-btn {
+.Electric-parkings-btn {
     align-items: center;
     text-align: start;
     justify-content: start;
 }
 
-.parking-btn {
+.Electric-parking-btn {
     color: rgb(186, 186, 186);
     background-color: #04003a;
     padding: 0.2rem 1rem 0.2rem 1rem;
@@ -74,14 +75,14 @@
 }
 
 
-.parking-btn:hover {
+.Electric-parking-btn:hover {
    cursor: pointer;
    color: rgb(255, 255, 255);
    box-shadow: 0 0 10px black;
 
 }
 
-.parking-status {
+.Electric-parking-status {
     display: flex;
     text-align: center;
     justify-content: center;
