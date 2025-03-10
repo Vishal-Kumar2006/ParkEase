@@ -7,11 +7,10 @@ const NewParking = () => {
     name: "",
     image: "",
     location: "",
-    totalSlots: "",
-    availableSlots: "",
+    totalSlots: new Array(24).fill(true), // 24-hour slots (default: all available)
     pricePerHour: "",
     isOpen: true,
-    isElectric:true,
+    isElectric: true,
   });
 
   const handleChange = (e) => {
@@ -22,32 +21,45 @@ const NewParking = () => {
     });
   };
 
+  // ✅ Toggle Slot Availability (True/False)
+  const toggleSlot = (index) => {
+    setParkingData((prevData) => {
+      const updatedSlots = [...prevData.totalSlots];
+      updatedSlots[index] = !updatedSlots[index]; // Toggle the slot
+      return { ...prevData, totalSlots: updatedSlots };
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post(
         "http://localhost:5000/parkings/new",
-        parkingData
+        parkingData,
+        { withCredentials: true }
       );
+
       alert("Parking Created Successfully!");
       window.location.href = "http://localhost:5173/parkings";
       console.log(response.data);
 
-      // Reset form after submission
       setParkingData({
         name: "",
         image: "",
         location: "",
-        totalSlots: "",
-        availableSlots: "",
+        totalSlots: new Array(24).fill(true),
         pricePerHour: "",
         isOpen: true,
-        isElectric:true,
+        isElectric: true,
       });
     } catch (error) {
       console.error("Error creating parking:", error);
-      alert("Failed to create parking.");
+      if (error.response && error.response.status === 401) {
+        alert("Unauthorized! Please log in again.");
+        window.location.href = "http://localhost:5173/user/login";
+      } else {
+        alert("Failed to create parking.");
+      }
     }
   };
 
@@ -91,33 +103,6 @@ const NewParking = () => {
           />
         </div>
 
-        <div className="newParking-dual-input">
-          <div className="newParking-input">
-            <label>Total Slots:</label>
-            <input
-              type="number"
-              name="totalSlots"
-              className="input"
-              value={parkingData.totalSlots}
-              onChange={handleChange}
-              required
-            />
-          </div>
-      
-          <div className="newParking-input">
-            <label>Available Slots:</label>
-            <input
-              type="number"
-              name="availableSlots"
-              className="input"
-              value={parkingData.availableSlots}
-              onChange={handleChange}
-              required
-            />
-          </div>
-      
-        </div>
-
         <div className="newParking-input">
           <label>Price Per Hour:</label>
           <input
@@ -129,31 +114,52 @@ const NewParking = () => {
             required
           />
         </div>
+
         <div className="newParking-dual-input">
           <div className="newParking-input check">
             <label>Open Status</label>
             <input
-                type="checkbox"
-                name="isOpen"
-                className="check-input"
-                checked={parkingData.isOpen}
-                onChange={handleChange}
+              type="checkbox"
+              name="isOpen"
+              className="check-input"
+              checked={parkingData.isOpen}
+              onChange={handleChange}
             />
           </div>
-          
+
           <div className="newParking-input check">
             <label>Is Electric Parking</label>
             <input
-                type="checkbox"
-                name="isElectric"
-                className="check-input"
-                checked={parkingData.isElectric}
-                onChange={handleChange}
+              type="checkbox"
+              name="isElectric"
+              className="check-input"
+              checked={parkingData.isElectric}
+              onChange={handleChange}
             />
-            </div>
+          </div>
+        </div>
+        {/* ✅ Slots Section */}
+        <div className="slots-container">
+          <h3>24-Hour Slots</h3>
+          <div className="slots-grid">
+            {parkingData.totalSlots.map((slot, index) => (
+              <button
+                key={index}
+                className={`slot-btn ${slot ? "available" : "booked"}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleSlot(index);
+                }}
+              >
+                {index}  to {index + 1} {slot ? "🟢" : "🔴"}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <button type="submit" className="newParking-btn">Create Parking</button>
+        <button type="submit" className="newParking-btn">
+          Create Parking
+        </button>
       </form>
     </div>
   );

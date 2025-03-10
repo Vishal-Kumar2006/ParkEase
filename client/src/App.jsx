@@ -1,49 +1,54 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Navbar from "./components/Body/Navbar.jsx";
 import Footer from "./components/Body/Footer.jsx";
 import "./App.css";
 
-
 // Lazy Loading Components for Performance
 const Home = lazy(() => import("./components/Parking/Home.jsx"));
-const AllParking = lazy(() => import("./components/Parking/allParkings.jsx"));
+
+// All Parkings Routes
+const AllParking = lazy(() => import("./components/Parking/AllParkings.jsx"));
 const ElectricParking = lazy(() => import("./components/Parking/ElectricParking.jsx"));
 const ParkingDetails = lazy(() => import("./components/Parking/Parking.jsx")); 
+const NewParking = lazy(() => import("./components/Parking/NewParking.jsx"));
+const UpdateParking = lazy(() => import("./components/Parking/UpdateParking.jsx"));
+
 const Profile = lazy(() => import("./components/User/Profile.jsx"));
+const SignUp = lazy(() => import("./components/User/SignUp.jsx"));
+const Login = lazy(() => import("./components/User/Login.jsx"));
+
 const NotFound = lazy(() => import("./components/Body/NotFound.jsx")); // Handle unknown routes
-const NewParking = lazy(()=> import("./components/Parking/NewParking.jsx"));
-const UpdateParking = lazy(()=> import("./components/Parking/UpdateParking.jsx"));
 
 const App = () => {
   return (
-      <div className="App">
-        <Navbar />
-        
-        {/* Suspense to handle lazy loading fallback */}
-        <Suspense fallback={<h2>Loading...</h2>}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/parkings" element={<AllParking />} />
-            <Route path="/electricParking" element={<ElectricParking />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/parkings/new" element={<NewParking />} />
-            
-            
-            {/* Dynamic Route for Individual Parking Details */}
-            <Route path="/parkings/:id" element={<ParkingDetails />} />
+    <div className="App">
+      <Navbar />
+      
+      {/* Suspense to handle lazy loading fallback */}
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-            {/* Update Route */}
-            <Route path="/parkings/:id/update" element={<UpdateParking />} />
-            
-            {/* Catch-All Route for 404 Pages */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+          {/* All Parkings Routes */}
+          <Route path="/parkings" element={<AllParking />} />
+          <Route path="/electricParking" element={<ElectricParking />} />
+          <Route path="/parkings/new" element={<NewParking />} />
+          <Route path="/parkings/:id" element={<ParkingDetails />} />
+          <Route path="/parkings/:id/update" element={<UpdateParking />} />
 
-        <Footer />
-      </div>
-   
+          {/* All User Routes */}
+          <Route path="/user/profile" element={<Profile />} />
+          <Route path="/user/signup" element={<SignUp />} />
+          <Route path="/user/login" element={<Login />} />
+          
+          {/* Catch-All Route for 404 Pages */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+
+      <Footer />
+    </div>
   );
 };
 

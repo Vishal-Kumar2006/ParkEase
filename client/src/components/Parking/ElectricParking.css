@@ -1,13 +1,12 @@
 .Electric-Parkings {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+    grid-template-columns: repeat(3, 1fr); /* Three cards per row on large screens */
     gap: 1rem;
     justify-content: center;
     padding: 1rem;
 }
 
 .Electric-parking-card {
-    /* border: 2px solid white; */
     text-align: center;
     background-color: #003ba0;
     border-radius: 1rem 1rem 0 0;
@@ -100,17 +99,16 @@
     color: rgb(171, 0, 0);
 }
 
-/* ✅ Responsive Navbar with Menu Button */
+/* Responsive Design for Tablets (840px and below) */
 @media (max-width: 840px) {
-    .Parkings {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Three cards per row */
+    .Electric-Parkings {
+        grid-template-columns: repeat(2, 1fr); /* Two cards per row */
     }
 }
 
+/* Responsive Design for Mobile Phones (510px and below) */
 @media (max-width: 510px) {
-    .Parkings {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr); /* Three cards per row */
+    .Electric-Parkings {
+        grid-template-columns: repeat(1, 1fr); /* One card per row */
     }
 }

@@ -38,6 +38,46 @@
     margin: 0.3rem;
 }
 
+.slots-container h3 {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.slot-btn {
+    display: flex;
+    margin: 1rem;
+    font-size: 0.8rem;
+    border-radius: 0.4rem;
+    border: none;
+    padding: 0.5rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    animation: appear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 15%;
+}
+
+.available {
+    background-color: #85ff85ef;
+    box-shadow: 0 0 1rem rgb(168, 255, 184);
+}
+
+.booked {
+    background-color: #ff6d6dca;
+    box-shadow: 0 0 1rem rgb(174, 0, 0);
+}
+
 .parking-update-btn {
     display: flex;
     align-items: center;
@@ -92,5 +132,34 @@
 
     .parking-update-btn {
        gap: 1rem; 
+    }
+
+    .slots-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 740px) {
+    .parking-update-btn {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .parking-update-btn {
+       gap: 1rem; 
+    }
+
+    .slots-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 420px) {
+    .slots-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
     }
 }

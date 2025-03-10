@@ -1,30 +1,27 @@
-const express = require("express");
-const router = express.Router();
 const Parking = require("../models/parking");
 
-
-router.get("/", async (req, res) => {
+async function home (req, res) {
     const allPakings = await Parking.find(req.params);
+    console.log(allPakings);
     res.send(allPakings);
-});
+}
 
+async function handleNewParking (req, res) {
+  try {
+    const userId = req.user?.id; // Ensure middleware extracts user from cookie
+    console.log(req.user);
+    if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
-router.post("/new", async (req, res) => {
+    const newParking = new Parking({ ...req.body, user: userId });
+    await newParking.save();
     
-    try {
-        const parking = new Parking(req.body);
-        if(parking.image == "") parking.image = "https://www.newdelhiairport.in/media/2011/premium-lane-parking.jpg";
-        console.log(parking);
-        const saved = await parking.save();
-        res.json(saved);
-    } catch (error) {
-        console.error("Error while saving to DB:", error);  // Log full error
-        res.status(500).json({ message: error.message });
-    }
-});
+    res.status(201).json({ message: "Parking created successfully", newParking });
+  } catch (error) {
+    res.status(500).json({ message: "Error creating parking", error });
+  }
+}
 
-// Move this route below to avoid conflicts
-router.get("/:id", async (req, res) => {
+async function getParking(req, res) {
     try {
         const parking = await Parking.findById(req.params.id);
         if (!parking) return res.status(404).json({ message: "Parking not found" });
@@ -32,10 +29,9 @@ router.get("/:id", async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-});
+}
 
-
-router.put("/:id/update", async (req, res) => {
+async function updateParking(req, res) {
     try {
         const updatedParking = await Parking.findByIdAndUpdate(
             req.params.id,  
@@ -51,10 +47,9 @@ router.put("/:id/update", async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-});
+}
 
-
-router.delete("/:id/delete", async (req, res) => {
+async function handleDeleteParking(req, res) {
     try {
         const deleteParking = await Parking.findByIdAndDelete(req.params.id); // ✅ Removed req.body
 
@@ -66,7 +61,7 @@ router.delete("/:id/delete", async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-});
+}
 
 
-module.exports = router;
+module.exports = {home, handleNewParking, getParking, updateParking, handleDeleteParking }

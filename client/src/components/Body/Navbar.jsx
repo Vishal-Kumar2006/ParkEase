@@ -15,6 +15,9 @@ import "./Navbar.css";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  
+
+
   return (
     <header className="Navbar">
       <h3 className="nav-heading">ParkEase</h3>
@@ -47,7 +50,7 @@ const Navbar = () => {
          
         </NavLink>
 
-        <NavLink to="/profile" className="nav-option">
+        <NavLink to="/user/profile" className="nav-option">
           <AccountBoxIcon /> 
           <p>Profile</p>
         </NavLink>

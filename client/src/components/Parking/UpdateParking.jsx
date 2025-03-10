@@ -32,10 +32,12 @@ const UpdateParking = () => {
     try {
       const response = await axios.put(
         `http://localhost:5000/parkings/${id}/update`,
-        parkingData
+        parkingData,
+        { withCredentials: true } 
       );
       alert("Parking Updated Successfully!");
       console.log(response.data);
+      
       window.location.href = "http://localhost:5173/parkings";
     } catch (error) {
       console.error("Error updating parking:", error);
@@ -83,32 +85,6 @@ const UpdateParking = () => {
           />
         </div>
 
-        <div className="newParking-dual-input">
-          <div className="newParking-input">
-            <label>Total Slots:</label>
-            <input
-              type="number"
-              name="totalSlots"
-              className="input"
-              value={parkingData.totalSlots}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="newParking-input">
-            <label>Available Slots:</label>
-            <input
-              type="number"
-              name="availableSlots"
-              className="input"
-              value={parkingData.availableSlots}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
-
         <div className="newParking-input">
           <label>Price Per Hour:</label>
           <input
@@ -144,6 +120,26 @@ const UpdateParking = () => {
             />
           </div>
         </div>
+
+        {/* ✅ Slots Section */}
+        <div className="slots-container">
+          <h3>24-Hour Slots</h3>
+          <div className="slots-grid">
+            {parkingData.totalSlots.map((slot, index) => (
+              <button
+                key={index}
+                className={`slot-btn ${slot ? "available" : "booked"}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleSlot(index);
+                }}
+              >
+                {index}  to {index + 1} {slot ? "🟢" : "🔴"}
+              </button>
+            ))}
+          </div>
+        </div>
+
 
         <button type="submit" className="newParking-btn">Update Parking</button>
       </form>
