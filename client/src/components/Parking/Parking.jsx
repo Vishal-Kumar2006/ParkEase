@@ -4,9 +4,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./Parking.css";
 
 const Parking = () => {
-  const { id } = useParams(); // Get parking ID from URL
+  const { id } = useParams();
   const [parking, setParking] = useState(null);
-  const [user, setUser] = useState(null);
+  const [currUser, setCurrUser] = useState(null);
+  const [parkingAdmin, setParkingAdmin] = useState(null);
+  let [booking, setBooking] = [];
+  
   const navigate = useNavigate();
 
   // ✅ Fetch parking and user details in parallel
@@ -15,10 +18,10 @@ const Parking = () => {
       try {
         const [parkingRes, userRes] = await Promise.all([
           axios.get(`http://localhost:5000/parkings/${id}`, { withCredentials: true }),
-          axios.get("http://localhost:5000/user/", { withCredentials: true })
+          axios.get("http://localhost:5000/user/", { withCredentials: true }),
         ]);
         setParking(parkingRes.data);
-        setUser(userRes.data.user);
+        setCurrUser(userRes.data.user);
       } catch (error) {
         if (error.response?.status === 401) {
           console.error("Unauthorized access. Redirecting to login...");
@@ -32,37 +35,39 @@ const Parking = () => {
     fetchData();
   }, [id, navigate]);
 
+  // ✅ Fetch Admin Data When `parking.user` is Available
+  useEffect(() => {
+    if (parking?.user) {
+      axios
+        .get(`http://localhost:5000/user/${parking.user}`, { withCredentials: true })
+        .then((response) => {
+          setParkingAdmin(response.data); // ✅ Store admin data in state
+        })
+        .catch((error) => {
+          console.error("Error fetching admin user:", error);
+        });
+    }
+  }, [parking]);
+
   if (!parking) {
     return <h2>Loading...</h2>;
   }
 
-  // ✅ Handle update navigation
-  const handleUpdate = () => {
-    navigate(`/parkings/${parking._id}/update`, { state: { parking } });
-  };
 
-  // ✅ Handle delete operation
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this parking?");
-    if (!confirmDelete) return;
 
-    try {
-      await axios.delete(`http://localhost:5000/parkings/${id}/delete`, {
-        withCredentials: true,
-      });
-      alert("Parking deleted successfully.");
-      navigate("/parkings");
-    } catch (error) {
-      console.error("Error deleting parking:", error);
-      alert(`Error: ${error.response?.data?.message || error.message}`);
-    }
-  };
+  const handleBooking = () => {
+    console.log("Book Parking");
+  }
 
   return (
     <>
-      <div className="parking-details">
-        {console.log(user)} {/* Debugging purpose */}
-
+      {console.log(parking.isElectric)}
+      <div className={`parking-details ${parking.isElectric ? "electric" : ""}`} >
+             {/* ✅ Display Admin Name When Available */}
+        <div className="parking-admin">
+          <img src={parkingAdmin ? parkingAdmin.photo : "Loading..."} alt="" className="parking-admin-photo" />
+          <p className="parking-admin-name" > {parkingAdmin ? parkingAdmin.name : "Loading..."}</p>
+        </div>     
         <img src={parking.image} alt="Parking Image" className="parking-img" />
         <div className="parking-info">
           <div className="detail">
@@ -80,30 +85,46 @@ const Parking = () => {
           </p>
 
           <div className="slots-container">
-          <h3>24-Hour Slots</h3>
-          <div className="slots-grid">
-            {parking.totalSlots.map((slot, index) => (
-              <button
-                key={index}
-                className={`slot-btn ${slot ? "available" : "booked"}`}
-              >
-                {index}  to {index + 1} {slot ? "🟢" : "🔴"}
-              </button>
-            ))}
+            <h3>24-Hour Slots</h3>
+            <div className="slots-grid">
+              {parking.totalSlots.map((slot, index) => (
+                <button
+                  key={index}
+                  className={`slot-btn ${slot ? "available" : "booked"}`}
+                >
+                  {index} to {index + 1} {slot ? "🟢" : "🔴"}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-          
-        </div>
-
       </div>
 
       {/* ✅ Conditionally Render Update & Delete Buttons if User is Authorized */}
-      {user && (
+      {currUser && parking.user && currUser._id === parking.user ? (
         <div className="parking-update-btn">
-          <button id="parking-update" onClick={handleUpdate}>Update Parking</button>
-          <button id="parking-delete" onClick={handleDelete}>Delete Parking</button>
+          <button id="parking-update" onClick={() => navigate(`/parkings/${parking._id}/update`, { state: { parking } })}>Update Parking</button>
+          <button id="parking-delete" onClick={async () => {
+            if (window.confirm("Are you sure you want to delete this parking?")) {
+              try {
+                await axios.delete(`http://localhost:5000/parkings/${id}/delete`, { withCredentials: true });
+                alert("Parking deleted successfully.");
+                navigate("/parkings");
+              } catch (error) {
+                console.error("Error deleting parking:", error);
+                alert(`Error: ${error.response?.data?.message || error.message}`);
+              }
+            }
+          }}>Delete Parking</button>
         </div>
+      ) : (
+        <div className="parking-update-btn">
+          <button onClick={handleBooking} id="parking-booking">Book Parking</button>
+        </div>
+
+
       )}
+
     </>
   );
 };

@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const session = require("express-session");
-const MongoStore = require("connect-mongo"); // ✅ Store session in MongoDB
+const MongoStore = require("connect-mongo"); 
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 
@@ -17,7 +17,7 @@ const userRoutes = require("./routes/user.js");
 const app = express();
 
 // ✅ Middleware
-app.use(express.json()); 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -42,7 +42,7 @@ db.once("open", () => console.log("✅ MongoDB Atlas Connected!"));
 // ✅ Store sessions in MongoDB
 app.use(
   session({
-    secret: process.env.JWT_SECRET, // Secure secret
+    secret: process.env.SESSION_SECRET || "thisIsAtempraryKey", // Use a separate session secret
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
@@ -52,14 +52,18 @@ app.use(
     }),
     cookie: {
       httpOnly: true, // Prevents client-side JS access
-      secure: false, // Set to true for HTTPS
+      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     },
   })
 );
+
+// ✅ Flash messages (must be after session middleware)
 app.use(flash());
 
+// ✅ Debugging: Log session data for testing
 app.use((req, res, next) => {
+  console.log("Session Data:", req.session);
   res.locals.flashMessages = req.flash();
   next();
 });
@@ -68,6 +72,7 @@ app.use((req, res, next) => {
 app.use("/parkings", restrictedToLoggedInUserOnly, pagesRoutes);
 app.use("/user", userRoutes);
 
+// ✅ Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);

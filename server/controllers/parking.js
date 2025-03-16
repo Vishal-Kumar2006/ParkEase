@@ -2,7 +2,6 @@ const Parking = require("../models/parking");
 
 async function home (req, res) {
     const allPakings = await Parking.find(req.params);
-    console.log(allPakings);
     res.send(allPakings);
 }
 

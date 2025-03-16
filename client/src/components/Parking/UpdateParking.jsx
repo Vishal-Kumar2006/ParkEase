@@ -12,12 +12,25 @@ const UpdateParking = () => {
     name: parking?.name || "",
     image: parking?.image || "",
     location: parking?.location || "",
-    totalSlots: parking?.totalSlots || "",
+
+    // 24-hour slots (default: all available)
+    totalSlots: Array.isArray(parking?.totalSlots) && parking?.totalSlots.length === 24 
+    ? [...parking.totalSlots] 
+    : new Array(24).fill(true),
+  
     availableSlots: parking?.availableSlots || "",
     pricePerHour: parking?.pricePerHour || "",
     isOpen: parking?.isOpen || false,
     isElectric: parking?.isElectric || false,
   });
+
+  const toggleSlot = (index) => {
+    setParkingData((prevData) => ({
+      ...prevData,
+      totalSlots: prevData.totalSlots.map((slot, i) => (i === index ? !slot : slot))
+    }));
+  };
+  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -130,12 +143,13 @@ const UpdateParking = () => {
                 key={index}
                 className={`slot-btn ${slot ? "available" : "booked"}`}
                 onClick={(e) => {
-                  e.preventDefault();
+                  e.preventDefault(); // Prevent form submission
                   toggleSlot(index);
                 }}
               >
-                {index}  to {index + 1} {slot ? "🟢" : "🔴"}
-              </button>
+              {index} to {index + 1} {slot ? "🟢" : "🔴"}
+            </button>
+            
             ))}
           </div>
         </div>

@@ -33,16 +33,40 @@ const NewParking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+
+      // Create new parking entry
       const response = await axios.post(
         "http://localhost:5000/parkings/new",
         parkingData,
         { withCredentials: true }
       );
+      
+    
+      // Add this Parking id into user info
+      const newParkingId = response.data.newParking._id; 
+  
+      // Fetch the current user data
+      const userResponse = await axios.get("http://localhost:5000/user", {
+        withCredentials: true,
+      });
+  
+      let userData = userResponse.data.user;
 
-      alert("Parking Created Successfully!");
-      window.location.href = "http://localhost:5173/parkings";
-      console.log(response.data);
+      // Update the user's parking array with the new parking ID
+      const updatedParkings = [...userData.parkings, newParkingId];
+  
+      // Send the update request to the backend (to add this parking in user's info)
+      await axios.put(
+        `http://localhost:5000/user/${userData._id}/update`, 
+        { parkings: updatedParkings }, 
+        { withCredentials: true }
+      );
+  
+      alert("Parking Created and User Updated Successfully!");
 
+      window.location.href = `http://localhost:5173/parkings/${newParkingId}`;
+  
+      // Reset Form
       setParkingData({
         name: "",
         image: "",
@@ -61,7 +85,7 @@ const NewParking = () => {
         alert("Failed to create parking.");
       }
     }
-  };
+  };  
 
   return (
     <div className="NewParking">

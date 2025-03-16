@@ -16,8 +16,6 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   
-
-
   return (
     <header className="Navbar">
       <h3 className="nav-heading">ParkEase</h3>

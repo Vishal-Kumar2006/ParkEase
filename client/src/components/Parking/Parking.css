@@ -1,9 +1,38 @@
 
 .parking-details {
 
-    background-color: #000f3b;
+    background-color: #7c8ba3;
     margin: 5% 10% 5% 10%;
+    border-radius: 0.5rem;
 }
+
+.electric {
+    background-color: #002492;
+    margin: 5% 10% 5% 10%;
+    border-radius: 0.5rem;
+}
+
+.parking-admin {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem 1rem 0.5rem 1rem;
+} 
+
+.parking-admin-photo {
+    height: 3rem;
+    border: 3px solid white;
+    border-radius: 50%;
+} 
+
+.parking-admin-name {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: start;
+    font-size: 2rem;
+    color: white;
+    margin-left: 1rem;
+} 
 
 .parking-img {
     border-radius: none;
