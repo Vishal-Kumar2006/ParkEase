@@ -97,6 +97,9 @@
     animation-range: entry 0% cover 15%;
 }
 
+.booking-slot-btn{
+    cursor: pointer;
+}
 .available {
     background-color: #85ff85ef;
     box-shadow: 0 0 1rem rgb(168, 255, 184);
@@ -149,6 +152,24 @@
     padding: 0 1rem 0 1rem;
     cursor: pointer;
     box-shadow: 0 0 20px rgb(135, 0, 0);
+}
+
+#parking-booking {
+    font-size: 2.3rem;
+    background-color: #000f3bfa;
+    color: #a7a7a7;
+    padding: 0 1rem 0 1rem;
+    border-radius: 0.3rem;
+    transition: 0.2s;
+    border: none;
+}
+
+#parking-booking:hover {
+    background-color: #000f3b;
+    color: #ffffff;
+    padding: 0 1rem 0 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgb(90, 25, 255);
 }
 
 

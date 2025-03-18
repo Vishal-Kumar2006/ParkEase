@@ -1,16 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./Parking.css";
+import "../Parking/Parking.css";
 
-const Parking = () => {
+const Book = () => {
   const { id } = useParams();
   const [parking, setParking] = useState(null);
   const [currUser, setCurrUser] = useState(null);
   const [parkingAdmin, setParkingAdmin] = useState(null);
+  const [avilableSlots, setAvilableSlots] = useState([]);
+  const [selectedSlots, setSelectedSlots] = useState([]);
+
   const navigate = useNavigate();
 
-  // ✅ Fetch parking and user details in parallel
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,11 +33,9 @@ const Parking = () => {
         }
       }
     };
-
     fetchData();
   }, [id, navigate]);
 
-  // ✅ Fetch Admin Data When `parking.user` is Available
   useEffect(() => {
     if (parking?.user) {
       axios
@@ -43,7 +43,11 @@ const Parking = () => {
           withCredentials: true,
         })
         .then((response) => {
-          setParkingAdmin(response.data); // ✅ Store admin data in state
+          setParkingAdmin(response.data);
+          const updatedSlots = parking.totalSlots
+            .map((isAvailable, index) => (isAvailable ? index : null))
+            .filter((slot) => slot !== null); // Remove null values
+          setAvilableSlots(updatedSlots);
         })
         .catch((error) => {
           console.error("Error fetching admin user:", error);
@@ -51,16 +55,59 @@ const Parking = () => {
     }
   }, [parking]);
 
-  if (!parking) {
-    return <h2>Loading...</h2>;
+  if (!parking) return <h2>Loading...</h2>;
+
+  const handleSlot = (slot) => {
+    console.log(selectedSlots.includes(slot));
+
+    setSelectedSlots((prevSlots) =>
+      prevSlots.includes(slot)
+        ? prevSlots.filter((s) => s !== slot) // Remove slot if already selected
+        : [...prevSlots, slot] // Add slot if not selected
+    );
   }
+
+  // ✅ Updated Booking Function
+  const handleBooking = async () => {
+    if (!currUser) {
+      alert("You need to log in to book a parking slot.");
+      return navigate("/user/login");
+    }
+    if (selectedSlots.length === 0) {
+      alert("Please select at least one slot.");
+      return;
+    }
+
+    const bookingData = {
+      userId: currUser._id,
+      parkingId: id,
+      bookedSlots: selectedSlots,
+      totalAmount: selectedSlots.length * parking.pricePerHour,
+      status: "Booked",
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/bookings/book",
+        bookingData,
+        {
+          withCredentials: true,
+        }
+      );
+
+      alert("Booking successful!");
+      navigate("/parkings"); // Redirect to user bookings page
+    } catch (error) {
+      console.error("Error booking slot:", error);
+      alert("Booking failed. Try again.");
+    }
+  };
 
   return (
     <>
       <div
         className={`parking-details ${parking.isElectric ? "electric" : ""}`}
       >
-        {/* ✅ Display Admin Name When Available */}
         <div className="parking-admin">
           <img
             src={parkingAdmin ? parkingAdmin.photo : "Loading..."}
@@ -68,7 +115,6 @@ const Parking = () => {
             className="parking-admin-photo"
           />
           <p className="parking-admin-name">
-            {" "}
             {parkingAdmin ? parkingAdmin.name : "Loading..."}
           </p>
         </div>
@@ -105,15 +151,19 @@ const Parking = () => {
             )}
           </p>
 
+          {/* ✅ Slot Selection */}
+          {console.log(avilableSlots)}
           <div className="slots-container">
-            <h3>24-Hour Slots</h3>
+            <h3>All Available Slots are given Below</h3>
             <div className="slots-grid">
-              {parking.totalSlots.map((slot, index) => (
+              {avilableSlots.map((slot, index) => (
                 <button
                   key={index}
-                  className={`slot-btn ${slot ? "available" : "booked"}`}
+                  className={`slot-btn booking-slot-btn ${selectedSlots.includes(slot)  ? "booked" : "available"}`}
+                  onClick={() => handleSlot(slot)}
                 >
-                  {index} to {index + 1} {slot ? "🟢" : "🔴"}
+                  
+                  {slot} to {slot + 1} {selectedSlots.includes(slot) ? "✅" : "🟢"}
                 </button>
               ))}
             </div>
@@ -121,58 +171,13 @@ const Parking = () => {
         </div>
       </div>
 
-      {/* ✅ Conditionally Render Update & Delete Buttons if User is Authorized */}
-      {currUser && parking.user && currUser._id === parking.user ? (
-        <div className="parking-update-btn">
-          <button
-            id="parking-update"
-            onClick={() =>
-              navigate(`/parkings/${parking._id}/update`, {
-                state: { parking },
-              })
-            }
-          >
-            Update Parking
-          </button>
-          <button
-            id="parking-delete"
-            onClick={async () => {
-              if (
-                window.confirm("Are you sure you want to delete this parking?")
-              ) {
-                try {
-                  await axios.delete(
-                    `http://localhost:5000/parkings/${id}/delete`,
-                    { withCredentials: true }
-                  );
-                  alert("Parking deleted successfully.");
-                  navigate("/parkings");
-                } catch (error) {
-                  console.error("Error deleting parking:", error);
-                  alert(
-                    `Error: ${error.response?.data?.message || error.message}`
-                  );
-                }
-              }
-            }}
-          >
-            Delete Parking
-          </button>
-        </div>
-      ) : (
-        <div className="parking-update-btn">
-          <button
-            id="parking-update"
-            onClick={() =>
-              navigate(`/booking/${parking._id}`)
-            }
-          >
-            Book Parking
-          </button>
-        </div>
-      )}
+      <div className="parking-update-btn">
+        <button onClick={handleBooking} id="parking-booking">
+          Book Parking
+        </button>
+      </div>
     </>
   );
 };
 
-export default Parking;
+export default Book;

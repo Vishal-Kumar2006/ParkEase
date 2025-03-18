@@ -13,6 +13,9 @@ dotenv.config();
 
 const pagesRoutes = require("./routes/parking.js");
 const userRoutes = require("./routes/user.js");
+const bookingRoutes = require("./routes/booking.js");
+
+
 
 const app = express();
 
@@ -71,6 +74,7 @@ app.use((req, res, next) => {
 // ✅ Routes
 app.use("/parkings", restrictedToLoggedInUserOnly, pagesRoutes);
 app.use("/user", userRoutes);
+app.use("/bookings", bookingRoutes);
 
 // ✅ Start Server
 const PORT = process.env.PORT || 5000;

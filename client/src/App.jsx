@@ -14,9 +14,13 @@ const ParkingDetails = lazy(() => import("./components/Parking/Parking.jsx"));
 const NewParking = lazy(() => import("./components/Parking/NewParking.jsx"));
 const UpdateParking = lazy(() => import("./components/Parking/UpdateParking.jsx"));
 
+// All User Routes
 const Profile = lazy(() => import("./components/User/Profile.jsx"));
 const SignUp = lazy(() => import("./components/User/SignUp.jsx"));
 const Login = lazy(() => import("./components/User/Login.jsx"));
+
+// All Booking Routes
+const Booking = lazy(() => import("./components/Booking/Book.jsx"));
 
 const NotFound = lazy(() => import("./components/Body/NotFound.jsx")); // Handle unknown routes
 
@@ -41,6 +45,9 @@ const App = () => {
           <Route path="/user/profile" element={<Profile />} />
           <Route path="/user/signup" element={<SignUp />} />
           <Route path="/user/login" element={<Login />} />
+
+          {/* All Booking Routes */}
+          <Route path="/booking/:id" element={<Booking />} />
           
           {/* Catch-All Route for 404 Pages */}
           <Route path="*" element={<NotFound />} />
