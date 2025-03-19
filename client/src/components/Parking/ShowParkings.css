@@ -12,7 +12,7 @@
     border-radius: 1rem 1rem 0 0;
     animation: appear 1s ease-in-out;
     animation-timeline: view();
-    animation-range: entry 0% cover 40%;
+    animation-range: entry 0% cover 20%;
     transition: 0.2s ease-in-out;
 }
 

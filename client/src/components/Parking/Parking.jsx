@@ -88,13 +88,7 @@ const Parking = () => {
             <strong>Address:</strong> {parking.location}
           </p>
           <p className="p-d">
-            <b>Total Slots:</b> {parking.totalSlots}
-          </p>
-          <p className="p-d">
-            <b>Available Slots:</b> {parking.availableSlots}
-          </p>
-          <p className="p-d">
-            <strong>Hourly Rate:</strong> ${parking.pricePerHour}
+            <strong>Charges Per Hour:</strong> ${parking.pricePerHour}
           </p>
           <p className="p-d">
             Electric Parking:{" "}

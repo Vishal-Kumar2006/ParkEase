@@ -27,28 +27,39 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div className={`nav-options ${menuOpen ? "open" : ""}`}>
-        <NavLink to="/" className="nav-option">
+        <NavLink to="/" className="nav-option"
+            onClick={() => setMenuOpen(!menuOpen)}
+        >
+      
           <HomeIcon /> 
-          <p>Home</p>
+          <p >Home</p>
         </NavLink>
 
-        <NavLink to="/parkings" className="nav-option">
+        <NavLink to="/parkings" className="nav-option"
+        onClick={() => setMenuOpen(!menuOpen)}
+        >
           <DirectionsCarIcon /> 
           <p>All Parkings</p>
         </NavLink>
 
-        <NavLink to="/electricParking" className="nav-option">
+        <NavLink to="/electricParking" className="nav-option"
+        onClick={() => setMenuOpen(!menuOpen)}
+        >
           <ElectricCarIcon /> 
           <p>E-Parking</p>
         </NavLink>
 
-        <NavLink to="/parkings/new" className="nav-option">
+        <NavLink to="/parkings/new" className="nav-option"
+        onClick={() => setMenuOpen(!menuOpen)}
+        >
           <LuCircleParking /> 
           <p>Create New Parking</p>
          
         </NavLink>
 
-        <NavLink to="/user/profile" className="nav-option">
+        <NavLink to="/user/profile" className="nav-option"
+        onClick={() => setMenuOpen(!menuOpen)}
+        >
           <AccountBoxIcon /> 
           <p>Profile</p>
         </NavLink>
