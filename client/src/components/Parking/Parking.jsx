@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import ReviewForm from "../Review/reviewform.jsx";
+import AllReviews from "../Review/AllReviews.jsx";
 import "./Parking.css";
 
 const Parking = () => {
@@ -157,12 +159,13 @@ const Parking = () => {
         <div className="parking-update-btn">
           <button
             id="parking-update"
-            onClick={() =>
-              navigate(`/booking/${parking._id}`)
-            }
+            onClick={() => navigate(`/booking/${parking._id}`)}
           >
             Book Parking
           </button>
+
+          <ReviewForm parkingId={parking._id}/>
+          <AllReviews allReviews={parking.reviews} />
         </div>
       )}
     </>

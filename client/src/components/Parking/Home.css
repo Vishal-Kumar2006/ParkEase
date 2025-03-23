@@ -54,11 +54,11 @@
 
 .parking-options button:hover {
     cursor: pointer;
-    margin: 0.25rem;
+    margin-bottom: 4rem;
     font-size: 3rem;
     padding: 0.5;
-    background-color: #96d0ff;
-    border-radius: 0.2rem;
+    background-color: #cfeaff;
+    border-radius: 0.5rem;
     border: none;
     box-shadow:2px 8px 2rem rgb(0, 16, 39);
 }
@@ -70,6 +70,7 @@
     align-items: center;
     text-align: center;
     margin: 2rem;
+    transition: 0.2s;
 }
 
 .featured-parkings h2 {
@@ -83,12 +84,20 @@
     padding: 1rem;
     margin: 1rem;
     margin-bottom: 2rem;
-    transition: 1s ease-in-out;
+    transition: 0.5s;
     animation: appear 1s ease-in-out;
     animation-timeline: view();
     animation-range: entry 0% cover 35%;
-
 }
+
+
+.parking-list div:hover {
+    box-shadow: 0px 0px 2rem black;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+    cursor: pointer;
+}
+
 
 .parking-list div h3 {
     font-size: 1.5rem;
