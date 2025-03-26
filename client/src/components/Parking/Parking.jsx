@@ -165,7 +165,7 @@ const Parking = () => {
           </button>
 
           <ReviewForm parkingId={parking._id}/>
-          <AllReviews allReviews={parking.reviews} />
+          <AllReviews allReviews={parking.review} />
         </div>
       )}
     </>

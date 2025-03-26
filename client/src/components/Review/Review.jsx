@@ -40,6 +40,14 @@ const Review = ({ reviewId }) => {
     }
   }, [currReview]);
 
+  const handleDeleteReview = () => {
+    axios
+      .delete(`http://localhost:5000/reviews/${reviewId}`)
+      .then((res) => {
+        alert("Review deletd sucessfully.");
+      });
+  };
+
   return (
     <div className="Review">
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -60,6 +68,9 @@ const Review = ({ reviewId }) => {
               <p> {currReview.rating}</p>
             </div>
           </div>
+          <button id="delete-btn" onClick={handleDeleteReview}>
+            delete
+          </button>
         </div>
       ) : !error ? (
         <p>Loading review...</p>

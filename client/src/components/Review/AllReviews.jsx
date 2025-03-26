@@ -10,7 +10,10 @@ const AllReviews = ({ allReviews }) => {
       ) : (
         <div>
             <h4 id="reviews-heading">All Reviews are given below</h4>
+            
+            <h6 id="reviews-sub-heading">Refresh to see new Review's</h6>
           {allReviews.map((review, id) => (<Review key={id} reviewId={review} />))}
+
         </div>
       )}
     </div>

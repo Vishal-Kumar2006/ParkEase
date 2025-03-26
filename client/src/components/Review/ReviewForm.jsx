@@ -23,7 +23,7 @@ const ReviewForm = ({ parkingId }) => {
     console.log(reviewData);
 
     axios
-      .post(`http://localhost:5000/parkings/${parkingId}/review`, reviewData, {
+      .post(`http://localhost:5000/parkings/${parkingId}/review/new`, reviewData, {
         withCredentials: true,
       })
       .then((response) => {
@@ -44,11 +44,11 @@ const ReviewForm = ({ parkingId }) => {
     <div className="ReviewForm-div">
       <h2>Create a Review</h2>
       <form className="ReviewForm">
-        <label htmlFor="rating" class="form-label">
+        <label htmlFor="rating" className="form-label">
           Parking Rating
         </label>
         <input
-          class="form-range"
+          className="form-range"
           id="customRange1"
           type="range"
           min={1}

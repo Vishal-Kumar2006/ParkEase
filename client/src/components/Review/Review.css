@@ -5,7 +5,14 @@
     font-size: 2rem;
     margin-top: 5rem;
     border-radius: 4px;
+}
 
+#reviews-sub-heading {
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    font-size: 1rem;
+    margin-top: 5rem;
 }
 
 .Review {
@@ -56,8 +63,24 @@
     align-items: center;
 }
 
+#delete-btn {
+    background-color: #272727;
+    color: rgb(163, 0, 0);
+    font-size: 1.5rem;
+    margin: 1rem;
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-shadow: 0 0 0.5rem black;
+    transition: 0.2s;
+}
 
-
+#delete-btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1rem black;
+    background-color: #4d0000;   
+    color: wheat;
+}
 
 @media (max-width: 840px) {
     .Review {
