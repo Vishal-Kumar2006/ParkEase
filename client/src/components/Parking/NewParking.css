@@ -1,0 +1,188 @@
+.NewParking {
+    border: 2px solid rgb(0, 38, 59);
+    background-color: #64d0f7;
+    box-shadow: 0 0 10px rgb(0, 7, 70);
+    border-radius: 1rem;
+    margin: 5% 10%;
+}
+
+.NewParking-heading {
+    margin-top: 2rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: rgb(29, 29, 29);
+}
+
+.newParking-input {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.newParking-input label {
+    text-align: start;
+    font-size: 1.4rem;
+    width: 80%;
+} 
+
+.newParking-dual-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.newParking-dual-input input{
+   width: 100%;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    text-align: start;
+    align-items: center;
+    padding: 0.2rem;
+    font-size: 1rem;
+    width: 80%;
+    height: 2rem;
+    border: 3px solid rgb(60, 59, 59);
+    border-radius: 0.3rem;
+    background-color: #444444;
+    color: rgb(232, 251, 255);
+    box-shadow: 0 0 10px rgb(0, 0, 76);
+    animation: appear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 20%;
+}
+
+.check {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* border: 1px solid black; */
+    width: 100%;
+    animation: appear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+.check label {
+   font-size: 1.5rem;
+   width: 100%;
+   justify-content: center;
+   text-align: center;
+   align-items: center;
+}
+
+.check input {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 0;
+    height: 2rem;
+    cursor: pointer;
+ }
+
+ .slots-container {
+    background-color: #232323;
+    padding: 1rem;
+    border-top: 2px solid rgb(0, 0, 0);
+ }
+
+ .slots-container h3 {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+ }
+
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.slot-btn {
+    display: flex;
+    margin: 1rem;
+    font-size: 0.8rem;
+    border-radius: 0.4rem;
+    border: none;
+    padding: 0.5rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    animation: appear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 15%;
+}
+
+.slot-btn:hover {
+    cursor: pointer;
+}
+
+.available {
+    background-color: #85ff85ef;
+    box-shadow: 0 0 1rem rgb(168, 255, 184);
+}
+
+.booked {
+    background-color: #ff6d6dca;
+    box-shadow: 0 0 1rem rgb(174, 0, 0);
+}
+
+.newParking-btn {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: rgb(150, 150, 150);
+    background-color: #002fff;
+    display: flex;
+    border: none;
+    font-size: 2rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin: 10% 10% 5% 10%;
+    transition: 0.2s;
+    animation: appear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 20%;
+}
+
+.newParking-btn:hover {
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 20px black;
+}
+
+
+/* ✅ Responsive Navbar with Menu Button */
+@media (max-width: 768px) {
+    .slots-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ✅ Responsive Navbar with Menu Button */
+@media (max-width: 420px) {
+    .slots-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

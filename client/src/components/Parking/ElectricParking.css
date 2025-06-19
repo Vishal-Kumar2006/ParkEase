@@ -1,0 +1,114 @@
+.Electric-Parkings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three cards per row on large screens */
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.Electric-parking-card {
+    text-align: center;
+    background-color: #003ba0;
+    border-radius: 1rem 1rem 0 0;
+    animation: appear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 20%;
+    transition: 0.2s ease-in-out;
+}
+
+.Electric-parking-card:hover{
+    box-shadow: 0 0 20px rgb(0, 12, 92);
+    cursor: pointer;
+}
+
+.Electric-parking-name {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.Electric-parking-img {
+   width: 100%;
+   border-radius:10px 10px 0 0;
+}
+
+.Electric-parking-name {
+    text-align: start;
+    margin-top: 1rem;
+    padding-left: 0.5rem;
+    margin-bottom: 0.1rem;
+}
+
+.Electric-parking-address {
+    text-align: start;
+    padding-left: 0.5rem;
+    
+}
+
+.Electric-detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.Electric-parkings-btn {
+    align-items: center;
+    text-align: start;
+    justify-content: start;
+}
+
+.Electric-parking-btn {
+    color: rgb(186, 186, 186);
+    background-color: #04003a;
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    border-radius: 0.5rem;
+    margin: 2.5rem 0 1rem  0.5rem;
+    border: 15px solid white;
+    border: none;
+    font-size: 2rem;
+    transition: 0.2s;
+    text-align: start;
+    align-content: center;
+    justify-content: start;
+}
+
+
+.Electric-parking-btn:hover {
+   cursor: pointer;
+   color: rgb(255, 255, 255);
+   box-shadow: 0 0 10px black;
+
+}
+
+.Electric-parking-status {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 900;
+    margin: 0.5rem;
+}
+
+.open {
+    color: rgb(85, 255, 85);
+}
+
+.close {
+    color: rgb(171, 0, 0);
+}
+
+/* Responsive Design for Tablets (840px and below) */
+@media (max-width: 840px) {
+    .Electric-Parkings {
+        grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+    }
+}
+
+/* Responsive Design for Mobile Phones (510px and below) */
+@media (max-width: 510px) {
+    .Electric-Parkings {
+        grid-template-columns: repeat(1, 1fr); /* One card per row */
+    }
+}

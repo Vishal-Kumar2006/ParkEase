@@ -1,0 +1,118 @@
+#reviews-heading {
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-top: 5rem;
+    border-radius: 4px;
+}
+
+#reviews-sub-heading {
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    font-size: 1rem;
+    margin-top: 5rem;
+}
+
+.Review {
+    background-color: #93e7fd;
+    box-shadow: 0 0 10px black;
+    margin: 1rem;
+    border-radius: 5px;
+    padding: 1rem;
+    width: 40rem;
+}
+
+.review-admin {
+    display: flex;
+    text-align: start;
+    align-items: center;
+    justify-content: start;
+}
+
+.review-admin img {
+    border-radius: 50%;
+    height: 3rem;
+    margin: 0.5rem;
+}
+
+.review-admin h3 {
+   font-size: 2rem;
+}
+
+.review-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem 0 1rem; 
+    align-items: center;
+}
+
+.review-content div  {
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+    align-items: center;
+}
+
+.review-content p  {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+
+    align-items: center;
+}
+
+#delete-btn {
+    background-color: #272727;
+    color: rgb(163, 0, 0);
+    font-size: 1.5rem;
+    margin: 1rem;
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    box-shadow: 0 0 0.5rem black;
+    transition: 0.2s;
+}
+
+#delete-btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1rem black;
+    background-color: #4d0000;   
+    color: wheat;
+}
+
+@media (max-width: 840px) {
+    .Review {
+        background-color: #93e7fd;
+        box-shadow: 0 0 10px black;
+        margin: 1rem;
+        border-radius: 5px;
+        padding: 1rem;
+        width: 35rem;
+    }
+}
+
+@media (max-width: 740px) {
+ 
+    .Review {
+        background-color: #93e7fd;
+        box-shadow: 0 0 10px black;
+        margin: 1rem;
+        border-radius: 5px;
+        padding: 1rem;
+        width: 22rem;
+    }
+    
+}
+
+@media (max-width: 420px) {
+    .Review {
+        background-color: #93e7fd;
+        box-shadow: 0 0 10px black;
+        margin: 1rem;
+        border-radius: 5px;
+        padding: 1rem;
+        width: 15rem;
+    }
+}

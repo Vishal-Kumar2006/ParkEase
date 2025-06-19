@@ -1,0 +1,219 @@
+
+.parking-details {
+
+    background-color: #7c8ba3;
+    margin: 5% 10% 5% 10%;
+    border-radius: 0.5rem;
+}
+
+.electric {
+    background-color: #002492;
+    margin: 5% 10% 5% 10%;
+    border-radius: 0.5rem;
+}
+
+.parking-admin {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem 1rem 0.5rem 1rem;
+} 
+
+.parking-admin-photo {
+    height: 3rem;
+    border: 3px solid white;
+    border-radius: 50%;
+} 
+
+.parking-admin-name {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: start;
+    font-size: 2rem;
+    color: white;
+    margin-left: 1rem;
+} 
+
+.parking-img {
+    border-radius: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.parking-info {
+    margin: 0.5rem;
+    color: white;
+}
+
+.detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.parking-status {
+    font-size: 1.5rem;
+}
+.open {
+    color: rgb(48, 255, 48);
+}
+
+.close {
+    color: red;
+}
+
+.p-d {
+    margin: 0.3rem;
+}
+
+.slots-container h3 {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.slot-btn {
+    display: flex;
+    margin: 1rem;
+    font-size: 0.8rem;
+    border-radius: 0.4rem;
+    border: none;
+    padding: 0.5rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    animation: appear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 15%;
+}
+
+.booking-slot-btn{
+    cursor: pointer;
+}
+.available {
+    background-color: #85ff85ef;
+    box-shadow: 0 0 1rem rgb(168, 255, 184);
+}
+
+.booked {
+    background-color: #ff6d6dca;
+    box-shadow: 0 0 1rem rgb(174, 0, 0);
+}
+
+.parking-update-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0% 10% 10% 10%;
+    width: 80%;
+    justify-content: space-between;
+}
+
+#parking-update {
+    font-size: 2.3rem;
+    background-color: #000f3bfa;
+    color: #a7a7a7;
+    padding: 0 1rem 0 1rem;
+    border-radius: 0.3rem;
+    transition: 0.2s;
+    justify-content: start;
+    align-items: center;
+    text-align: start;
+    border: none;
+}
+
+#parking-update:hover {
+    background-color: #000f3b;
+    color: #ffffff;
+    padding: 0 1rem 0 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgb(90, 25, 255);
+}
+
+#parking-delete {
+    font-size: 2.3rem;
+    background-color: #3b0000fa;
+    color: #a7a7a7;
+    padding: 0 1rem 0 1rem;
+    border-radius: 0.3rem;
+    transition: 0.2s;
+    border: none;
+}
+
+#parking-delete:hover {
+    background-color: #3b0000;
+    color: #ffffff;
+    padding: 0 1rem 0 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgb(135, 0, 0);
+}
+
+#parking-booking {
+    font-size: 2.3rem;
+    background-color: #000f3bfa;
+    color: #a7a7a7;
+    padding: 0 1rem 0 1rem;
+    border-radius: 0.3rem;
+    transition: 0.2s;
+    border: none;
+}
+
+#parking-booking:hover {
+    background-color: #000f3b;
+    color: #ffffff;
+    padding: 0 1rem 0 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgb(90, 25, 255);
+}
+
+
+@media (max-width: 840px) {
+    .parking-update-btn {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .parking-update-btn {
+       gap: 1rem; 
+    }
+
+    .slots-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 740px) {
+    .parking-update-btn {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .parking-update-btn {
+       gap: 1rem; 
+    }
+
+    .slots-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 420px) {
+    .slots-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

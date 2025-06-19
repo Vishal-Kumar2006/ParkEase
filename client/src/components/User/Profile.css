@@ -1,0 +1,116 @@
+.profile {
+    background-color: #00408e9c;
+}
+
+.user-photo {
+    border-radius: 50%;
+    height: 15rem;
+    margin: 3rem;
+    margin-bottom: 1rem;
+    border: 4px solid rgb(13, 0, 0);
+}
+
+.user-name {
+    display: flex;
+    font-size: 3.5rem;
+    margin-left: 2rem;
+    padding-bottom: 5rem;
+}
+
+.user-parking{
+    margin: 2rem;
+    border: none;
+    background-color: rgb(197, 239, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.user-parking h3 {
+    font-size: 4rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: black;
+}
+
+.user-no-parkings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.user-no-parkings p {
+    display: flex;
+    justify-content: center;
+    font-size: 4rem;
+    margin: 2rem;
+    color: rgb(175, 0, 0);
+}
+
+.new-parkin-btn{
+    display: flex;
+    color: rgb(28, 62, 255);
+    background-color: #5c9ae5;
+    border: none;
+    padding: 0.4rem;
+    border-radius: 5px;
+    font-size: 2rem;
+    cursor: pointer;
+    margin: 2rem;
+    transition: 0.2s ease-in-out;
+}
+
+.new-parkin-btn:hover {
+    box-shadow: 0 0 1rem rgb(0, 16, 96);
+    background-color: #a1e1ff;
+    color: black;
+    border-radius: 10px;
+}
+
+.user-bookings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: #191919;
+    margin: 2rem;
+    border-radius: 1rem;
+    margin-top: 14rem;
+}
+
+.user-bookings h3 {
+    font-size: 4rem;
+    color: rgb(205, 205, 205);
+}
+
+.no-parking-msg {
+    font-size: 4rem;
+    color: rgb(255, 0, 0);
+}
+
+.log-out-btn {
+    display: flex;
+    margin: 2rem;
+    font-size: 2rem;
+    padding: 0.5rem;
+    color: rgb(255, 162, 162);
+    background-color: rgb(70, 0, 0);
+    border: none;
+    border-radius: 0.5rem;
+    transition: 0.2s linear;
+}
+
+.log-out-btn:hover {
+    cursor: pointer;
+    background-color: #ff8282;
+    box-shadow: 0 0 10px rgb(255, 0, 0);
+    color: rgb(0, 0, 0);
+}
+

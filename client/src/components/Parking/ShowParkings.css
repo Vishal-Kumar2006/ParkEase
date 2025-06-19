@@ -1,0 +1,125 @@
+.Parkings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.parking-card {
+    text-align: center;
+    background-color: #7c8ba3;
+    border-radius: 1rem 1rem 0 0;
+    animation: appear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 20%;
+    transition: 0.2s ease-in-out;
+}
+
+.electric {
+    text-align: center;
+    background-color: #002765;
+    border-radius: 1rem 1rem 0 0;
+    animation: appear 1s ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+    transition: 0.2s ease-in-out;
+}
+
+.parking-card:hover{
+    box-shadow: 0 0 20px rgb(0, 12, 92);
+    cursor: pointer;
+}
+
+.parking-name {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.parking-img {
+   width: 100%;
+   border-radius:10px 10px 0 0;
+}
+
+.parking-name {
+    text-align: start;
+    margin-top: 1rem;
+    padding-left: 0.5rem;
+    margin-bottom: 0.1rem;
+}
+
+.parking-address {
+    text-align: start;
+    padding-left: 0.5rem;
+    
+}
+
+.detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.parkings-btn {
+    align-items: center;
+    text-align: start;
+    justify-content: start;
+}
+
+.parking-btn {
+    color: rgb(186, 186, 186);
+    background-color: #04003a;
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    border-radius: 0.5rem;
+    margin: 2.5rem 0 1rem  0.5rem;
+    border: 15px solid white;
+    border: none;
+    font-size: 2rem;
+    transition: 0.2s;
+    text-align: start;
+    align-content: center;
+    justify-content: start;
+}
+
+
+.parking-btn:hover {
+   cursor: pointer;
+   color: rgb(255, 255, 255);
+   box-shadow: 0 0 10px black;
+
+}
+
+.parking-status {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 900;
+    margin: 0.5rem;
+}
+
+.open {
+    color: rgb(85, 255, 85);
+}
+
+.close {
+    color: rgb(171, 0, 0);
+}
+
+/* ✅ Responsive Navbar with Menu Button */
+@media (max-width: 840px) {
+    .Parkings {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Three cards per row */
+    }
+}
+
+@media (max-width: 510px) {
+    .Parkings {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* Three cards per row */
+    }
+}
