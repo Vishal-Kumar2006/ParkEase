@@ -1,7 +1,7 @@
 <h1>🚗 ParkEase – Smart Parking Made Easy</h1> 
 ParkEase is a full-stack MERN application designed to simplify the process of finding and reviewing parking spots. It helps users make informed decisions by offering reviews, real-time data (coming soon), and enhanced security features. Built as part of my MERN stack journey, ParkEase continues to grow with every feature update.
 
-🔗 GitHub Repository
+🔗 GitHub Repository : https://github.com/Vishal-Kumar2006/ParkEase
 👉 View the Source Code on GitHub
 
 ✨ Recent Updates
@@ -50,12 +50,12 @@ Bcrypt.js for password hashing
 🔄 Booking System – Reserve parking slots in advance
 
 🚀 Getting Started (Local Setup)
-Clone the Repository
+Clone the Repository https://github.com/Vishal-Kumar2006/ParkEase
 
 bash
 Copy
 Edit
-git clone https://github.com/yourusername/park-ease.git  
+git clone 
 cd park-ease  
 Install Dependencies
 
