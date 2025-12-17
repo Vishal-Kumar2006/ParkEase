@@ -1,11 +1,10 @@
 .App {
-  background-color: rgb(197, 239, 255);
+  background-color: rgb(249, 255, 203);
   font-family: "Plus Jakarta Sans", sans-serif; /* ✅ Correct font stack */
   display: grid;
   grid-template-rows: auto 1fr auto; /* Header | Body | Footer */
   min-height: 100vh;
 }
-
 
 @keyframes appear {
   from {

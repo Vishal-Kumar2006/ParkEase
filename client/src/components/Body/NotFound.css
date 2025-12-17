@@ -1,0 +1,16 @@
+.NotFound {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem;
+}
+
+.NotFound h1 {
+  font-size: 12rem;
+  font-family: "Bitcount Prop Single", system-ui;
+}
+
+.NotFound p {
+  font-size: 4rem;
+  font-family: "Bitcount Prop Single", system-ui;
+}

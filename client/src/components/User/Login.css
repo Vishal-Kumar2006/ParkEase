@@ -1,134 +1,117 @@
-.log-in-page{
-    margin: 1rem;
-    box-shadow: 0 0 1rem rgb(0, 0, 0);
-    display: flex;
-    margin-left: 10%;
-    margin-right: 10%;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    padding-bottom: 5rem;
-    background-color: #269ae760;
-    backdrop-filter: blur(5px);
-    border-radius: 2rem;
-    margin-top: 5rem;
-    margin-bottom: 10rem;
+.log-in-page {
+  margin: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding-bottom: 5rem;
 }
 
 .log-in-heading {
-    color: rgb(255, 255, 255);
-    font-size: 2.5rem;
-    margin: 2rem;
+  color: #2facffb9;
+  font-size: 2.5rem;
 }
 
-.log-in-form{
-    display: flex;
-    flex-direction: column;
+.log-in-form {
+  display: flex;
+  flex-direction: column;
 }
 
+.input-field {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
 
 .input-label {
-    text-align: start;
-    justify-content: start;
-    font-size: 1.8rem;
-    color: #ffffff;
+  text-align: start;
+  justify-content: start;
+  font-size: 1.2rem;
+  color: #2facffe7;
 }
 
 .log-in-input {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    height: 2rem;
-    width:30rem;
-    padding-left: 0.5rem;
-    border: 2px solid rgb(0, 21, 255);
-    box-shadow: 0 0 10px blue;
-    border-radius: 0.4rem;
+  font-size: 1.2rem;
+  height: 3rem;
+  width: 30rem;
+  padding-left: 1rem;
+  border-radius: 0.4rem;
+  border: 2px solid black;
+  color: rgb(0, 0, 0);
 }
 
 .log-in-btn {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    color: rgb(193, 193, 193);
-    background-color: #0011ffab;
-    border: none;
-    font-size: 2.5rem;
-    padding: 4px 2rem;
-    border-radius: 1rem;
-    margin-top: 3rem;
-    transition: 0.2s;
+  text-align: start;
+  justify-content: flex-start;
+  align-items: center;
+  width: fit-content;
+  color: rgb(0, 0, 0);
+  background-color: #2facffe7;
+  border: none;
+  font-size: 2rem;
+  height: 3.5rem;
+  padding: 0 2rem;
+  border-radius: 4px;
+  margin-top: 2rem;
+  transition: 0.3s;
 }
 
 .log-in-btn:hover {
-    cursor: pointer;
-    color: white;
-    box-shadow: 0 0 10px rgb(0, 34, 255);
-    border-color: rgb(0, 0, 255);
+  cursor: pointer;
+  color: rgb(239, 255, 186);
 }
 
-.sign-up-btn {
-    text-align: start;
-    justify-content: flex-start;
-    align-items: center;
-    width: fit-content;
-    color: rgb(193, 193, 193);
-    background-color: #0011ffab;
-    border: none;
-    font-size: 2.5rem;
-    padding: 4px 2rem;
-    border-radius: 1rem;
-    margin: 0;
-    margin-top: 3rem;
-    transition: 0.2s;
+.sign-up {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-top: 4rem;
+  font-size: 1.2rem;
 }
 
-
-.sign-up-btn:hover {
-    cursor: pointer;
-    color: white;
-    box-shadow: 0 0 10px rgb(0, 34, 255);
-    border-color: rgb(0, 0, 255);
+.sign-up a {
+  color: rgba(0, 0, 255, 0.614);
 }
 
+.sign-up a:hover {
+  cursor: pointer;
+  color: blue;
+}
 
 @media screen and (max-width: 760px) {
-    .log-in-input {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        width: 19rem;
-        
-    }
+  .log-in-input {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    width: 19rem;
+  }
 
-    .input-label {
-        font-size: 1.3rem;
-    }
+  .input-label {
+    font-size: 1.3rem;
+  }
 
-    .log-in-page{
-       border-radius: 0.5rem;
-    }
+  .log-in-page {
+    border-radius: 0.5rem;
+  }
 }
 
-
 @media screen and (max-width: 420px) {
-    .log-in-page{
-        border-radius: 0.3rem;
-     }
+  .log-in-page {
+    border-radius: 0.3rem;
+  }
 
-    .log-in-input {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        width: 15rem;
-        
-    }
+  .log-in-input {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    width: 15rem;
+  }
 
-    .input-label {
-        font-size: 1rem;
-    }
+  .input-label {
+    font-size: 1rem;
+  }
 
-    .sign-up-btn {
-        border-radius: 0.5rem;
-        font-size: 1.5rem;
-    }
+  .sign-up-btn {
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+  }
 }
