@@ -1,21 +1,20 @@
-
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ElectricCarIcon from "@mui/icons-material/ElectricCar";
-import HomeIcon from '@mui/icons-material/Home';
-import MenuIcon from "@mui/icons-material/Menu";  // Hamburger icon
-import CloseIcon from "@mui/icons-material/Close";  // Close icon
+import HomeIcon from "@mui/icons-material/Home";
+import MenuIcon from "@mui/icons-material/Menu"; // Hamburger icon
+import CloseIcon from "@mui/icons-material/Close"; // Close icon
 import { LuCircleParking } from "react-icons/lu";
-
+import { useAuth } from "../../context/AuthContext";
 
 import "./Navbar.css";
 
 const Navbar = () => {
+  const { user } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  
   return (
     <header className="Navbar">
       <h3 className="nav-heading">ParkEase</h3>
@@ -27,43 +26,54 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div className={`nav-options ${menuOpen ? "open" : ""}`}>
-        <NavLink to="/" className="nav-option"
-            onClick={() => setMenuOpen(!menuOpen)}
-        >
-      
-          <HomeIcon /> 
-          <p >Home</p>
+        <NavLink
+          to="/"
+          className="nav-option"
+          onClick={() => setMenuOpen(!menuOpen)}>
+          <HomeIcon />
+          <p>Home</p>
         </NavLink>
 
-        <NavLink to="/parkings" className="nav-option"
-        onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <DirectionsCarIcon /> 
+        <NavLink
+          to="/parkings"
+          className="nav-option"
+          onClick={() => setMenuOpen(!menuOpen)}>
+          <DirectionsCarIcon />
           <p>All Parkings</p>
         </NavLink>
 
-        <NavLink to="/electricParking" className="nav-option"
-        onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <ElectricCarIcon /> 
+        <NavLink
+          to="/electricParking"
+          className="nav-option"
+          onClick={() => setMenuOpen(!menuOpen)}>
+          <ElectricCarIcon />
           <p>E-Parking</p>
         </NavLink>
 
-        <NavLink to="/parkings/new" className="nav-option"
-        onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <LuCircleParking /> 
+        <NavLink
+          to="/parkings/new"
+          className="nav-option"
+          onClick={() => setMenuOpen(!menuOpen)}>
+          <LuCircleParking />
           <p>Create New Parking</p>
-         
         </NavLink>
 
-        <NavLink to="/user/profile" className="nav-option"
-        onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <AccountBoxIcon /> 
-          <p>Profile</p>
-        </NavLink>
-        
+        {user ? (
+          <NavLink
+            to="/user/profile"
+            className="nav-option"
+            onClick={() => setMenuOpen(!menuOpen)}>
+            {user.photo ? <img src={user.photo} /> : <p>Profile</p>}
+          </NavLink>
+        ) : (
+          <NavLink
+            to="/user/login"
+            className="nav-option"
+            onClick={() => setMenuOpen(!menuOpen)}>
+            <AccountBoxIcon />
+            <p> Login </p>
+          </NavLink>
+        )}
       </div>
     </header>
   );

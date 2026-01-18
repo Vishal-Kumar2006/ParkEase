@@ -1,0 +1,33 @@
+.HomeCard {
+  background-color: #a3d1ff;
+  display: flex;
+}
+
+.HomeCard-Left img {
+  height: 15rem;
+  width: 20rem;
+}
+
+.HomeCard-Right {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.HomeCard-Right h3 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.HomeCard-Detail {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .HomeCard {
+    display: flex;
+    flex-direction: column;
+  }
+}

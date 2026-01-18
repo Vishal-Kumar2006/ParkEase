@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const session = require("express-session");
-const MongoStore = require("connect-mongo"); 
+const MongoStore = require("connect-mongo");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 
@@ -16,7 +16,6 @@ const userRoutes = require("./routes/user.js");
 const bookingRoutes = require("./routes/booking.js");
 const reviewRoutes = require("./routes/review.js");
 
-
 const app = express();
 
 // ✅ Middleware
@@ -28,7 +27,7 @@ app.use(
   cors({
     origin: "http://localhost:5173", // Your frontend URL
     credentials: true, // Required for session cookies
-  })
+  }),
 );
 
 // ✅ MongoDB Connection
@@ -58,7 +57,7 @@ app.use(
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     },
-  })
+  }),
 );
 
 // ✅ Flash messages (must be after session middleware)
@@ -66,7 +65,6 @@ app.use(flash());
 
 // ✅ Debugging: Log session data for testing
 app.use((req, res, next) => {
-  console.log("Session Data:", req.session);
   res.locals.flashMessages = req.flash();
   next();
 });

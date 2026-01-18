@@ -1,80 +1,45 @@
+import "./AllReview.css";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { FaHeart } from "react-icons/fa";
-import "./Review.css";
+import { useAuth } from "../../context/AuthContext";
 
-const Review = ({ reviewId }) => {
-  const [currReview, setCurrReview] = useState(null);
-  const [error, setError] = useState(null);
-  const [reviewAdmin, setReviewAdmin] = useState(null);
+const Review = ({ review, onDelete }) => {
+  const { user } = useAuth();
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/reviews/${reviewId}`, {
+  const isOwner = user && review.userId._id === user._id;
+
+  const handleDeleteReview = async () => {
+    try {
+      await axios.delete(`http://localhost:5000/reviews/${review._id}`, {
         withCredentials: true,
-      })
-      .then((response) => {
-        setCurrReview(response.data);
-        setError(null); // Clear errors if successful
-      })
-      .catch((error) => {
-        console.log("Error", error);
-        setError("Failed to fetch review. Please try again.");
       });
-  }, [reviewId]);
-
-  useEffect(() => {
-    if (currReview?.userId) {
-      // Check if userId exists
-      axios
-        .get(`http://localhost:5000/user/${currReview.userId}`, {
-          withCredentials: true,
-        })
-        .then((response) => {
-          setReviewAdmin(response.data);
-          setError(null); // Clear previous errors
-        })
-        .catch(() => {
-          setError("Error fetching Review admin!");
-        });
+      onDelete(review._id);
+    } catch (err) {
+      console.error(err);
     }
-  }, [currReview]);
-
-  const handleDeleteReview = () => {
-    axios
-      .delete(`http://localhost:5000/reviews/${reviewId}`)
-      .then((res) => {
-        alert("Review deletd sucessfully.");
-      });
   };
 
   return (
     <div className="Review">
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {currReview ? (
-        <div>
-          {reviewAdmin ? (
-            <div className="review-admin">
-              <img src={reviewAdmin.photo} alt="" />
-              <h3>{reviewAdmin.name}</h3>
-            </div>
-          ) : (
-            ""
-          )}
-          <div className="review-content">
-            <p>{currReview.review}</p>
-            <div>
-              <FaHeart />
-              <p> {currReview.rating}</p>
-            </div>
-          </div>
-          <button id="delete-btn" onClick={handleDeleteReview}>
-            delete
-          </button>
+      <div className="review-header">
+        <div className="review-user">
+          <img src={review.userId.photo} alt="User Image" />
+          <h4>{review.userId.name}</h4>
         </div>
-      ) : !error ? (
-        <p>Loading review...</p>
-      ) : null}
+
+        {isOwner && (
+          <button className="delete-btn" onClick={handleDeleteReview}>
+            Delete
+          </button>
+        )}
+      </div>
+
+      <div className="review-content">
+        <p>{review.review}</p>
+        <div className="rating">
+          <p id="heart">❤️</p>
+          <p id="rating-count">{review.rating}</p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,20 +1,22 @@
-import Review from "../Review/Review.jsx";
-import "./Review.css";
+import Review from "./Review.jsx";
+import "./AllReview.css";
 
-
-const AllReviews = ({ allReviews }) => {
+const AllReviews = ({ reviews, onDeleteReview }) => {
   return (
     <div className="AllReviews">
-      {allReviews.length == 0 ? (
-        <h1 >There is no Review Created</h1>
+      {reviews.length === 0 ? (
+        <></>
       ) : (
-        <div>
-            <h4 id="reviews-heading">All Reviews are given below</h4>
-            
-            <h6 id="reviews-sub-heading">Refresh to see new Review's</h6>
-          {allReviews.map((review, id) => (<Review key={id} reviewId={review} />))}
-
-        </div>
+        <>
+          <h4 id="reviews-heading">All Reviews are given below</h4>
+          {reviews.map((review) => (
+            <Review
+              key={review._id}
+              review={review}
+              onDelete={onDeleteReview}
+            />
+          ))}
+        </>
       )}
     </div>
   );

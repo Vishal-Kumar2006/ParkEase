@@ -1,12 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const {createNewReview, getReviewById, deleteReviewbyId } = require("../controllers/review");
-
+const {
+  createNewReview,
+  getReviewByParkingId,
+  deleteReviewbyId,
+} = require("../controllers/review");
 
 router.post("/new", createNewReview);
 
-router.get("/:id", getReviewById);
+router.get("/parking/:id", getReviewByParkingId);
 
 router.delete("/:id", deleteReviewbyId);
 

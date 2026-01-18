@@ -1,116 +1,153 @@
+/* Style for the User Profile and data*/
 .profile {
-    background-color: #00408e9c;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-data {
+  display: flex;
+  margin: 4rem 3rem;
+  text-align: start;
+  align-items: start;
+}
+
+.profile-image {
+  border-radius: 5%;
+  height: 20rem;
+  width: 20rem;
+  border: 2px solid rgb(13, 0, 0);
 }
 
 .user-photo {
-    border-radius: 50%;
-    height: 15rem;
-    margin: 3rem;
-    margin-bottom: 1rem;
-    border: 4px solid rgb(13, 0, 0);
+  border-radius: 5%;
+  height: 20rem;
+  width: 20rem;
+}
+
+.profile-data-info {
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .user-name {
-    display: flex;
-    font-size: 3.5rem;
-    margin-left: 2rem;
-    padding-bottom: 5rem;
+  display: flex;
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
 }
 
-.user-parking{
-    margin: 2rem;
-    border: none;
-    background-color: rgb(197, 239, 255);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    border-radius: 1rem;
+.profile-data-info p {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.parking-and-booking {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+.parking-data h2 {
+  font-size: 2rem;
+}
+
+.booking-data h2 {
+  font-size: 2rem;
+}
+
+/* Style for the Parking Block  */
+.user-parking {
+  margin: 2rem;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border-radius: 1rem;
 }
 
 .user-parking h3 {
-    font-size: 4rem;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    color: black;
+  font-size: 2rem;
+  margin: 2rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: black;
 }
 
 .user-no-parkings {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
 
 .user-no-parkings p {
-    display: flex;
-    justify-content: center;
-    font-size: 4rem;
-    margin: 2rem;
-    color: rgb(175, 0, 0);
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 2rem;
+  color: rgb(175, 0, 0);
 }
 
-.new-parkin-btn{
-    display: flex;
-    color: rgb(28, 62, 255);
-    background-color: #5c9ae5;
-    border: none;
-    padding: 0.4rem;
-    border-radius: 5px;
-    font-size: 2rem;
-    cursor: pointer;
-    margin: 2rem;
-    transition: 0.2s ease-in-out;
+.new-parking-btn {
+  display: flex;
+  color: #000000;
+  background-color: #5eacff;
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 2rem;
+  transition: 0.2s ease-in-out;
 }
 
-.new-parkin-btn:hover {
-    box-shadow: 0 0 1rem rgb(0, 16, 96);
-    background-color: #a1e1ff;
-    color: black;
-    border-radius: 10px;
+.new-parking-btn:hover {
+  box-shadow: 2px 2px 10px rgb(0, 16, 96);
+  color: rgb(0, 119, 255);
+  background-color: #000000;
+  border-radius: 10px;
 }
 
+/* Style for the user Booking's data   */
 .user-bookings {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    background-color: #191919;
-    margin: 2rem;
-    border-radius: 1rem;
-    margin-top: 14rem;
+  margin: 3rem 1rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .user-bookings h3 {
-    font-size: 4rem;
-    color: rgb(205, 205, 205);
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem;
 }
 
 .no-parking-msg {
-    font-size: 4rem;
-    color: rgb(255, 0, 0);
+  font-size: 2rem;
+  color: rgb(255, 0, 0);
 }
 
 .log-out-btn {
-    display: flex;
-    margin: 2rem;
-    font-size: 2rem;
-    padding: 0.5rem;
-    color: rgb(255, 162, 162);
-    background-color: rgb(70, 0, 0);
-    border: none;
-    border-radius: 0.5rem;
-    transition: 0.2s linear;
+  width: fit-content;
+  font-size: 1.2rem;
+  margin: 1rem 5rem;
+  padding: 1rem 2rem;
+  color: rgb(255, 0, 0);
+  background-color: rgb(70, 0, 0);
+  border: none;
+  border-radius: 4px;
+  transition: 0.2s linear;
 }
 
 .log-out-btn:hover {
-    cursor: pointer;
-    background-color: #ff8282;
-    box-shadow: 0 0 10px rgb(255, 0, 0);
-    color: rgb(0, 0, 0);
+  cursor: pointer;
+  background-color: #430000;
+  box-shadow: 2px 2px 10px rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
-

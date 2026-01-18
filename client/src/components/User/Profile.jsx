@@ -4,65 +4,78 @@ import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 import ShowParkings from "../Parking/ShowParkings.jsx";
 import ShowBookings from "../Booking/ShowBookings.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  // All Storage area
+
+  const { user, setUser } = useAuth();
+
+  const [userData, setUserData] = useState(null);
+  const [userDataLoading, setUserDataLoading] = useState(true);
+
   const [parkings, setParkings] = useState([]);
   const [bookings, setBookings] = useState([]);
+
   const [bookedParking, setBookedParking] = useState([]);
 
   const navigate = useNavigate();
 
+  // Step 1: Check if the user is Logged in
+  useEffect(() => {
+    if (!user) {
+      navigate("/user/login");
+    }
+  }, []);
+
+  // Step 2: Collect User data from backend if user is Logged In
   useEffect(() => {
     axios
       .get("http://localhost:5000/user", { withCredentials: true })
       .then((res) => {
         if (res.data.user) {
-          setUser(res.data.user);
-          // console.log(res.data.user);
+          setUserData(res.data.user);
+          setUserDataLoading(false);
         } else {
           navigate("/user/login");
         }
       })
       .catch(() => navigate("/user/login"));
-  }, [navigate]);
+  }, [user, navigate]);
 
+  // Step 2: Collect Parking's data Created by User
   useEffect(() => {
-    if (user?.parkings?.length) {
-      Promise.all(
-        user.parkings.map(
-          (parkingId) =>
-            axios
-              .get(`http://localhost:5000/parkings/${parkingId}`, {
-                withCredentials: true,
-              })
-              .then((res) => res.data)
-              .catch(() => null) // Handle errors
-        )
-      ).then((results) => setParkings(results.filter(Boolean))); // Remove null values
+    try {
+      axios
+        .get(`http://localhost:5000/parkings/getParking-byUserId`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setParkings(res.data);
+        });
+    } catch (error) {
+      console.log(error);
     }
-  }, [user]);
+  }, [user, userData]);
 
+  // Step 3: Collect Booking data booked by user
   useEffect(() => {
-    if (user?.bookings?.length > 0) {
-      Promise.all(
-        user.bookings.map((bookingId) =>
-          axios
-            .get(`http://localhost:5000/bookings/${bookingId}`, {
-              withCredentials: true,
-            })
-            .then((response) => response.data) // Extract data
-            .catch((error) => {
-              console.error(`Error fetching booking ${bookingId}:`, error);
-              return null; // Prevents breaking Promise.all()
-            })
-        )
-      ).then((results) => {
-        const validBookings = results.filter((booking) => booking !== null);
-        setBookings(validBookings); // Set only valid bookings
-      });
+    try {
+      axios
+        .get(`http://localhost:5000/bookings/getBooking_byUserId`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setBookings(res.data);
+        })
+        .catch((error) => {
+          setBookings(null);
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
     }
-  }, [user]);
+  }, [user, userData]);
 
   useEffect(() => {
     if (bookings.length > 0) {
@@ -76,41 +89,65 @@ const Profile = () => {
             .catch((error) => {
               console.error(
                 `Error fetching parking ${booking.parkingId}:`,
-                error
+                error,
               );
               return null; // Prevent breaking the entire Promise.all()
-            })
-        )
+            }),
+        ),
       ).then((results) => {
         const validParkings = results.filter((parking) => parking !== null);
-        setBookedParking(validParkings); // Store fetched parking data
+        setBookedParking(validParkings);
       });
     }
   }, [bookings]);
 
+  // Handle if user Try to Logout
   const handleLogOut = () => {
     axios
       .post("http://localhost:5000/user/logout", {}, { withCredentials: true })
-      .then(() => navigate("/user/login"))
+      .then(() => {
+        setUser(null);
+        navigate("/user/login");
+      })
       .catch((err) => console.log(err));
   };
 
-  if (!user) {
+  // If User is loggedin and it's data is loading
+  if (!userData && userDataLoading) {
     return <h2>Loading...</h2>;
   }
 
   return (
     <div className="profile">
-      <img
-        className="user-photo"
-        src={
-          user?.photo ||
-          "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-        }
-        alt="User Image"
-      />
-      <h2 className="user-name">{user?.name || "User Name"}</h2>
+      {/* Profile Data of User */}
+      <div className="profile-data">
+        <div className="profile-image">
+          <img
+            className="user-photo"
+            src={
+              userData?.photo ||
+              "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+            }
+            alt="User Image"
+          />
+        </div>
+        <div className="profile-data-info">
+          <h2 className="user-name">{userData?.name || "User Name"}</h2>
+          <div className="parking-and-booking">
+            <div className="parking-data">
+              <h2>{parkings.length ? parkings.length : 0} </h2>
+              <p>Parkings </p>
+            </div>
 
+            <div className="booking-data">
+              <h2>{bookings.length ? bookings.length : 0} </h2>
+              <p>Bookings </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Parkings created by this user */}
       <div className="user-parking">
         <h3 className="user">Parkings</h3>
         {parkings.length > 0 ? (
@@ -122,12 +159,12 @@ const Profile = () => {
         )}
         <button
           onClick={() => navigate("/parkings/new")}
-          className="new-parkin-btn"
-        >
+          className="new-parking-btn">
           Create a new Parking
         </button>
       </div>
 
+      {/* Booked Parking by the User */}
       <div className="user-bookings">
         <h3>Bookings</h3>
         {bookings.length > 0 ? (
@@ -136,15 +173,16 @@ const Profile = () => {
           <p className="no-parking-msg">No bookings found.</p>
         )}
 
-<button
+        <button
           onClick={() => navigate("/parkings")}
-          className="new-parkin-btn"
-        >
+          className="new-parking-btn">
           Create a new Boking
         </button>
       </div>
 
-      <button onClick={handleLogOut} className="log-out-btn">Log Out</button>
+      <button onClick={handleLogOut} className="log-out-btn">
+        Log Out
+      </button>
     </div>
   );
 };

@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import "./SignUp.css";
 
 const SignUp = () => {
+  const { user, setUser } = useAuth();
+  const [imageFile, setImageFile] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,18 +24,75 @@ const SignUp = () => {
     navigate("/user/login");
   };
 
+  useEffect(() => {
+    if (user == null) return;
+    alert("You are already logged in, to again logged in logout first");
+    navigate("/user/profile");
+    {
+      console.log(user);
+    }
+  }, [user, navigate]);
+
+  const uploadImage = async () => {
+    if (!imageFile) {
+      console.log("Image:", imageFile);
+      throw new Error("No image selected");
+    }
+
+    const data = new FormData();
+    data.append("file", imageFile);
+    data.append("upload_preset", "ParkEase");
+    data.append("folder", "Parking");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dhj0i3rr1/image/upload",
+      {
+        method: "POST",
+        body: data,
+      },
+    );
+
+    const result = await res.json();
+    console.log("Cloudinary response:", result);
+
+    if (!res.ok) {
+      throw new Error(result.error?.message || "Image upload failed");
+    }
+
+    return result.secure_url;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let imageUrl = "";
+
+    if (imageFile) {
+      imageUrl = await uploadImage();
+    }
+
+    const payload = {
+      ...formData,
+      photo: imageUrl,
+    };
+
     try {
       const response = await axios.post(
         "http://localhost:5000/user/signup",
-        formData
+        payload,
       );
+
+      console.log(response.data.user);
+      setUser(response.data.user);
+
       alert("User Created Successfully");
-      navigate("/parkings");
+      navigate("/user/login");
     } catch (error) {
       console.error("Signup Error:", error.response?.data || error.message);
-      alert("Signup failed. Please try again.");
+      alert(
+        `Signup failed: ${
+          error.response?.data.message || error.message.message
+        }`,
+      );
     }
   };
 
@@ -94,11 +154,10 @@ const SignUp = () => {
             Profile Photo URL
           </label>
           <input
-            type="text"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImageFile(e.target.files[0])}
             name="photo"
-            placeholder="Photo URL"
-            value={formData.photo}
-            onChange={handleChange}
             className="sign-up-input"
             required
           />

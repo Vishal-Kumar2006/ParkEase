@@ -6,7 +6,16 @@ async function handleBooking(req, res) {
   try {
     const { userId, parkingId, bookedSlots, totalAmount } = req.body;
 
-    console.log("User ID:", userId);
+    // Step 1: Find user and Parking (Mandatory) to book a slot
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const parking = await Parking.findById(parkingId);
+    if (!parking) {
+      return res.status(404).json({ message: "Parking not found" });
+    }
 
     // Create a new booking
     const newBooking = new Booking({
@@ -22,21 +31,6 @@ async function handleBooking(req, res) {
     const savedBooking = await newBooking.save();
     console.log("Saved Booking:", savedBooking);
 
-    // Find the user and update their bookings list
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    user.bookings.push(savedBooking._id);
-    await user.save(); // ✅ Save the updated user document
-    console.log("Updated User:", user);
-
-    // Find the parking and update its slots
-    const parking = await Parking.findById(parkingId);
-    if (!parking) {
-      return res.status(404).json({ error: "Parking not found" });
-    }
     // Update parking slots to mark them as booked
     bookedSlots.forEach((slot) => {
       if (slot >= 0 && slot < parking.totalSlots.length) {
@@ -44,9 +38,8 @@ async function handleBooking(req, res) {
       }
     });
 
-    await parking.save(); // ✅ Save the updated parking document
-
-    console.log("Updated Parking Slots:", parking.totalSlots);
+    // ✅ Save the updated parking document
+    await parking.save();
 
     // Send success response
     res.status(201).json({
@@ -56,6 +49,18 @@ async function handleBooking(req, res) {
   } catch (error) {
     console.error("Error handling booking:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+async function getBookingByUserId(req, res) {
+  try {
+    const userId = req.session.user?.id;
+    if (!userId) return res.status(401).json({ message: "Unauthorized" });
+
+    const bookings = await Booking.find({ userId: userId });
+    res.status(201).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: "Error creating parking", error });
   }
 }
 
@@ -75,4 +80,4 @@ async function getBookingById(req, res) {
   }
 }
 
-module.exports = { handleBooking, getBookingById };
+module.exports = { handleBooking, getBookingById, getBookingByUserId };

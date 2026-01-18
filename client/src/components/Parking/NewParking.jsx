@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "./NewParking.css";
 
 const NewParking = () => {
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
+  const [imageFile, setImageFile] = useState(null);
+
   const [parkingData, setParkingData] = useState({
     name: "",
     image: "",
@@ -12,6 +19,42 @@ const NewParking = () => {
     isOpen: true,
     isElectric: true,
   });
+
+  useEffect(() => {
+    if (!user) {
+      alert("Please login first");
+      navigate("/user/login");
+    }
+  }, []);
+
+  const uploadImage = async () => {
+    if (!imageFile) {
+      console.log("Image:", imageFile);
+      throw new Error("No image selected");
+    }
+
+    const data = new FormData();
+    data.append("file", imageFile);
+    data.append("upload_preset", "ParkEase");
+    data.append("folder", "Parking");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dhj0i3rr1/image/upload",
+      {
+        method: "POST",
+        body: data,
+      },
+    );
+
+    const result = await res.json();
+    console.log("Cloudinary response:", result);
+
+    if (!res.ok) {
+      throw new Error(result.error?.message || "Image upload failed");
+    }
+
+    return result.secure_url;
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -32,40 +75,30 @@ const NewParking = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+    let imageUrl = "";
 
+    if (imageFile) {
+      imageUrl = await uploadImage();
+    }
+
+    const payload = {
+      ...parkingData,
+      image: imageUrl,
+    };
+    try {
       // Create new parking entry
       const response = await axios.post(
         "http://localhost:5000/parkings/new",
-        parkingData,
-        { withCredentials: true }
+        payload,
+        { withCredentials: true },
       );
-      
-    
+
       // Add this Parking id into user info
-      const newParkingId = response.data.newParking._id; 
-  
-      // Fetch the current user data
-      const userResponse = await axios.get("http://localhost:5000/user", {
-        withCredentials: true,
-      });
-  
-      let userData = userResponse.data.user;
+      const newParkingId = response.data.newParking._id;
 
-      // Update the user's parking array with the new parking ID
-      const updatedParkings = [...userData.parkings, newParkingId];
-  
-      // Send the update request to the backend (to add this parking in user's info)
-      await axios.put(
-        `http://localhost:5000/user/${userData._id}/update`, 
-        { parkings: updatedParkings }, 
-        { withCredentials: true }
-      );
-  
-      alert("Parking Created and User Updated Successfully!");
+      alert("Parking Created Successfully!");
+      navigate(`/parkings/${newParkingId}`);
 
-      window.location.href = `http://localhost:5173/parkings/${newParkingId}`;
-  
       // Reset Form
       setParkingData({
         name: "",
@@ -79,13 +112,13 @@ const NewParking = () => {
     } catch (error) {
       console.error("Error creating parking:", error);
       if (error.response && error.response.status === 401) {
-        alert("Unauthorized! Please log in again.");
-        window.location.href = "http://localhost:5173/user/login";
+        alert("Unauthorized! Please log in");
+        navigate("/user/login");
       } else {
         alert("Failed to create parking.");
       }
     }
-  };  
+  };
 
   return (
     <div className="NewParking">
@@ -104,14 +137,12 @@ const NewParking = () => {
         </div>
 
         <div className="newParking-input">
-          <label>Image URL:</label>
+          <label>Image :</label>
           <input
-            type="text"
-            name="image"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImageFile(e.target.files[0])}
             className="input"
-            value={parkingData.image}
-            onChange={handleChange}
-            placeholder="Optional (Default Image Used)"
           />
         </div>
 
@@ -173,9 +204,8 @@ const NewParking = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   toggleSlot(index);
-                }}
-              >
-                {index}  to {index + 1} {slot ? "🟢" : "🔴"}
+                }}>
+                {index} to {index + 1} {slot ? "🟢" : "🔴"}
               </button>
             ))}
           </div>

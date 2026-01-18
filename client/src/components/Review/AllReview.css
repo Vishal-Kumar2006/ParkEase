@@ -1,0 +1,115 @@
+.ReviewHome {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#reviews-heading {
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-top: 5rem;
+}
+
+/* Styling for the Review Class */
+.Review {
+  display: flex;
+  flex-direction: column;
+  background-color: #bfe9ff61;
+  box-shadow: 2px 2px 8px black;
+  margin: 1rem;
+  border-radius: 5px;
+  width: 40rem;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-user {
+  margin: 0.5rem 0 0 0.5rem;
+  height: 3rem;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.review-user img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+.review-user h4 {
+  font-size: 1.2rem;
+  margin: 1rem;
+}
+
+.delete-btn {
+  font-size: 1rem;
+  background-color: #ff0000;
+  padding: 0.2rem 0.5rem;
+  margin: 1rem;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.review-content {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.2rem;
+  margin-left: 0.5rem;
+  align-items: start;
+}
+
+.review-content p {
+  font-size: 1.5rem;
+}
+
+#heart {
+  font-size: 1.8rem;
+}
+
+#rating-count {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 840px) {
+  .Review {
+    background-color: #93e7fd;
+    box-shadow: 0 0 10px black;
+    margin: 1rem;
+    border-radius: 5px;
+    padding: 1rem;
+    width: 35rem;
+  }
+}
+
+@media (max-width: 740px) {
+  .Review {
+    background-color: #93e7fd;
+    box-shadow: 0 0 10px black;
+    margin: 1rem;
+    border-radius: 5px;
+    padding: 1rem;
+    width: 22rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .Review {
+    background-color: #93e7fd;
+    box-shadow: 0 0 10px black;
+    margin: 1rem;
+    border-radius: 5px;
+    padding: 1rem;
+    width: 15rem;
+  }
+}

@@ -1,146 +1,69 @@
 .ShowBookings {
-   display: flex;
-   flex-direction: column-reverse;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+  gap: 1rem;
+  justify-content: center;
 }
 
-.bookedParking {
-    margin: 1rem;
+.booking-card {
+  text-align: start;
+  background-color: #5eacff;
+  border-radius: 1rem 1rem 0 0;
+  animation: appear 1s ease-in-out;
+  animation-timeline: view();
+  animation-range: entry 0% cover 20%;
+  transition: 0.2s ease-in-out;
 }
 
-.bookedParking img {
-    width: 100%;
-    height: 10rem;
-    border-radius: 1rem 1rem 0 0;
-
+.booking-card img {
+  height: 15rem;
+  width: 100%;
+  border-radius: 1rem 1rem 0 0;
 }
 
-.bookedParking-status {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
+.booking-card:hover {
+  box-shadow: 2px 6px 12px rgb(0, 0, 0);
+  cursor: pointer;
 }
 
-.bookedParking-status h3{
-   font-size: 2rem;
-   margin: 1rem;
-   margin-bottom: 0;
-} 
-
-.bookedParking-status div span{
-    font-size: 1rem;
-    margin: 1rem;
- } 
-
-.close {
-    color: red;
+.card-details {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  align-items: start;
+  margin: 1rem 0.5rem;
 }
 
-.booking-info {
-    text-align: start;
-    justify-content: start;
-    font-size: 1.3rem;
-    color: rgba(255, 221, 158, 0.814);
-    margin-left: 1rem;
+.card-details h3 {
+  display: flex;
+  align-items: flex-start;
+  text-align: start;
+  align-items: center;
+  justify-content: start;
+  color: black;
+  font-size: 1.2rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
 }
 
-.booking-slots-h {
-    font-size: 2rem;
-    margin-top:4rem;
+.card-details button {
+  color: rgb(212, 251, 255);
+  background-color: #282828d3;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  display: flex;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem 1.5rem;
+  border: none;
+  transition: 0.2s;
 }
 
-.all-booking-slots {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three cards per row */
-    gap: 1rem;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.booking {
-    padding: 1rem;
-}
-
-.not-valid {
-    background-color: #360000;
-    background-image: url("https://png.pngtree.com/png-vector/20220527/ourmid/pngtree-red-grunge-expired-rubber-stamp-png-image_4750216.png");
-}
-
-.valid {
-    background-color: #002a04;
-}
-
-.booking p {
-    color: rgb(184, 184, 184);
-    text-align: start;
-    justify-content: start;
-    align-items: start;
-    font-size: 1.2rem;
-}
-
-.booking-slots-time {
-    display: flex;
-}
-
-.total-slots {
-    font-size: 2.5rem;
-    margin-top: 1rem;
-}
-
-.booking-slots-time{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three cards per row */
-    gap: 1rem;
-    justify-content: center;
-    padding: 1rem;
-
-}
-
-.booking-slots-time p {
-    display: flex;
-    margin: 2px;
-    padding: 2px;
-    font-size: 0.8rem;
-    border-radius: 8px;
-    border: 2px solid white;
-    background-color: #0039ab;
-}
-
-@media (max-width: 820px) {
-    .all-booking-slots {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Three cards per row */
-        gap: 1rem;
-        justify-content: center;
-        padding: 1rem;
-    }
-
-    .booking-slots-time p {
-        display: flex;
-        margin: 2px;
-        padding: 2px;
-        font-size: 0.6rem;
-        border-radius: 8px;
-        border: 2px solid white;
-        background-color: #0039ab;
-    }
-}
-
-@media (max-width: 550px) {
-    .all-booking-slots {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr); /* Three cards per row */
-        gap: 1rem;
-        justify-content: center;
-        padding: 1rem;
-    }
-
-    .booking-slots-time p {
-        display: flex;
-        margin: 2px;
-        padding: 2px;
-        font-size: 1rem;
-        border-radius: 8px;
-        border: 2px solid white;
-        background-color: #0039ab;
-    }
+.card-details button:hover {
+  cursor: pointer;
+  color: rgb(0, 119, 255);
+  background-color: #000000;
+  box-shadow: 2px 2px 10px rgb(0, 0, 0);
 }

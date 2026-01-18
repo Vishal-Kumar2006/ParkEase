@@ -19,12 +19,7 @@ async function createNewReview(req, res) {
 
     // Create new review
     const newReview = new Review({ ...req.body, userId: req.session.user.id });
-    const savedReview = await newReview.save();
-    console.log(savedReview);
-
-    // Update the Parking's Review Array
-    currParking.review.push(newReview._id);
-    await currParking.save();
+    await newReview.save();
 
     // Respond with success
     res
@@ -36,18 +31,16 @@ async function createNewReview(req, res) {
   }
 }
 
-const getReviewById = async (req, res) => {
+const getReviewByParkingId = async (req, res) => {
   try {
-    // First of All Try to find Review
-    const review = await Review.findById(req.params.id);
+    const parkingId = req.params.id;
 
-    // If Review Not Find Update with (404) error
-    if (!review) {
-      return res.status(404).json({ error: "Review not found." });
-    }
+    const reviews = await Review.find({ parkingId }).populate(
+      "userId",
+      "name photo",
+    );
 
-    // Res with (200) and Review
-    res.status(200).json(review);
+    res.status(200).json(reviews);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Something went wrong." });
@@ -56,27 +49,22 @@ const getReviewById = async (req, res) => {
 
 const deleteReviewbyId = async (req, res) => {
   try {
-    // Find and delete the review
-    const review = await Review.findByIdAndDelete(req.params.id);
+    const review = await Review.findById(req.params.id);
+
     if (!review) {
-      return res.status(404).json({ error: "Review not found." });
+      return res.status(404).json({ error: "Review not found" });
     }
 
-    // Remove the review ID from the corresponding Parking document
-    const parkingId = review.parkingId;
-    const currParking = await Parking.findById(parkingId);
-    if (currParking) {
-      currParking.review = currParking.review.filter(
-        (reviewId) => !reviewId.equals(review._id)
-      );
-      await currParking.save();
+    // req.user.id comes from auth middleware
+    if (review.userId.toString() !== req.user.id) {
+      return res.status(403).json({ error: "Not authorized" });
     }
 
-    res.status(200).json({ message: "Review deleted successfully." });
+    await review.deleteOne();
+    res.status(200).json({ message: "Review deleted" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Something went wrong." });
+    res.status(500).json({ error: "Something went wrong" });
   }
 };
 
-module.exports = { createNewReview, getReviewById, deleteReviewbyId };
+module.exports = { createNewReview, getReviewByParkingId, deleteReviewbyId };

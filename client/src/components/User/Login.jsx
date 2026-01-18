@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+
 import axios from "axios";
 import "./Login.css";
 
 const Login = () => {
+  const { user, setUser } = useAuth();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,6 +23,11 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    if (!user) return;
+    navigate("/user/profile");
+  }, [user, navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent form reload
     try {
@@ -27,8 +36,10 @@ const Login = () => {
         formData,
         {
           withCredentials: true,
-        }
+        },
       );
+      console.log(user);
+      setUser(response.data.user);
       alert("Login Successful");
       navigate("/parkings");
     } catch (error) {
@@ -79,6 +90,7 @@ const Login = () => {
           </button>
         </div>
       </form>
+
       <div className="sign-up">
         Or
         <a onClick={redirectSignUp}> Create new Account</a>

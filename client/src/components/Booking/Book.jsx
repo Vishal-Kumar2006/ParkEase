@@ -1,85 +1,75 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "../Parking/Parking.css";
 
 const Book = () => {
   const { id } = useParams();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [parking, setParking] = useState(null);
-  const [currUser, setCurrUser] = useState(null);
-  const [parkingAdmin, setParkingAdmin] = useState(null);
+
   const [avilableSlots, setAvilableSlots] = useState([]);
   const [selectedSlots, setSelectedSlots] = useState([]);
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [parkingRes, userRes] = await Promise.all([
-          axios.get(`http://localhost:5000/parkings/${id}`, {
-            withCredentials: true,
-          }),
-          axios.get("http://localhost:5000/user/", { withCredentials: true }),
-        ]);
-        setParking(parkingRes.data);
-        setCurrUser(userRes.data.user);
-      } catch (error) {
+  const fetchData = async () => {
+    axios
+      .get(`http://localhost:5000/parkings/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setParking(res.data);
+      })
+      .catch((error) => {
         if (error.response?.status === 401) {
           console.error("Unauthorized access. Redirecting to login...");
           navigate("/user/login");
         } else {
           console.error("Error fetching data:", error);
         }
-      }
-    };
+      });
+  };
+
+  // Fetch parking and user(Admin) details in
+  useEffect(() => {
     fetchData();
-  }, [id, navigate]);
+  }, [id]);
 
   useEffect(() => {
-    if (parking?.user) {
-      axios
-        .get(`http://localhost:5000/user/${parking.user}`, {
-          withCredentials: true,
-        })
-        .then((response) => {
-          setParkingAdmin(response.data);
-          const updatedSlots = parking.totalSlots
-            .map((isAvailable, index) => (isAvailable ? index : null))
-            .filter((slot) => slot !== null); // Remove null values
-          setAvilableSlots(updatedSlots);
-        })
-        .catch((error) => {
-          console.error("Error fetching admin user:", error);
-        });
-    }
+    if (!parking) return;
+    const updatedSlots = parking.totalSlots
+      .map((isAvailable, index) => (isAvailable ? index : null))
+      .filter((slot) => slot !== null);
+
+    setAvilableSlots(updatedSlots);
   }, [parking]);
 
   if (!parking) return <h2>Loading...</h2>;
 
   const handleSlot = (slot) => {
-    console.log(selectedSlots.includes(slot));
-
-    setSelectedSlots((prevSlots) =>
-      prevSlots.includes(slot)
-        ? prevSlots.filter((s) => s !== slot) // Remove slot if already selected
-        : [...prevSlots, slot] // Add slot if not selected
+    setSelectedSlots(
+      (prevSlots) =>
+        prevSlots.includes(slot)
+          ? prevSlots.filter((s) => s !== slot) // Remove slot if already selected
+          : [...prevSlots, slot], // Add slot if not selected
     );
-  }
+  };
 
-  // ✅ Updated Booking Function
+  // Updated Booking Function
   const handleBooking = async () => {
-    if (!currUser) {
+    if (!user) {
       alert("You need to log in to book a parking slot.");
       return navigate("/user/login");
     }
+
     if (selectedSlots.length === 0) {
       alert("Please select at least one slot.");
       return;
     }
 
     const bookingData = {
-      userId: currUser._id,
+      userId: user._id,
       parkingId: id,
       bookedSlots: selectedSlots,
       totalAmount: selectedSlots.length * parking.pricePerHour,
@@ -92,7 +82,7 @@ const Book = () => {
         bookingData,
         {
           withCredentials: true,
-        }
+        },
       );
 
       alert("Booking successful!");
@@ -106,64 +96,80 @@ const Book = () => {
   return (
     <>
       <div
-        className={`parking-details ${parking.isElectric ? "electric" : ""}`}
-      >
+        className={`parking-details ${parking.isElectric ? "electric" : ""}`}>
+        {/*  Display Admin Name When Available */}
         <div className="parking-admin">
-          <img
-            src={parkingAdmin ? parkingAdmin.photo : "Loading..."}
-            alt=""
-            className="parking-admin-photo"
-          />
+          <div className="parking-admin-image">
+            <img
+              src={
+                parking.user.photo
+                  ? parking.user.photo
+                  : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+              }
+              alt=""
+              className="parking-admin-photo"
+            />
+          </div>
+
           <p className="parking-admin-name">
-            {parkingAdmin ? parkingAdmin.name : "Loading..."}
+            {" "}
+            {parking.user.name ? parking.user.name : "Anonyms"}
           </p>
         </div>
-        <img src={parking.image} alt="Parking Image" className="parking-img" />
+
+        <img
+          src={parking.image}
+          alt="Parking Image"
+          className="parking-image"
+        />
         <div className="parking-info">
           <div className="detail">
-            <h2 className="parking-name">{parking.name}</h2>
-            <p className="parking-status">
-              {parking.isOpen ? (
-                <span className="open">Opened</span>
+            <div className="detail-header">
+              <h2 className="parking-name">{parking.name}</h2>
+              <p className="parking-status">
+                {parking.isOpen ? (
+                  <span className="open">Opened</span>
+                ) : (
+                  <span className="close">Closed</span>
+                )}
+              </p>
+            </div>
+
+            <p className="p-d">
+              <strong>Address:</strong> {parking.location}
+            </p>
+            <p className="p-d">
+              <b>Total Slots:</b> {parking.totalSlots.length}
+            </p>
+            <p className="p-d">
+              <b>Available Slots:</b> {parking.availableSlots}
+            </p>
+            <p className="p-d">
+              <strong>Hourly Rate:</strong> ${parking.pricePerHour}
+            </p>
+            <p className="p-d">
+              Electric Parking:{" "}
+              {parking.isElectric ? (
+                <span className="open">Yes</span>
               ) : (
-                <span className="close">Closed</span>
+                <span className="close">No</span>
               )}
             </p>
           </div>
-          <p className="p-d">
-            <strong>Address:</strong> {parking.location}
-          </p>
-          <p className="p-d">
-            <b>Total Slots:</b> {parking.totalSlots}
-          </p>
-          <p className="p-d">
-            <b>Available Slots:</b> {parking.availableSlots}
-          </p>
-          <p className="p-d">
-            <strong>Hourly Rate:</strong> ${parking.pricePerHour}
-          </p>
-          <p className="p-d">
-            Electric Parking:{" "}
-            {parking.isElectric ? (
-              <span className="open">Yes</span>
-            ) : (
-              <span className="close">No</span>
-            )}
-          </p>
 
           {/* ✅ Slot Selection */}
-          {console.log(avilableSlots)}
           <div className="slots-container">
             <h3>All Available Slots are given Below</h3>
             <div className="slots-grid">
               {avilableSlots.map((slot, index) => (
                 <button
                   key={index}
-                  className={`slot-btn booking-slot-btn ${selectedSlots.includes(slot)  ? "booked" : "available"}`}
-                  onClick={() => handleSlot(slot)}
-                >
-                  
-                  {slot} to {slot + 1} {selectedSlots.includes(slot) ? "✅" : "🟢"}
+                  className={`slot-btn booking-slot-btn ${
+                    selectedSlots.includes(slot) ? "booked" : "available"
+                  }`}
+                  onClick={() => handleSlot(slot)}>
+                  {slot} to {slot + 1}{" "}
+                  {selectedSlots.includes(slot) ? "✅" : "🟢"}
                 </button>
               ))}
             </div>
