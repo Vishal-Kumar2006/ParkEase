@@ -5,7 +5,7 @@ const {
   createNewReview,
   getReviewByParkingId,
   deleteReviewbyId,
-} = require("../controllers/review");
+} = require("../controllers/review.js");
 
 router.post("/new", createNewReview);
 

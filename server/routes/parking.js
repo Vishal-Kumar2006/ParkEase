@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const reviewRoutes = require("../routes/review");
+const reviewRoutes = require("../routes/review.js");
 
 const {
   home,
