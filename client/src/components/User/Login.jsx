@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import API_URL from "../../config/api";
 
 import axios from "axios";
 import "./Login.css";
@@ -31,13 +32,9 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent form reload
     try {
-      const response = await axios.post(
-        "http://localhost:5000/user/login",
-        formData,
-        {
-          withCredentials: true,
-        },
-      );
+      const response = await axios.post(`${API_URL}/user/login`, formData, {
+        withCredentials: true,
+      });
       console.log(user);
       setUser(response.data.user);
       alert("Login Successful");

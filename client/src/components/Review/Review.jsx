@@ -1,6 +1,7 @@
 import "./AllReview.css";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
+import API_URL from "../../config/api";
 
 const Review = ({ review, onDelete }) => {
   const { user } = useAuth();
@@ -9,7 +10,7 @@ const Review = ({ review, onDelete }) => {
 
   const handleDeleteReview = async () => {
     try {
-      await axios.delete(`http://localhost:5000/reviews/${review._id}`, {
+      await axios.delete(`${API_URL}/reviews/${review._id}`, {
         withCredentials: true,
       });
       onDelete(review._id);

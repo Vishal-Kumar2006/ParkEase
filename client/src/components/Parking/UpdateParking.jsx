@@ -2,10 +2,13 @@ import { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import "./NewParking.css";
+import API_URL from "../../config/api";
+import { useNavigate } from "react-router-dom";
 
 const UpdateParking = () => {
   const { id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const parking = location.state?.parking; // Get parking data from state
 
   const [parkingData, setParkingData] = useState({
@@ -14,10 +17,11 @@ const UpdateParking = () => {
     location: parking?.location || "",
 
     // 24-hour slots (default: all available)
-    totalSlots: Array.isArray(parking?.totalSlots) && parking?.totalSlots.length === 24 
-    ? [...parking.totalSlots] 
-    : new Array(24).fill(true),
-  
+    totalSlots:
+      Array.isArray(parking?.totalSlots) && parking?.totalSlots.length === 24
+        ? [...parking.totalSlots]
+        : new Array(24).fill(true),
+
     availableSlots: parking?.availableSlots || "",
     pricePerHour: parking?.pricePerHour || "",
     isOpen: parking?.isOpen || false,
@@ -27,10 +31,11 @@ const UpdateParking = () => {
   const toggleSlot = (index) => {
     setParkingData((prevData) => ({
       ...prevData,
-      totalSlots: prevData.totalSlots.map((slot, i) => (i === index ? !slot : slot))
+      totalSlots: prevData.totalSlots.map((slot, i) =>
+        i === index ? !slot : slot,
+      ),
     }));
   };
-  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -44,14 +49,12 @@ const UpdateParking = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:5000/parkings/${id}/update`,
+        `${API_URL}/parkings/${id}/update`,
         parkingData,
-        { withCredentials: true } 
+        { withCredentials: true },
       );
       alert("Parking Updated Successfully!");
-      console.log(response.data);
-      
-      window.location.href = "http://localhost:5173/parkings";
+      navigate("/parkings");
     } catch (error) {
       console.error("Error updating parking:", error);
       alert("Failed to update parking.");
@@ -145,17 +148,16 @@ const UpdateParking = () => {
                 onClick={(e) => {
                   e.preventDefault(); // Prevent form submission
                   toggleSlot(index);
-                }}
-              >
-              {index} to {index + 1} {slot ? "🟢" : "🔴"}
-            </button>
-            
+                }}>
+                {index} to {index + 1} {slot ? "🟢" : "🔴"}
+              </button>
             ))}
           </div>
         </div>
 
-
-        <button type="submit" className="newParking-btn">Update Parking</button>
+        <button type="submit" className="newParking-btn">
+          Update Parking
+        </button>
       </form>
     </div>
   );

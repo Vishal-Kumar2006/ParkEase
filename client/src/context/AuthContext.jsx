@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../config/api";
 
 const AuthContext = createContext();
 
@@ -10,7 +11,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user", { withCredentials: true })
+      .get(`${API_URL}/user`, { withCredentials: true })
       .then((response) => {
         setUser(response.data.user);
       })

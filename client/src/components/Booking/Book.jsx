@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import API_URL from "../../config/api";
 import "../Parking/Parking.css";
 
 const Book = () => {
@@ -15,7 +16,7 @@ const Book = () => {
 
   const fetchData = async () => {
     axios
-      .get(`http://localhost:5000/parkings/${id}`, {
+      .get(`${API_URL}/parkings/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -78,7 +79,7 @@ const Book = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/bookings/book",
+        `${API_URL}/bookings/book`,
         bookingData,
         {
           withCredentials: true,

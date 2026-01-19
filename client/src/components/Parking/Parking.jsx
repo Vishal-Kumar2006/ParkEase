@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import ReviewHome from "../Review/ReviewHome.jsx";
 import "./Parking.css";
 import { useAuth } from "../../context/AuthContext.jsx";
+import API_URL from "../../config/api.js";
 
 const Parking = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Parking = () => {
 
   const fetchData = async () => {
     axios
-      .get(`http://localhost:5000/parkings/${id}`, {
+      .get(`${API_URL}/parkings/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -138,10 +139,9 @@ const Parking = () => {
                 window.confirm("Are you sure you want to delete this parking?")
               ) {
                 try {
-                  await axios.delete(
-                    `http://localhost:5000/parkings/${id}/delete`,
-                    { withCredentials: true },
-                  );
+                  await axios.delete(`${API_URL}/parkings/${id}/delete`, {
+                    withCredentials: true,
+                  });
                   alert("Parking deleted successfully.");
                   navigate("/parkings");
                 } catch (error) {

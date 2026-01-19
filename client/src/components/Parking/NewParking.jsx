@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./NewParking.css";
+import API_URL from "../../config/api";
 
 const NewParking = () => {
   const { user } = useAuth();
@@ -87,11 +88,9 @@ const NewParking = () => {
     };
     try {
       // Create new parking entry
-      const response = await axios.post(
-        "http://localhost:5000/parkings/new",
-        payload,
-        { withCredentials: true },
-      );
+      const response = await axios.post(`${API_URL}/parkings/new`, payload, {
+        withCredentials: true,
+      });
 
       // Add this Parking id into user info
       const newParkingId = response.data.newParking._id;

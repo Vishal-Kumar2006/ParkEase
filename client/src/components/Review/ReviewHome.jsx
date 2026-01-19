@@ -3,15 +3,15 @@ import axios from "axios";
 import ReviewForm from "./ReviewForm";
 import AllReviews from "./AllReviews";
 import "./AllReview.css";
+import API_URL from "../../config/api";
 
 const ReviewHome = ({ parkingId }) => {
   const [reviews, setReviews] = useState([]);
 
   const fetchReviews = async () => {
-    const res = await axios.get(
-      `http://localhost:5000/reviews/parking/${parkingId}`,
-      { withCredentials: true },
-    );
+    const res = await axios.get(`${API_URL}/reviews/parking/${parkingId}`, {
+      withCredentials: true,
+    });
     setReviews(res.data);
   };
 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import "./SignUp.css";
+import API_URL from "../../config/api";
 
 const SignUp = () => {
   const { user, setUser } = useAuth();
@@ -76,10 +77,7 @@ const SignUp = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/user/signup",
-        payload,
-      );
+      const response = await axios.post(`${API_URL}/user/signup`, payload);
 
       console.log(response.data.user);
       setUser(response.data.user);

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import LoadParking from "../Loading/LoadParking";
 import ShowParkings from "./ShowParkings";
+import API_URL from "../../config/api";
 
 const AllParkings = () => {
   const [allParkings, setAllParkings] = useState([]);
@@ -11,7 +12,7 @@ const AllParkings = () => {
   // Fetch Parking's data
   useEffect(() => {
     axios
-      .get("http://localhost:5000/parkings", { withCredentials: true })
+      .get(`${API_URL}/parkings`, { withCredentials: true })
       .then((response) => {
         setAllParkings(response.data);
       })

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./ReviewForm.css";
+import API_URL from "../../config/api";
 
 const ReviewForm = ({ parkingId, onReviewAdded }) => {
   const [reviewData, setReviewData] = useState({
@@ -28,7 +29,7 @@ const ReviewForm = ({ parkingId, onReviewAdded }) => {
 
     try {
       await axios.post(
-        `http://localhost:5000/parkings/${parkingId}/review/new`,
+        `${API_URL}/parkings/${parkingId}/review/new`,
         reviewData,
         { withCredentials: true },
       );

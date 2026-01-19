@@ -5,6 +5,7 @@ import "./Profile.css";
 import ShowParkings from "../Parking/ShowParkings.jsx";
 import ShowBookings from "../Booking/ShowBookings.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
+import API_URL from "../../config/api.js";
 
 const Profile = () => {
   // All Storage area
@@ -31,7 +32,7 @@ const Profile = () => {
   // Step 2: Collect User data from backend if user is Logged In
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user", { withCredentials: true })
+      .get(`${API_URL}/user`, { withCredentials: true })
       .then((res) => {
         if (res.data.user) {
           setUserData(res.data.user);
@@ -47,7 +48,7 @@ const Profile = () => {
   useEffect(() => {
     try {
       axios
-        .get(`http://localhost:5000/parkings/getParking-byUserId`, {
+        .get(`${API_URL}/parkings/getParking-byUserId`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -62,7 +63,7 @@ const Profile = () => {
   useEffect(() => {
     try {
       axios
-        .get(`http://localhost:5000/bookings/getBooking_byUserId`, {
+        .get(`${API_URL}/bookings/getBooking_byUserId`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -82,7 +83,7 @@ const Profile = () => {
       Promise.all(
         bookings.map((booking) =>
           axios
-            .get(`http://localhost:5000/parkings/${booking.parkingId}`, {
+            .get(`${API_URL}/parkings/${booking.parkingId}`, {
               withCredentials: true,
             })
             .then((response) => response.data) // Extract parking data
@@ -104,7 +105,7 @@ const Profile = () => {
   // Handle if user Try to Logout
   const handleLogOut = () => {
     axios
-      .post("http://localhost:5000/user/logout", {}, { withCredentials: true })
+      .post(`${API_URL}/user/logout`, {}, { withCredentials: true })
       .then(() => {
         setUser(null);
         navigate("/user/login");
