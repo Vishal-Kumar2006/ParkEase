@@ -25,8 +25,8 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://parkease-h9y0.onrender.com/", // Your frontend URL
-    credentials: true, // Required for session cookies
+    origin: "https://parkease-h9y0.onrender.com",
+    credentials: true,
   }),
 );
 
@@ -44,18 +44,19 @@ db.once("open", () => console.log(" MongoDB Atlas Connected!"));
 //  Store sessions in MongoDB
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "thisIsAtempraryKey", // Use a separate session secret
+    name: "connect.sid",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: mongoURI,
+      mongoUrl: process.env.MONGO_URI,
       collectionName: "sessions",
-      ttl: 7 * 24 * 60 * 60, // 7 days expiry
     }),
     cookie: {
-      httpOnly: true, // Prevents client-side JS access
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      httpOnly: true,
+      secure: true, // REQUIRED on Render
+      sameSite: "none", // REQUIRED for cross-origin
+      maxAge: 1000 * 60 * 60 * 24,
     },
   }),
 );

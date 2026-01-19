@@ -6,14 +6,17 @@ async function handleSignUp(req, res) {
   try {
     const { name, email, password, photo } = req.body;
 
-    // Check if email already exists
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    // Hash password and create user
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = await User.create({
       name,
       email,
@@ -23,7 +26,7 @@ async function handleSignUp(req, res) {
         "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
     });
 
-    // ✅ Store user in session
+    // ✅ Save user info in session
     req.session.user = {
       id: newUser._id,
       email: newUser.email,
@@ -31,22 +34,20 @@ async function handleSignUp(req, res) {
       photo: newUser.photo,
     };
 
-    // ✅ Explicitly save session and wait
-    await new Promise((resolve, reject) => {
-      req.session.save((err) => {
-        if (err) {
-          console.error("Session Save Error:", err);
-          reject(err);
-        } else {
-          resolve();
-        }
+    // ✅ Ensure session is saved before responding
+    req.session.save((err) => {
+      if (err) {
+        console.error("Session save error:", err);
+        return res.status(500).json({ message: "Session error" });
+      }
+
+      res.status(201).json({
+        message: "User created successfully",
+        user: req.session.user,
       });
     });
-
-    // Send response after session is fully saved
-    res.json({ message: "User created successfully", user: req.session.user });
   } catch (error) {
-    console.error("Error signing up:", error);
+    console.error("SignUp Error:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
@@ -56,24 +57,38 @@ async function handleLogin(req, res) {
   try {
     const { email, password } = req.body;
 
-    // Find user by email
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password required" });
+    }
+
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "Invalid email" });
+      return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    // Compare entered password with hashed password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid password" });
+      return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    // ✅ Store user in session
-    req.session.user = { id: user._id };
+    // ✅ Store FULL user (not just id)
+    req.session.user = {
+      id: user._id,
+      email: user.email,
+      name: user.name,
+      photo: user.photo,
+    };
 
-    res.json({
-      message: "User Logged in Successfully",
-      user: req.session.user,
+    req.session.save((err) => {
+      if (err) {
+        console.error("Session save error:", err);
+        return res.status(500).json({ message: "Session error" });
+      }
+
+      res.json({
+        message: "Login successful",
+        user: req.session.user,
+      });
     });
   } catch (error) {
     console.error("Login Error:", error);
@@ -90,11 +105,17 @@ async function handleLogout(req, res) {
           .status(500)
           .json({ message: "Logout failed. Please try again." });
       }
-      res.clearCookie("connect.sid"); // Remove session cookie
+
+      res.clearCookie("connect.sid", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      });
+
       res.json({ message: "Logged out successfully" });
     });
   } catch (error) {
-    console.error("Error logging out:", error);
+    console.error("Logout Exception:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
