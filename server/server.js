@@ -25,7 +25,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://parkease-h9y0.onrender.com",
+    origin: "https://parkease-6xhi.onrender.com",
     credentials: true,
   }),
 );
