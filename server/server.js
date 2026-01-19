@@ -18,7 +18,7 @@ const reviewRoutes = require("./routes/review.js");
 
 const app = express();
 
-// ✅ Middleware
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -30,7 +30,7 @@ app.use(
   }),
 );
 
-// ✅ MongoDB Connection
+//  MongoDB Connection
 const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
@@ -39,9 +39,9 @@ mongoose.connect(mongoURI, {
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "❌ MongoDB Connection Error:"));
-db.once("open", () => console.log("✅ MongoDB Atlas Connected!"));
+db.once("open", () => console.log(" MongoDB Atlas Connected!"));
 
-// ✅ Store sessions in MongoDB
+//  Store sessions in MongoDB
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "thisIsAtempraryKey", // Use a separate session secret
@@ -60,22 +60,22 @@ app.use(
   }),
 );
 
-// ✅ Flash messages (must be after session middleware)
+//  Flash messages (must be after session middleware)
 app.use(flash());
 
-// ✅ Debugging: Log session data for testing
+// Debugging: Log session data for testing
 app.use((req, res, next) => {
   res.locals.flashMessages = req.flash();
   next();
 });
 
-// ✅ Routes
+// Routes
 app.use("/parkings", pagesRoutes);
 app.use("/user", userRoutes);
 app.use("/bookings", restrictedToLoggedInUserOnly, bookingRoutes);
 app.use("/reviews", restrictedToLoggedInUserOnly, reviewRoutes);
 
-// ✅ Start Server
+// Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);

@@ -25,11 +25,8 @@ async function handleBooking(req, res) {
       totalAmount,
     });
 
-    console.log("New Booking:", newBooking);
-
     // Save the booking to the database
     const savedBooking = await newBooking.save();
-    console.log("Saved Booking:", savedBooking);
 
     // Update parking slots to mark them as booked
     bookedSlots.forEach((slot) => {
@@ -66,8 +63,6 @@ async function getBookingByUserId(req, res) {
 
 async function getBookingById(req, res) {
   try {
-    console.log("Received ID:", req.params.id);
-
     const booking = await Booking.findById(req.params.id);
     if (!booking) {
       return res.status(404).json({ error: "Booking not found" });

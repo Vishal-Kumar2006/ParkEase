@@ -23,8 +23,6 @@ async function handleSignUp(req, res) {
         "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
     });
 
-    console.log(newUser);
-
     // ✅ Store user in session
     req.session.user = {
       id: newUser._id,
@@ -44,8 +42,6 @@ async function handleSignUp(req, res) {
         }
       });
     });
-
-    console.log("Session Data after save:", req.session);
 
     // Send response after session is fully saved
     res.json({ message: "User created successfully", user: req.session.user });
@@ -103,7 +99,6 @@ async function handleLogout(req, res) {
   }
 }
 
-// ✅ Get Current Logged-in User
 // Get Current Logged-in User
 async function getCurrentUser(req, res) {
   try {
@@ -151,20 +146,16 @@ async function updateUserParking(req, res) {
     const { id } = req.params;
     const updatedFields = req.body;
 
-    console.log("Updating User ID:", id);
-    console.log("Received Data:", updatedFields);
-
     const updatedUser = await User.findByIdAndUpdate(
       id,
       { $set: updatedFields },
-      { new: true }
+      { new: true },
     );
 
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("Updated User:", updatedUser);
     res.json(updatedUser);
   } catch (error) {
     console.error("Error updating user:", error);

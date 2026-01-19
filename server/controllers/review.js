@@ -9,8 +9,6 @@ async function createNewReview(req, res) {
         .json({ error: "You must be logged in to create a review." });
     }
 
-    console.log(req.body);
-
     // Find the parking lot and associate the review
     const currParking = await Parking.findById(req.body.parkingId);
     if (!currParking) {
