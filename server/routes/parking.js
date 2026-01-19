@@ -10,7 +10,7 @@ const {
   getParkingByUser,
   updateParking,
   handleDeleteParking,
-} = require("../controllers/parking");
+} = require("../controllers/parking.js");
 
 router.get("/", home);
 
