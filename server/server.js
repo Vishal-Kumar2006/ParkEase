@@ -25,7 +25,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Your frontend URL
+    origin: "https://parkease-h9y0.onrender.com/", // Your frontend URL
     credentials: true, // Required for session cookies
   }),
 );
