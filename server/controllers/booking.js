@@ -1,6 +1,6 @@
-const Booking = require("../models/booking");
-const User = require("../models/user");
-const Parking = require("../models/parking");
+const Booking = require("../models/booking.js");
+const User = require("../models/user.js");
+const Parking = require("../models/parking.js");
 
 async function handleBooking(req, res) {
   try {
