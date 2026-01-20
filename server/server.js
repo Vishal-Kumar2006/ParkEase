@@ -5,82 +5,59 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const cookieParser = require("cookie-parser");
-const flash = require("connect-flash");
 
-const { restrictedToLoggedInUserOnly } = require("./middleware/auth");
-
-// Load env FIRST
 dotenv.config();
-
-// Routes
-const parkingRoutes = require("./routes/parking");
-const userRoutes = require("./routes/user");
-const bookingRoutes = require("./routes/booking");
-const reviewRoutes = require("./routes/review");
 
 const app = express();
 
-// BASIC MIDDLEWARE
+/* 🔥 REQUIRED FOR RENDER */
+app.set("trust proxy", 1);
+
+/* Middleware */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// CORS (STRICT)
 app.use(
   cors({
-    origin: "https://parkease-6xhi.onrender.com", // FRONTEND URL ONLY
+    origin: "https://parkease-6xhi.onrender.com",
     credentials: true,
   }),
 );
 
-// DATABASE
+/* MongoDB */
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => {
-    console.error("❌ MongoDB Connection Error:", err);
-    process.exit(1);
-  });
+  .catch(console.error);
 
-// SESSION (CRITICAL PART)
+/* Session */
 app.use(
   session({
     name: "connect.sid",
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URI,
-      collectionName: "sessions",
     }),
-
     cookie: {
       httpOnly: true,
-      secure: true, // REQUIRED on Render (HTTPS)
-      sameSite: "none", // REQUIRED for cross-site cookies
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      secure: true,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24,
     },
   }),
 );
 
-//  FLASH (OPTIONAL)
-app.use(flash());
+/* Routes */
+app.use("/user", require("./routes/user"));
+app.use("/parkings", require("./routes/parking"));
+app.use("/bookings", require("./routes/booking"));
+app.use("/reviews", require("./routes/review"));
 
-// ROUTES
-app.use("/parkings", parkingRoutes);
-app.use("/user", userRoutes);
-
-app.use("/bookings", restrictedToLoggedInUserOnly, bookingRoutes);
-app.use("/reviews", restrictedToLoggedInUserOnly, reviewRoutes);
-
-// HEALTH CHECK (IMPORTANT)
-app.get("/", (req, res) => {
-  res.json({ status: "Backend running ✅" });
-});
-
-// START SERVER
+/* Server */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log("🚀 Server running on port", PORT);
 });
