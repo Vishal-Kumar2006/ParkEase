@@ -123,11 +123,7 @@ async function handleLogout(req, res) {
 // Get Current Logged-in User
 async function getCurrentUser(req, res) {
   try {
-    if (!req.session.user) {
-      return res.status(401).json({ message: "Not logged in" });
-    }
-
-    const user = await User.findById(req.session.user.id).select("-password");
+    const user = await User.findById(req.user.id).select("-password");
 
     if (!user) {
       req.session.destroy(() => {});

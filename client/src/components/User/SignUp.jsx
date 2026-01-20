@@ -77,9 +77,10 @@ const SignUp = () => {
     };
 
     try {
-      const response = await axios.post(`${API_URL}/user/signup`, payload);
+      const response = await axios.post(`${API_URL}/user/signup`, payload, {
+        withCredentials: true,
+      });
 
-      console.log(response.data.user);
       setUser(response.data.user);
 
       alert("User Created Successfully");
