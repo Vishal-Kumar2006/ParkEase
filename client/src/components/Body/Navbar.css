@@ -71,7 +71,34 @@
     background: #a7dcfff1;
     backdrop-filter: blur(5px);
     width: 100%;
-    padding: 1rem;
+    gap: 1rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nav-options.open {
+    display: flex;
+  }
+
+  .nav-option {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .menu-btn {
+    display: block; /* Show menu button on mobile */
+  }
+
+  .nav-options {
+    display: none; /* Hide links by default */
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #a7dcfff1;
+    backdrop-filter: blur(5px);
+    width: 100%;
     gap: 1rem;
     transition: all 0.3s ease-in-out;
   }

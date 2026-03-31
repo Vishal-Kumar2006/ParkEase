@@ -9,13 +9,13 @@ const Home = lazy(() => import("./components/Parking/Home.jsx"));
 
 // All Parkings Routes
 const AllParking = lazy(() => import("./components/Parking/AllParkings.jsx"));
-const ElectricParking = lazy(() =>
-  import("./components/Parking/ElectricParking.jsx")
+const ElectricParking = lazy(
+  () => import("./components/Parking/ElectricParking.jsx"),
 );
 const ParkingDetails = lazy(() => import("./components/Parking/Parking.jsx"));
 const NewParking = lazy(() => import("./components/Parking/NewParking.jsx"));
-const UpdateParking = lazy(() =>
-  import("./components/Parking/UpdateParking.jsx")
+const UpdateParking = lazy(
+  () => import("./components/Parking/UpdateParking.jsx"),
 );
 
 // All User Routes

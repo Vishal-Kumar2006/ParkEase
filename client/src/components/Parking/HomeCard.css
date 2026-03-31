@@ -31,3 +31,35 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 468px) {
+  .HomeCard {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .HomeCard-Left img {
+    height: 10rem;
+    width: 10rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .HomeCard-Right {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .HomeCard-Right h3 {
+    font-size: 3rem;
+    margin-bottom: 0rem;
+  }
+
+  .HomeCard-Detail {
+    font-size: 1rem;
+  }
+}
