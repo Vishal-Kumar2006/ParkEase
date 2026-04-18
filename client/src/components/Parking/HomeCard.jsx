@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import "./HomeCard.css";
 
 const HomeCard = ({ card }) => {
+  const navigate = useNavigate();
   if (!card) return null;
 
   return (
@@ -10,8 +12,18 @@ const HomeCard = ({ card }) => {
       </div>
 
       <div className="HomeCard-Right">
-        <h3>{card.name}</h3>
-        <p className="HomeCard-Detail">{card.detail}</p>
+        <div className="HomeCard-Details">
+          <h3>{card.name}</h3>
+          <p className="card-detail">{card.detail}</p>
+        </div>
+
+        {card.button && (
+          <div
+            onClick={() => navigate(`/${card.button}`)}
+            className="HomeCard-Button">
+            {`Go to ${card.name}`}
+          </div>
+        )}
       </div>
     </div>
   );

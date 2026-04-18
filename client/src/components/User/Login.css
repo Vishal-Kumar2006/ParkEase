@@ -21,7 +21,7 @@
 .input-field {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  margin-top: 1rem;
 }
 
 .input-label {
@@ -37,8 +37,9 @@
   width: 30rem;
   padding-left: 1rem;
   border-radius: 0.4rem;
-  border: 2px solid black;
+  border: 1px solid black;
   color: rgb(0, 0, 0);
+  outline: none;
 }
 
 .log-in-btn {
@@ -95,7 +96,59 @@
   }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 468px) {
+  .log-in-page {
+    margin: 4rem 1rem;
+    padding: 0;
+  }
+
+  .log-in-heading {
+    font-size: 1.8rem;
+  }
+
+  .log-in-form {
+    width: 90%;
+    margin: 2rem;
+  }
+
+  .input-field {
+    margin: 0.5rem 0;
+    width: 100%;
+  }
+
+  .log-in-input {
+    font-size: 1.2rem;
+    width: 100%;
+    min-width: 90%;
+  }
+
+  .log-in-btn {
+    font-size: 1.5rem;
+    height: 3rem;
+  }
+
+  .log-in-btn:hover {
+    cursor: pointer;
+    color: rgb(239, 255, 186);
+  }
+
+  .sign-up {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-top: 4rem;
+    font-size: 1.2rem;
+  }
+
+  .sign-up a {
+    color: rgba(0, 0, 255, 0.614);
+  }
+
+  .sign-up a:hover {
+    cursor: pointer;
+    color: blue;
+  }
+
   .log-in-page {
     border-radius: 0.3rem;
   }

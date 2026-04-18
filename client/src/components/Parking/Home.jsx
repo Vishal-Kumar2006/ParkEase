@@ -12,28 +12,28 @@ const Home = () => {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJdQV6cmgcg8mffOykR9aoWODorbjdW5uIcQ&s",
       detail:
-        "Shopping malls attract thousands of visitors daily, making parking a major concern. Our mall parking service ensures youget a secured and well-organized parking spot without any hassle. Whether you're visiting for shopping, dining, or entertainment, our real-time availability feature helps you find the best spot instantly. We offer dedicated spaces for disabled individuals, valet services, and electric vehicle charging stations for convenience. Say goodbye to the frustration of circling around for a parking space—pre-book your mall parking and enjoy a stress-free experience! ",
+        "Shopping malls attract thousands of visitors daily, making parking a major concern. Our mall parking service ensures youget a secured and well-organized parking spot without any hassle. Whether you're visiting for shopping, dining, or entertainment, our real-time availability feature helps you find the best spot instantly. We offer dedicated spaces for disabled individuals, valet services, and electric vehicle charging stations for convenience.",
     },
     {
       name: "Metro Stations",
       image:
         "https://liferepublic.in/images/media/1755782293Pune-Metro-Line-3-train-at-an-elevated-station-with-a-cityscape-background-at-sunset.jpg",
       detail:
-        " Metro stations are among the busiest locations, especially during peak hours. Finding a safe and convenient parking spot near metro stations can be difficult, but our smart booking system makes it easy. We provide well-maintained, secure, and affordable parking near major metro stations, so you can park and commute without worries. Our parking areas are equipped with CCTV surveillance, security personnel, and real-time monitoring for your safety. Whether you're a daily commuter or an occasional traveler, our metro station parking ensures a smooth transition from car to metro.",
+        " Metro stations are among the busiest locations, especially during peak hours. Finding a safe and convenient parking spot near metro stations can be difficult, but our smart booking system makes it easy. We provide well-maintained, secure, and affordable parking near major metro stations, so you can park and commute without worries. Our parking areas are equipped with CCTV surveillance, security personnel, and real-time monitoring for your safety.",
     },
     {
       name: "Railway Stations",
       image:
         "https://images.travelandleisureasia.com/wp-content/uploads/sites/3/2023/11/08111004/oldest-railway-stations-in-india-2.jpeg",
       detail:
-        " Railway stations serve thousands of passengers every day, leading to crowded parking areas. With our advanced parking solution, you can pre-book your spot, ensuring a hassle-free experience. We offer short-term and long-term parking options for travelers, with designated areas for overnight parking. Our facilities are guarded 24/7, well-lit, and equipped with electric charging stations for those traveling in EVs. Whether you're heading out for a short trip or an extended journey, our safe and convenient railway station parking lets you focus on your travels while we take care of your vehicle.",
+        " Railway stations serve thousands of passengers every day, leading to crowded parking areas. With our advanced parking solution, you can pre-book your spot, ensuring a hassle-free experience. We offer short-term and long-term parking options for travelers, with designated areas for overnight parking. Our facilities are guarded 24/7, well-lit, and equipped with electric charging stations for those traveling in EVs.",
     },
     {
       name: "Bus Stations",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSFSO6vqzd7sy76C1FSQr_RQ-6CY5CjCDkyg&s",
       detail:
-        "Bus terminals are often overcrowded, making it challenging to find secure parking. Our bus station parking service provides a dedicated, well-maintained space for passengers who need a safe place to park their vehicles before catching a bus. Our parking lots are affordable, secure, and easily accessible, making it easier for you to park and travel worry-free. Equipped with CCTV cameras, real-time tracking, and electric vehicle charging stations, our bus station parking ensures your car remains safe while you travel. Whether you're taking a short city bus ride or a long-distance journey, we've got the perfect parking spot for you!",
+        "Bus terminals are often overcrowded, making it challenging to find secure parking. Our bus station parking service provides a dedicated, well-maintained space for passengers who need a safe place to park their vehicles before catching a bus. Our parking lots are affordable, secure, and easily accessible, making it easier for you to park and travel worry-free. ",
     },
   ];
 
@@ -112,6 +112,7 @@ const Home = () => {
       "https://img.freepik.com/free-photo/parkinglot-commute-outside-area-auto_1112-984.jpg?semt=ais_hybrid&w=740&q=80",
     detail:
       "Browse all available parking spaces in one place. Find secure, affordable, and well-managed parking near malls, stations, and busy areas. Choose the spot that fits your location and timing—no guesswork.",
+    button: "parkings",
   };
   const electricParking = {
     name: "Electric Parking",
@@ -119,36 +120,40 @@ const Home = () => {
       "https://btcpower.com/wp-content/uploads/2023/04/parkingoftehfuture.jpg",
     detail:
       "Park smarter with dedicated electric vehicle charging spaces. Our EV-friendly parking ensures safe charging, real-time availability, and easy access. Perfect for daily commuters and long trips alike.",
+    button: "electricParking",
   };
   const newParking = {
-    name: "Create Your Parking",
+    name: "Create Parking",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOsErNenTjd7sL--vkFuBofqDqWx8EfpWpgA&s",
     detail:
       "Add and manage your own parking space effortlessly. List location, capacity, and features in just a few steps. Start earning while helping others park stress-free.",
+    button: "parkings/new",
   };
 
   return (
     <div className="home-container">
       {/* Hero Section */}
 
-      <section className="hero">
+      <section className="hero sub-hero">
         <h1>Find & Book Your Perfect Parking Spot </h1>
         <p>Hassle-free parking at your convenience</p>
 
-        <div className=" featured-parkings">
-          <div className="parking-list" onClick={() => navigate("/parkings")}>
+        <div className="featured-parkings">
+          <div
+            className="parking-list parking-list-links"
+            onClick={() => navigate("/parkings")}>
             <HomeCard card={allParking} />
           </div>
 
           <div
-            className="parking-list"
+            className="parking-list parking-list-links"
             onClick={() => navigate("/electricParking")}>
             <HomeCard card={electricParking} />
           </div>
 
           <div
-            className="parking-list"
+            className="parking-list parking-list-links"
             onClick={() => navigate("/parkings/new")}>
             <HomeCard card={newParking} />
           </div>
@@ -156,31 +161,37 @@ const Home = () => {
       </section>
 
       {/* Featured Parkings */}
-      <section className="featured-parkings">
+      <section className="sub-hero">
         <h2>Popular Parking Spots</h2>
-        <div className="parking-list">
+        <div className="featured-parkings">
           {parkingSpots.map((spot, index) => (
-            <HomeCard key={index} card={spot} />
+            <div className="parking-list">
+              <HomeCard key={index} card={spot} />
+            </div>
           ))}
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="featured-parkings">
+      <section className="sub-hero">
         <h2>How It Works?</h2>
-        <div className="parking-list">
+        <div className="featured-parkings">
           {parkingWorks.map((spot, index) => (
-            <HomeCard key={index} card={spot} />
+            <div className="parking-list">
+              <HomeCard key={index} card={spot} />
+            </div>
           ))}
         </div>
       </section>
 
       {/* Parking Benefits */}
-      <section className="featured-parkings">
+      <section className="sub-hero">
         <h2>Why Choose Our Parking?</h2>
-        <div className="parking-list">
+        <div className="featured-parkings">
           {features.map((spot, index) => (
-            <HomeCard key={index} card={spot} />
+            <div className="parking-list">
+              <HomeCard key={index} card={spot} />
+            </div>
           ))}
         </div>
       </section>
