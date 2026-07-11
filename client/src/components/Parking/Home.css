@@ -1,0 +1,77 @@
+.hero h1 {
+  font-size: 2rem;
+  color: rgb(6, 0, 47);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin: 1rem;
+  color: rgb(6, 0, 47);
+}
+.sub-hero {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 5rem 10%;
+}
+
+.featured-parkings h2 {
+  font-size: 2rem;
+}
+
+.parking-list {
+  margin: 7rem 0;
+  animation: appear 1s ease-in-out;
+  animation-timeline: view();
+  animation-range: entry 0% cover 25%;
+}
+
+.parking-list-links {
+  border-radius: 0 5rem 0 5rem;
+  transition: ease-in-out 0.5s;
+}
+
+.parking-list-links:hover {
+  cursor: pointer;
+  box-shadow: 10px 10px 2rem rgb(0, 193, 252);
+}
+
+/* ✅ Responsive Navbar with Menu Button */
+@media (max-width: 768px) {
+  .featured-parkings {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .parking-list {
+    margin: 5rem 0;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .hero {
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: rgb(6, 0, 47);
+  }
+
+  .sub-hero {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 92%;
+    margin: 5rem 4%;
+  }
+
+  .parking-list {
+    margin: 3.5rem 0;
+  }
+}

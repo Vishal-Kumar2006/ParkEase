@@ -1,0 +1,237 @@
+/* Style for the User Profile and data*/
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-data {
+  display: flex;
+  margin: 4rem 3rem;
+  text-align: start;
+  align-items: start;
+}
+
+.profile-image {
+  border-radius: 5%;
+  height: 20rem;
+  width: 20rem;
+  border: 2px solid rgb(13, 0, 0);
+}
+
+.user-photo {
+  border-radius: 5%;
+  height: 20rem;
+  width: 20rem;
+}
+
+.profile-data-info {
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.user-name {
+  display: flex;
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+}
+
+.profile-data-info p {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.parking-and-booking {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+.parking-data h2 {
+  font-size: 2rem;
+}
+
+.booking-data h2 {
+  font-size: 2rem;
+}
+
+/* Style for the Parking Block  */
+.user-parking {
+  margin: 2rem;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border-radius: 1rem;
+}
+
+.user-parking h3 {
+  font-size: 2rem;
+  margin: 2rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: black;
+}
+
+.user-no-parkings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.user-no-parkings p {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 2rem;
+  color: rgb(175, 0, 0);
+}
+
+.new-parking-btn {
+  display: flex;
+  color: #000000;
+  background-color: #5eacff;
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 2rem;
+  transition: 0.2s ease-in-out;
+}
+
+.new-parking-btn:hover {
+  box-shadow: 2px 2px 10px rgb(0, 16, 96);
+  color: rgb(0, 119, 255);
+  background-color: #000000;
+  border-radius: 10px;
+}
+
+/* Style for the user Booking's data   */
+.user-bookings {
+  margin: 3rem 1rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-bookings h3 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+.no-parking-msg {
+  font-size: 2rem;
+  color: rgb(255, 0, 0);
+}
+
+.log-out-btn {
+  width: fit-content;
+  font-size: 1.2rem;
+  margin: 1rem 5rem;
+  padding: 1rem 2rem;
+  color: rgb(255, 0, 0);
+  background-color: rgb(70, 0, 0);
+  border: none;
+  border-radius: 4px;
+  transition: 0.2s linear;
+}
+
+.log-out-btn:hover {
+  cursor: pointer;
+  background-color: #430000;
+  box-shadow: 2px 2px 10px rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+@media only screen and (max-width: 570px) {
+  .profile-data {
+    margin: 2rem 1rem;
+  }
+
+  .profile-image {
+    border-radius: 3%;
+    height: 10rem;
+    width: 10rem;
+  }
+
+  .user-photo {
+    border-radius: 3%;
+    height: 10rem;
+    width: 10rem;
+  }
+
+  .profile-data-info {
+    margin-left: 1rem;
+  }
+
+  .user-name {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .parking-and-booking {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .parking-data h2 {
+    font-size: 1.2rem;
+  }
+
+  .booking-data h2 {
+    font-size: 1.2rem;
+  }
+
+  /* Style for the Parking Block  */
+  .user-parking {
+    margin: 2rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .user-parking h3 {
+    font-size: 1.2rem;
+    margin: 1rem 0.5rem;
+  }
+
+  .user-no-parkings p {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin: 1rem 0.5rem;
+    color: rgb(175, 0, 0);
+  }
+
+  .new-parking-btn {
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    margin: 1rem;
+    transition: 0.2s ease-in-out;
+  }
+
+  /* Style for the user Booking's data   */
+  .user-bookings {
+    margin: 1rem 0.5rem;
+  }
+
+  .user-bookings h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 0.5rem;
+  }
+
+  .no-parking-msg {
+    font-size: 1.2rem;
+  }
+}

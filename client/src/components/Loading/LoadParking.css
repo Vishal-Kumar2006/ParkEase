@@ -1,0 +1,59 @@
+.LoadParking {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.parking-card-loading {
+  background-color: #00c3ffe3;
+  border-radius: 10px 10px 0 0;
+}
+.parking-img-loading {
+  height: 15rem;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  background-color: #cccccc;
+}
+
+.detail-loading {
+  background-color: hsl(194, 94%, 87%);
+  margin: 12px;
+  border-radius: 4px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+}
+
+.parking-address-loading {
+  background-color: #d9d9d9;
+  margin: 12px;
+  border-radius: 4px;
+  height: 1.5rem;
+}
+
+.parking-address-loading-half {
+  width: 70%;
+  background-color: #d9d9d9;
+  margin: 12px;
+  border-radius: 4px;
+  height: 1.5rem;
+}
+
+/* ✅ Responsive Navbar with Menu Button */
+@media (max-width: 840px) {
+  .LoadParking {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Three cards per row */
+  }
+}
+
+@media (max-width: 510px) {
+  .LoadParking {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Three cards per row */
+  }
+}

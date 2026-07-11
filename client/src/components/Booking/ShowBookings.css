@@ -1,0 +1,84 @@
+.ShowBookings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+  gap: 1rem;
+  justify-content: center;
+}
+
+.booking-card {
+  text-align: start;
+  background-color: #5eacff;
+  border-radius: 1rem 1rem 0 0;
+  animation: appear 1s ease-in-out;
+  animation-timeline: view();
+  animation-range: entry 0% cover 20%;
+  transition: 0.2s ease-in-out;
+}
+
+.booking-card img {
+  height: 15rem;
+  width: 100%;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.booking-card:hover {
+  box-shadow: 2px 6px 12px rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  align-items: start;
+  margin: 1rem 0.5rem;
+}
+
+.card-details h3 {
+  display: flex;
+  align-items: flex-start;
+  text-align: start;
+  align-items: center;
+  justify-content: start;
+  color: black;
+  font-size: 1.2rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.card-details button {
+  color: rgb(212, 251, 255);
+  background-color: #282828d3;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  display: flex;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem 1.5rem;
+  border: none;
+  transition: 0.2s;
+}
+
+.card-details button:hover {
+  cursor: pointer;
+  color: rgb(0, 119, 255);
+  background-color: #000000;
+  box-shadow: 2px 2px 10px rgb(0, 0, 0);
+}
+
+/* ✅ Responsive Navbar with Menu Button */
+@media (max-width: 840px) {
+  .ShowBookings {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+  }
+}
+
+@media (max-width: 510px) {
+  .ShowBookings {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* One cards per row */
+  }
+}
