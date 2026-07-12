@@ -6,6 +6,8 @@ const reviewRoutes = require("../routes/review.js");
 const {
   fetchAllParking,
   fetchElectricParking,
+  searchParking,
+  searchElectricParking,
   handleNewParking,
   getParking,
   getParkingByUser,
@@ -16,6 +18,10 @@ const {
 router.get("/all-parkings", fetchAllParking);
 
 router.get("/electric-parking", fetchElectricParking);
+
+router.get("/search-parking", searchParking);
+
+router.get("/search-electric-parking", searchElectricParking);
 
 router.post("/new", handleNewParking);
 

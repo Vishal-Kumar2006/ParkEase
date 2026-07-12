@@ -16,7 +16,7 @@ async function fetchAllParking(req, res) {
     const count = await Parking.countDocuments();
     const totalPages = Math.ceil(count / limit);
 
-    res.status(200).json({ allPakings, totalPages });
+    res.status(200).json({ allPakings, totalPages, count });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -47,6 +47,71 @@ async function fetchElectricParking(req, res) {
     return res.status(500).json({
       message: error.message,
     });
+  }
+}
+
+async function searchParking(req, res) {
+  const { location = "", page } = req.query;
+  const limit = 12;
+
+  if (page < 1) {
+    return res.status(400).json({ message: "Invalid page number" });
+  }
+  try {
+    const allPakings = await Parking.find({
+      location: {
+        $regex: location,
+        $options: "i",
+      },
+    })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+
+    const count = await Parking.countDocuments({
+      location: {
+        $regex: location,
+        $options: "i",
+      },
+    });
+    const totalPages = Math.ceil(count / limit);
+
+    res.status(200).json({ allPakings, totalPages, count });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+async function searchElectricParking(req, res) {
+  const { location = "", page } = req.query;
+  const limit = 12;
+
+  if (page < 1) {
+    return res.status(400).json({ message: "Invalid page number" });
+  }
+  try {
+    const allPakings = await Parking.find({
+      location: {
+        $regex: location,
+        $options: "i",
+      },
+    })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+
+    const count = await Parking.countDocuments({
+      isElectric: true,
+      location: {
+        $regex: location,
+        $options: "i",
+      },
+    });
+    const totalPages = Math.ceil(count / limit);
+
+    res.status(200).json({ allPakings, totalPages, count });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 }
 
@@ -127,6 +192,8 @@ async function handleDeleteParking(req, res) {
 module.exports = {
   fetchAllParking,
   fetchElectricParking,
+  searchParking,
+  searchElectricParking,
   handleNewParking,
   getParking,
   getParkingByUser,
