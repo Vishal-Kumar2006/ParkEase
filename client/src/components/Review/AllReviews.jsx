@@ -8,7 +8,10 @@ const AllReviews = ({ reviews, onDeleteReview }) => {
         <></>
       ) : (
         <>
-          <h4 id="reviews-heading">All Reviews are given below</h4>
+          <h4 id="reviews-heading">
+            {reviews.length} Review's on this Parking
+          </h4>
+          <hr />
           {reviews.map((review) => (
             <Review
               key={review._id}

@@ -2,6 +2,8 @@ import "./AllReview.css";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 import API_URL from "../../config/api";
+import Rating from "@mui/material/Rating";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 const Review = ({ review, onDelete }) => {
   const { user } = useAuth();
@@ -21,24 +23,27 @@ const Review = ({ review, onDelete }) => {
 
   return (
     <div className="Review">
-      <div className="review-header">
-        <div className="review-user">
-          <img src={review.userId.photo} alt="User Image" />
-          <h4>{review.userId.name}</h4>
-        </div>
-
-        {isOwner && (
-          <button className="delete-btn" onClick={handleDeleteReview}>
-            Delete
-          </button>
-        )}
+      <div className="review-user-details">
+        <img src={review.userId.photo} alt="User Image" />
       </div>
 
       <div className="review-content">
-        <p>{review.review}</p>
-        <div className="rating">
-          <p id="heart">❤️</p>
-          <p id="rating-count">{review.rating}</p>
+        <div className="review-user-controlls">
+          <h4>{review.userId.name}</h4>
+          {isOwner && (
+            <>
+              <button className="delete-btn" onClick={handleDeleteReview}>
+                <MoreHorizIcon />
+                <div className=""></div>
+              </button>
+            </>
+          )}
+        </div>
+        <div className="review-content-details">
+          <div className="rating">
+            <Rating name="read-only" value={review.rating} readOnly max={10} />
+          </div>
+          <p>{review.review}</p>
         </div>
       </div>
     </div>

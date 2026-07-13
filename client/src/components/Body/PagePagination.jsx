@@ -6,7 +6,7 @@ function PagePagination({ count, setPage }) {
     setPage(value);
   };
   return (
-    <div>
+    <div className="PagePagination">
       <Pagination onChange={changePage} count={count} color="primary" />
     </div>
   );

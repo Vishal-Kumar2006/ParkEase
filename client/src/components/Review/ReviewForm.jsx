@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import "./ReviewForm.css";
 import API_URL from "../../config/api";
+import Rating from "@mui/material/Rating";
+import { useAuth } from "../../context/AuthContext";
 
 const ReviewForm = ({ parkingId, onReviewAdded }) => {
   const [reviewData, setReviewData] = useState({
@@ -10,6 +12,8 @@ const ReviewForm = ({ parkingId, onReviewAdded }) => {
     parkingId: parkingId,
   });
 
+  const { user } = useAuth();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setReviewData((prevData) => ({
@@ -17,6 +21,7 @@ const ReviewForm = ({ parkingId, onReviewAdded }) => {
       [name]:
         name === "rating" ? Math.min(5, Math.max(1, Number(value))) : value,
     }));
+    console.log(reviewData.rating);
   };
 
   const handleSubmit = async (e) => {
@@ -48,30 +53,24 @@ const ReviewForm = ({ parkingId, onReviewAdded }) => {
 
   return (
     <div className="ReviewForm-div">
-      <h2>Create a Review</h2>
+      <img className="review-user-img" src={user.photo} alt="User Image" />
+
       <form className="ReviewForm">
         <div className="form-data">
-          <label htmlFor="rating" className="form-label">
-            Parking Rating
-          </label>
-          <input
-            className="form-range"
-            id="customRange1"
-            type="range"
+          <Rating
+            name="size-medium"
+            defaultValue={2}
+            max={10}
             min={1}
-            max={5}
-            name="rating"
-            onChange={handleChange}
-            value={reviewData.rating}
+            onChange={(_, newValue) => {
+              setReviewData({
+                ...reviewData,
+                rating: newValue,
+              });
+            }}
           />
-
-          <label htmlFor="review" className="form-label">
-            Review
-          </label>
-
           <textarea
             name="review"
-            id="review"
             className="review-input-textArea"
             onChange={handleChange}
             value={reviewData.review}
@@ -79,9 +78,11 @@ const ReviewForm = ({ parkingId, onReviewAdded }) => {
           />
         </div>
 
-        <button onClick={handleSubmit} className="review-btn">
-          Create Review
-        </button>
+        <div className="review-Button-div">
+          <button onClick={handleSubmit} className="review-btn">
+            Create Review
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -4,84 +4,106 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  margin: 0 10rem;
+}
+
+/* All Reviews Styling */
+.AllReviews {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.8rem;
+  margin-top: 2rem;
 }
 
 #reviews-heading {
-  text-align: center;
-  align-content: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  margin-top: 5rem;
+  text-align: start;
+  font-size: 1.1rem;
+}
+
+hr {
+  color: black;
 }
 
 /* Styling for the Review Class */
 .Review {
   display: flex;
-  flex-direction: column;
-  background-color: #bfe9ff61;
-  box-shadow: 2px 2px 8px black;
-  margin: 1rem;
-  border-radius: 5px;
-  width: 40rem;
+  gap: 0.3rem;
 }
 
-.review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.review-user {
-  margin: 0.5rem 0 0 0.5rem;
-  height: 3rem;
-  display: flex;
-  text-align: center;
-  align-items: center;
-}
-
-.review-user img {
+.review-user-details img {
   height: 3rem;
   width: 3rem;
+  object-fit: cover;
   border-radius: 50%;
-  border: 2px solid black;
-}
-
-.review-user h4 {
-  font-size: 1.2rem;
-  margin: 1rem;
-}
-
-.delete-btn {
-  font-size: 1rem;
-  background-color: #ff0000;
-  padding: 0.2rem 0.5rem;
-  margin: 1rem;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
 }
 
 .review-content {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background-color: #28a9ff4b;
+}
+
+.review-user-controlls {
+  display: flex;
   justify-content: space-between;
-  margin: 0.2rem;
-  margin-left: 0.5rem;
+}
+
+.delete-btn {
+  border: none;
+  height: 1rem;
+  background-color: #28a9ff00;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.review-content-details {
+  display: flex;
+  flex-direction: column;
   align-items: start;
+  justify-content: flex-start;
 }
 
-.review-content p {
-  font-size: 1.5rem;
+.review-content-details p {
+  min-height: 3rem;
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+  background-color: #fffffffb;
+  border-radius: 2px;
+  padding: 0.2rem;
+  width: 99%;
 }
 
-#heart {
-  font-size: 1.8rem;
+@media screen and (max-width: 840px) {
+  .ReviewHome {
+    margin: 0 5rem;
+  }
 }
 
-#rating-count {
-  font-size: 0.9rem;
+@media screen and (max-width: 680px) {
+  .ReviewHome {
+    margin: 0 1.5rem;
+  }
 }
 
-@media (max-width: 840px) {
+@media screen and (max-width: 400px) {
+  .ReviewHome {
+    margin: 0 0.5rem;
+  }
+
+  .review-content-details p {
+    width: 98%;
+  }
+}
+
+/* @media (max-width: 840px) {
   .Review {
     background-color: #93e7fd;
     box-shadow: 0 0 10px black;
@@ -112,4 +134,4 @@
     padding: 1rem;
     width: 15rem;
   }
-}
+} */

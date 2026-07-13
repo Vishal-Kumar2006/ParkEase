@@ -1,73 +1,62 @@
 .ReviewForm-div {
   display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  width: 80%;
-  padding: 0 10%;
-  margin-top: 5rem;
-}
-
-.ReviewForm-div h2 {
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
+  width: 100%;
+  gap: 0.5rem;
 }
 
 .ReviewForm {
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  width: 100%;
+}
+
+.review-user-img {
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .form-data {
   display: flex;
   flex-direction: column;
   text-align: start;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 2px 2px 12px rgb(0, 0, 0);
+  background-color: #28a9ff4b;
 }
 
 .review-input-textArea {
-  width: 100%;
-}
-
-.form-range {
-  cursor: pointer;
-  margin-bottom: 0.4rem;
-}
-.form-label {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-#review {
   height: 5rem;
   font-size: 1rem;
   color: rgb(0, 0, 0);
-  background-color: #bfe9ff61;
+  background-color: #fffffffb;
   border-radius: 2px;
-  padding: 0.5rem 0.2rem;
+  padding: 0.2rem 0.5rem;
   resize: none;
   text-align: left;
-  border: 1px solid black;
+  outline: none;
+  border: none;
+}
+
+.review-Button-div {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .review-btn {
-  text-align: start;
   width: fit-content;
-  padding: 1rem;
-  font-size: 1.3rem;
-  background-color: #3798ffd7;
+  padding: 0.6rem 0.9rem;
+  font-size: 1rem;
+  background-color: #28a9ff4b;
   border: none;
-  border-radius: 0.3rem;
-  margin-top: 1.2rem;
+  border-radius: 1.2rem;
+  margin-top: 0.5rem;
   transition: 0.2s linear;
 }
 
 .review-btn:hover {
-  color: white;
+  background-color: #28a9ffd3;
+  color: rgba(255, 255, 255, 0.808);
   cursor: pointer;
 }

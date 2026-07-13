@@ -110,7 +110,7 @@
   .Parkings {
     grid-template-columns: repeat(1, 1fr); /* Three cards per row */
     gap: 0.8rem;
-    padding: 0.5rem;
+    padding: 0.3rem;
   }
 
   .parking-name {
