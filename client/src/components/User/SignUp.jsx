@@ -6,24 +6,16 @@ import "./SignUp.css";
 import API_URL from "../../config/api";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const { user, setUser } = useAuth();
+  const [isSignUpState, setIsSignUpState] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
-    photo: "", // Added photo field
+    name: "",
+    photo: "",
   });
-
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const redirectLogin = () => {
-    navigate("/user/login");
-  };
 
   useEffect(() => {
     if (user == null) return;
@@ -56,6 +48,10 @@ const SignUp = () => {
     }
 
     return result.secure_url;
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -92,24 +88,11 @@ const SignUp = () => {
 
   return (
     <div className="sign-up-page">
-      <h2 className="sign-up-heading">Sign Up</h2>
+      <h2 className="sign-up-heading">
+        {" "}
+        {isSignUpState ? "Sign Up" : "Log In"} to ParkEase
+      </h2>
       <form onSubmit={handleSubmit} className="sign-up-form">
-        <div className="inputSection">
-          <label htmlFor="name" className="input-label">
-            Enter User Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="sign-up-input"
-            required
-            autoComplete="name"
-          />
-        </div>
-
         <div className="inputSection">
           <label htmlFor="email" className="input-label">
             Enter E-mail
@@ -117,7 +100,7 @@ const SignUp = () => {
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="xyz@gmail.com"
             value={formData.email}
             onChange={handleChange}
             className="sign-up-input"
@@ -142,31 +125,53 @@ const SignUp = () => {
           />
         </div>
 
-        <div className="inputSection">
-          {/* New field for photo */}
-          <label htmlFor="photo" className="input-label">
-            Profile Photo URL
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImageFile(e.target.files[0])}
-            name="photo"
-            className="sign-up-input"
-            required
-          />
-        </div>
+        {isSignUpState && (
+          <>
+            <div className="inputSection">
+              <label htmlFor="name" className="input-label">
+                Enter User Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                className="sign-up-input"
+                required
+                autoComplete="name"
+              />
+            </div>
+
+            <div className="inputSection">
+              {/* New field for photo */}
+              <label htmlFor="photo" className="input-label">
+                Profile Photo URL
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImageFile(e.target.files[0])}
+                name="photo"
+                className="sign-up-input"
+                required
+              />
+            </div>
+          </>
+        )}
 
         <div className="buttonSection">
           <button type="submit" className="sign-up-btn">
-            Sign Up
+            {isSignUpState ? "Sign Up" : "Login"}
           </button>
         </div>
       </form>
 
       <div className="sign-up">
         Or
-        <a onClick={redirectLogin}>have an account</a>
+        <p onClick={(e) => setIsSignUpState(!isSignUpState)}>
+          {isSignUpState ? "have an account" : "create a new account"}
+        </p>
       </div>
     </div>
   );

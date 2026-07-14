@@ -1,302 +1,314 @@
-.parking-details {
-  background-color: #53f96f69;
-  margin: 5% 10% 5% 10%;
+.view-parking-details {
+  background-color: #00ff6656;
+  margin: 5% 10%;
+  margin-bottom: 0;
   border-radius: 0.5rem;
 }
 
-.electric {
+.parking-isElectric-true {
   background-color: #5eacffdf;
-  margin: 5% 10% 5% 10%;
-  border-radius: 0.5rem;
 }
 
 .parking-admin {
   display: flex;
   flex-direction: row;
-  margin: 0.5rem 1rem 0.5rem 1rem;
+  margin: 0.2rem 0.5rem;
+  gap: 0.2rem;
 }
 
 .parking-admin-image {
-  height: 3rem;
-  width: 3rem;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 .parking-admin-photo {
-  height: 3rem;
-  width: 3rem;
-  border: 1px solid white;
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .parking-admin-name {
   display: flex;
-  justify-content: start;
   align-items: center;
-  text-align: start;
-  color: rgb(0, 0, 0);
-  margin-left: 1rem;
   font-weight: bolder;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
-.parking-image {
-  border-radius: none;
+.view-parking-image {
   width: 100%;
-  height: 25rem;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  height: 27rem;
   object-fit: cover;
 }
 
 .parking-info {
   margin: 0.5rem;
-  color: rgb(45, 45, 45);
+  color: rgb(0, 0, 0, 0.9);
 }
 
-.detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.detail-header {
+.parking-detail-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
-.parking-status {
-  font-size: 1.5rem;
+.parking-name {
+  font-size: 1.2rem;
 }
+
+.view-parking-status {
+  font-size: 1rem;
+  font-style: italic;
+}
+
 .open {
-  color: rgb(48, 255, 48);
+  color: rgb(204, 255, 204);
 }
 
 .close {
-  color: red;
+  color: rgb(246, 0, 0);
 }
 
-.p-d {
-  margin: 0.3rem;
+.view-parking-sub-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.8);
 }
 
-.slots-container {
-  border-radius: 10px;
+.parking-slots-div {
+  background-color: rgb(255, 255, 255);
+  margin-top: 1rem;
+  padding: 0.5rem 0;
 }
-.slots-container h3 {
-  justify-content: center;
+
+.parking-slots-div h4 {
   text-align: center;
-  align-items: center;
-  color: white;
-  font-size: 2rem;
-  margin-top: 2rem;
+  font-size: 1.2rem;
 }
 
-.slots-grid {
+.slots-container-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  margin-top: 1rem;
+  border-radius: 2px;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.slots-container-single-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 4px black;
+  border-radius: 0.2rem;
+}
+
+.parking-slot-btn {
+  border: none;
 }
 
 .slot-btn {
-  display: flex;
-  margin: 1rem;
-  font-size: 0.8rem;
-  border-radius: 0.2rem;
-  border: none;
-  padding: 0.5rem;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+  font-size: 3rem;
+  width: 100%;
+  height: 100%;
   transition: 0.2s;
   animation: appear 1s ease-in-out;
   animation-timeline: view();
   animation-range: entry 0% cover 15%;
 }
 
+.about-slots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+  gap: 5rem;
+  width: 100%;
+}
+
+.about-slots div {
+  border-radius: 4px;
+}
+
+.about-slots div h3 {
+  font-size: 1rem;
+}
+
+.about-slots-icons {
+  width: 6rem;
+  height: 100%;
+}
+
+.slots-container-single-grid p {
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
 .booking-slot-btn {
   cursor: pointer;
 }
-.available {
+
+.grid-available {
+  border: 4px solid #00ff00;
   background-color: #00ff00;
 }
 
+.grid-booked {
+  background-color: #ff0000;
+  border: 4px solid #ff0000;
+}
 .booked {
-  background-color: #ff0000ca;
+  background-color: #ff0000;
 }
 
-.parking-update-btn {
+.parking-controll-btn-div {
+  margin: 0 10%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0% 10% 10% 10%;
-  width: 80%;
   justify-content: space-between;
 }
 
-#parking-update {
-  font-size: 1.5rem;
-  background-color: #3797ffa4;
-  color: #000000;
-  padding: 0.8rem 2rem;
-  border-radius: 0.3rem;
-  transition: 0.2s;
-  justify-content: start;
-  align-items: center;
-  text-align: start;
-  border: none;
-  margin: 1rem;
-}
-
-#parking-update:hover {
-  background-color: #5eacffdf;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-#parking-delete {
-  font-size: 2.3rem;
-  background-color: #3b0000fa;
-  color: #a7a7a7;
-  padding: 0 1rem 0 1rem;
-  border-radius: 0.3rem;
-  transition: 0.2s;
-  border: none;
-}
-
-#parking-delete:hover {
-  background-color: #3b0000;
-  color: #ffffff;
-  padding: 0 1rem 0 1rem;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgb(135, 0, 0);
-}
-
-#parking-booking {
-  font-size: 1.5rem;
-  background-color: #3797ffa4;
-  color: #000000;
+.parking-controll-btn {
+  width: fit-content;
   padding: 0.8rem 1rem;
-  border-radius: 0.3rem;
-  transition: 0.4s;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #28a9ff4b;
   border: none;
+  border-radius: 0.2rem;
+  margin-top: 0.5rem;
+  transition: 0.2s linear;
 }
 
-#parking-booking:hover {
-  color: #ffffff;
+.parking-controll-btn:hover {
+  background-color: #28a9ffd3;
+  color: rgba(255, 255, 255, 0.808);
   cursor: pointer;
 }
 
-@media (max-width: 840px) {
-  .parking-update-btn {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .parking-update-btn {
-    gap: 1rem;
-  }
-
-  .slots-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .slot-btn {
-    margin: 0.2rem;
-    font-size: 0.8rem;
+@media (max-width: 1000px) {
+  .view-parking-details {
+    margin: 5% 9%;
     border-radius: 0.2rem;
-    padding: 0.3rem;
   }
-}
-
-@media (max-width: 740px) {
-  .parking-update-btn {
-    display: flex;
-    flex-direction: column;
+  .parking-admin-name {
+    font-size: 1.4rem;
   }
 
-  .parking-update-btn {
-    gap: 1rem;
+  .view-parking-image {
+    height: 25rem;
   }
 
-  .slots-grid {
+  .view-parking-status {
+    font-size: 0.8rem;
+  }
+
+  .slots-container-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    margin-top: 0.8rem;
+    border-radius: 2px;
+    gap: 1rem;
+    padding: 0.8rem;
   }
 }
 
-@media (max-width: 470px) {
-  .parking-details {
-    margin: 2% 4%;
+@media (max-width: 720px) {
+  .view-parking-details {
+    margin: 3% 8%;
+    border-radius: 0.2rem;
   }
 
-  .electric {
-    margin: 2% 4%;
-  }
-
-  .parking-admin {
-    margin: 0.2rem 0.5rem;
+  .parking-admin-image {
+    height: 2.3rem;
+    width: 2.3rem;
   }
 
   .parking-admin-name {
-    margin-left: 0.5rem;
+    font-size: 1.3rem;
+  }
+
+  .view-parking-image {
+    height: 18rem;
+  }
+
+  .parking-slots-div h4 {
+    font-size: 1.1rem;
+  }
+
+  .slots-container-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin-top: 0.8rem;
+    border-radius: 2px;
+    gap: 1rem;
+    padding: 0.8rem;
+  }
+
+  .about-slots div h3 {
+    font-size: 0.8rem;
+  }
+
+  .about-slots-icons {
+    width: 5rem;
+  }
+}
+
+@media (max-width: 510px) {
+  .view-parking-details {
+    margin: 3% 2%;
+    border-radius: 0.2rem;
+  }
+
+  .parking-admin {
+    margin: 0.1rem 0.2rem;
+  }
+
+  .parking-admin-image {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .parking-admin-name {
     font-size: 1.2rem;
   }
 
-  .parking-image {
+  .view-parking-image {
     height: 15rem;
   }
 
   .parking-info {
-    margin: 0.2rem;
+    margin: 0.4rem;
   }
 
-  .parking-status {
+  .parking-detail-header {
+    margin-bottom: 0.3rem;
+  }
+
+  .view-parking-sub-details {
+    gap: 0.4rem;
+    flex-direction: column;
+    font-size: 0.8rem;
+    padding-left: 0.2rem;
+  }
+
+  .parking-slots-div {
+    margin-top: 0.4rem;
+    padding: 0.4rem 0;
+  }
+
+  .parking-slots-div h4 {
     font-size: 1rem;
   }
-
-  .p-d {
-    margin: 0.1rem;
-  }
-
-  .slots-container h3 {
-    font-size: 1.2rem;
-    margin-top: 1.2rem;
-  }
-
-  .slots-grid {
+  .slots-container-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .slot-btn {
-    margin: 0.5rem;
-    font-size: 0.8rem;
-    padding: 0.2rem;
-  }
-
-  .parking-update-btn {
-    margin: 0% 5% 5% 5%;
-    width: 60%;
-  }
-
-  #parking-update {
-    font-size: 1.2rem;
-    padding: 0.4rem 1.2rem;
-    margin: 0.5rem;
-  }
-
-  #parking-delete {
-    font-size: 1.3rem;
-    padding: 0 0.5rem;
-  }
-
-  #parking-delete:hover {
-    padding: 0 0.5rem;
-  }
-
-  #parking-booking {
-    font-size: 1.2rem;
-    padding: 0.2rem 0.8rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 0.8rem;
+    border-radius: 2px;
+    gap: 1rem;
+    padding: 0.8rem;
   }
 }

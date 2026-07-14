@@ -2,6 +2,7 @@
   display: flex;
   width: 100%;
   gap: 0.5rem;
+  margin-top: 5rem;
 }
 
 .ReviewForm {
@@ -59,4 +60,12 @@
   background-color: #28a9ffd3;
   color: rgba(255, 255, 255, 0.808);
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .review-user-img {
+    margin-top: 0.2rem;
+    height: 2rem;
+    width: 2rem;
+  }
 }

@@ -4,7 +4,7 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  margin: 0 10rem;
+  margin: 5% 10%;
 }
 
 /* All Reviews Styling */
@@ -83,55 +83,32 @@ hr {
 
 @media screen and (max-width: 840px) {
   .ReviewHome {
-    margin: 0 5rem;
+    margin: 3% 8%;
   }
 }
 
 @media screen and (max-width: 680px) {
   .ReviewHome {
-    margin: 0 1.5rem;
+    margin: 3% 2%;
   }
 }
 
 @media screen and (max-width: 400px) {
   .ReviewHome {
-    margin: 0 0.5rem;
+    margin: 3% 2%;
+  }
+
+  .review-user-details img {
+    margin-top: 0.2rem;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .Review {
+    gap: 0.15rem;
   }
 
   .review-content-details p {
     width: 98%;
   }
 }
-
-/* @media (max-width: 840px) {
-  .Review {
-    background-color: #93e7fd;
-    box-shadow: 0 0 10px black;
-    margin: 1rem;
-    border-radius: 5px;
-    padding: 1rem;
-    width: 35rem;
-  }
-}
-
-@media (max-width: 740px) {
-  .Review {
-    background-color: #93e7fd;
-    box-shadow: 0 0 10px black;
-    margin: 1rem;
-    border-radius: 5px;
-    padding: 1rem;
-    width: 22rem;
-  }
-}
-
-@media (max-width: 420px) {
-  .Review {
-    background-color: #93e7fd;
-    box-shadow: 0 0 10px black;
-    margin: 1rem;
-    border-radius: 5px;
-    padding: 1rem;
-    width: 15rem;
-  }
-} */

@@ -1,14 +1,12 @@
 .Parkings {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  justify-content: center;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .parking-card {
-  text-align: center;
-  background-color: #5eacff;
+  background-color: #00ff6656;
   border-radius: 1rem 1rem 0 0;
   animation: appear 1s ease-in-out;
   animation-timeline: view();
@@ -17,116 +15,103 @@
 }
 
 .parking-card:hover {
-  box-shadow: 0 0 20px rgb(0, 12, 92);
+  box-shadow: 0 0 10px rgb(0, 12, 92);
   cursor: pointer;
 }
 
-.parking-name {
-  display: flex;
-  align-items: flex-start;
-  text-align: left;
-  margin-bottom: 1rem;
-  color: black;
-  font-size: 1.2rem;
-  text-align: start;
-  margin-top: 1rem;
-  padding-left: 0.5rem;
-  margin-bottom: 0.1rem;
+.electric-true {
+  background-color: #28a9ff9a;
+}
+
+.parking-open-false {
+  background-color: rgba(255, 72, 72, 0.533);
+}
+
+.parking-img-div {
+  width: 100%;
+  height: 18rem;
 }
 
 .parking-img {
   border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 15rem;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  height: 100%;
   object-fit: cover;
 }
 
-.parking-address {
-  text-align: start;
-  padding-left: 0.5rem;
+.detail {
+  padding: 0.5rem;
 }
 
-.detail {
+.parking-details {
   display: flex;
   justify-content: space-between;
 }
 
-.parkings-btn {
-  align-items: center;
-  text-align: start;
-  justify-content: start;
+.parking-sub-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 0.5rem 0;
 }
 
-.parking-btn {
-  color: rgb(212, 251, 255);
-  background-color: #282828d3;
-  padding: 0.2rem 1rem 0.2rem 1rem;
-  border-radius: 0.5rem;
-  margin: 2.5rem 0 1rem 0.5rem;
-  font-size: 2rem;
-  transition: 0.2s;
-  text-align: start;
-  align-content: center;
-  justify-content: start;
-  border: none;
+.parking-sub-details div {
+  display: flex;
+  justify-content: space-between;
 }
 
-.parking-btn:hover {
-  cursor: pointer;
-  color: rgb(0, 119, 255);
-  background-color: #000000;
+.parking-name {
+  font-size: 1.2rem;
+  color: rgba(40, 40, 40, 0.613);
 }
 
 .parking-status {
+  font-style: italic;
+  font-size: 0.8rem !important;
+}
+
+.parking-status-open {
+  color: rgb(0, 59, 0);
+}
+
+.parking-status-close {
+  color: rgb(113, 0, 0);
+}
+
+.parking-sub-details div p {
+  font-size: 1.1rem;
+  color: rgba(37, 37, 37, 0.8);
+}
+
+.parking-date-div {
   display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  font-weight: 900;
-  margin: 0.5rem;
+  flex-direction: row-reverse;
+  font-style: italic;
+  font-size: 0.1rem;
 }
 
-.open {
-  color: rgb(85, 255, 85);
-}
-
-.close {
-  color: rgb(171, 0, 0);
+.parking-date-createdAt {
+  font-size: 0.8rem !important;
+  color: rgba(22, 22, 22, 0.441) !important;
 }
 
 /* ✅ Responsive Navbar with Menu Button */
 @media (max-width: 840px) {
   .Parkings {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Three cards per row */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 510px) {
   .Parkings {
-    grid-template-columns: repeat(1, 1fr); /* Three cards per row */
-    gap: 0.8rem;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
     padding: 0.3rem;
   }
 
-  .parking-name {
-    font-size: 1rem;
-    margin: 0.8rem 0 0 0.1rem;
-    padding-left: 0.2rem;
-  }
-
-  .parking-btn {
-    padding: 0.2rem 0.8rem;
-    margin: 1.5rem 0 0.8rem 0.2rem;
-    font-size: 1.2rem;
-  }
-
-  .parking-status {
-    font-size: 0.8rem;
-    margin: 0.2rem;
+  .parking-img-div {
+    width: 100%;
+    height: 20rem;
   }
 }

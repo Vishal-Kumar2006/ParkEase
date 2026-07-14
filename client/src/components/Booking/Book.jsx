@@ -4,6 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import API_URL from "../../config/api";
 import "../Parking/Parking.css";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import CarRepairIcon from "@mui/icons-material/CarRepair";
 
 const Book = () => {
   const { id } = useParams();
@@ -97,7 +99,7 @@ const Book = () => {
   return (
     <>
       <div
-        className={`parking-details ${parking.isElectric ? "electric" : ""}`}>
+        className={`view-parking-details parking-isElectric-${parking.isElectric}`}>
         {/*  Display Admin Name When Available */}
         <div className="parking-admin">
           <div className="parking-admin-image">
@@ -107,79 +109,96 @@ const Book = () => {
                   ? parking.user.photo
                   : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
               }
-              alt=""
+              alt="parking-admin-photo"
               className="parking-admin-photo"
             />
           </div>
 
           <p className="parking-admin-name">
-            {" "}
             {parking.user.name ? parking.user.name : "Anonyms"}
           </p>
         </div>
 
-        <img
-          src={parking.image}
-          alt="Parking Image"
-          className="parking-image"
-        />
-        <div className="parking-info">
-          <div className="detail">
-            <div className="detail-header">
-              <h2 className="parking-name">{parking.name}</h2>
-              <p className="parking-status">
-                {parking.isOpen ? (
-                  <span className="open">Opened</span>
-                ) : (
-                  <span className="close">Closed</span>
-                )}
-              </p>
-            </div>
+        <div className="">
+          <img
+            src={parking.image}
+            alt="Parking Image"
+            className="view-parking-image"
+          />
+        </div>
 
-            <p className="p-d">
-              <strong>Address:</strong> {parking.location}
-            </p>
-            <p className="p-d">
-              <b>Total Slots:</b> {parking.totalSlots.length}
-            </p>
-            <p className="p-d">
-              <b>Available Slots:</b> {parking.availableSlots}
-            </p>
-            <p className="p-d">
-              <strong>Hourly Rate:</strong> ${parking.pricePerHour}
-            </p>
-            <p className="p-d">
-              Electric Parking:{" "}
-              {parking.isElectric ? (
-                <span className="open">Yes</span>
+        <div className="parking-info">
+          <div className="parking-detail-header">
+            <h2 className="parking-name">{parking.name}</h2>
+            <p className="view-parking-status">
+              {parking.isOpen ? (
+                <span className="open">Opened</span>
               ) : (
-                <span className="close">No</span>
+                <span className="close">Closed</span>
               )}
             </p>
           </div>
 
+          <div className="view-parking-sub-details">
+            <p>
+              <strong>Address:</strong> {parking.location}
+            </p>
+
+            <p>
+              <strong>Charges Per Hour:</strong> ₹{parking.pricePerHour}
+            </p>
+          </div>
+
+          <div className="view-parking-sub-details">
+            <p>
+              <strong>Created At : </strong>
+              {new Date(parking.createdAt).toLocaleString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </p>
+
+            <p>
+              Electric Parking
+              <strong>
+                : {parking.isElectric ? " Available" : " Not-Available"}
+              </strong>
+            </p>
+          </div>
+
           {/* ✅ Slot Selection */}
-          <div className="slots-container">
-            <h3>All Available Slots are given Below</h3>
-            <div className="slots-grid">
+
+          <div className="parking-slots-div">
+            <h4>All Available Slots are given Below</h4>
+            <div className="slots-container-grid">
               {avilableSlots.map((slot, index) => (
-                <button
-                  key={index}
-                  className={`slot-btn booking-slot-btn ${
-                    selectedSlots.includes(slot) ? "booked" : "available"
-                  }`}
-                  onClick={() => handleSlot(slot)}>
-                  {slot} to {slot + 1}{" "}
-                  {selectedSlots.includes(slot) ? "✅" : "🟢"}
-                </button>
+                <div
+                  style={{ cursor: "pointer" }}
+                  className={`slots-container-single-grid ${selectedSlots.includes(slot) ? "grid-booked" : "grid-available"}`}>
+                  <button
+                    style={{ cursor: "pointer" }}
+                    key={index}
+                    onClick={() => handleSlot(slot)}
+                    className={`parking-slot-btn ${selectedSlots.includes(slot) ? "booked" : "available"}`}>
+                    {selectedSlots.includes(slot) ? (
+                      <CarRepairIcon className="slot-btn" />
+                    ) : (
+                      <DirectionsCarIcon className="slot-btn" />
+                    )}
+                  </button>
+                  <p className="">
+                    {index} - {index + 1}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="parking-update-btn">
-        <button onClick={handleBooking} id="parking-booking">
+      <div className="parking-controll-btn-div">
+        <button onClick={handleBooking} className="parking-controll-btn">
           Book Parking
         </button>
       </div>

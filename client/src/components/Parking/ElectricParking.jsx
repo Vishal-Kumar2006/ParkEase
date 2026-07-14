@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "./AllParking.css";
-import "./ElectricParking.css";
 import LoadParking from "../Loading/LoadParking";
 import API_URL from "../../config/api";
 import PagePagination from "../Body/PagePagination";
 import SearchPage from "../Body/SearchPage";
+import ShowParkings from "./ShowParkings";
+import "./AllParking.css";
 
 const ElectricParking = () => {
   const [allParkings, setAllParkings] = useState([]);
@@ -54,7 +54,9 @@ const ElectricParking = () => {
         `${API_URL}/parkings/search-electric-parking?location=${query}?&page=${page}`,
       )
       .then((response) => {
-        setAllParkings(response.data.allPakings);
+        setAllParkings(
+          response.data.allPakings.filter((parking) => parking.isElectric),
+        );
         setCount(response.data.totalPages);
       })
       .catch((error) => {
@@ -76,43 +78,8 @@ const ElectricParking = () => {
       {allParkings.length == 0 || allParkings == null ? (
         <LoadParking />
       ) : (
-        <div className="show-All-Parking">
-          <div className="Electric-Parkings">
-            {allParkings
-              .filter((parking) => parking.isElectric) // ✅ Filter only electric parkings
-              .map((parking) => (
-                <div key={parking._id} className="Electric-parking-card">
-                  {parking.image ? (
-                    <img
-                      src={parking.image}
-                      alt="Parking"
-                      className="Electric-parking-img"
-                    />
-                  ) : null}
-
-                  <div className="Electric-detail">
-                    <h2 className="Electric-parking-name">{parking.name}</h2>
-                    <p className="Electric-parking-status">
-                      {parking.isOpen ? (
-                        <span className="open">Opened</span>
-                      ) : (
-                        <span className="close">Closed</span>
-                      )}
-                    </p>
-                  </div>
-                  <p className="Electric-parking-address">
-                    <strong>Address:</strong> {parking.location}
-                  </p>
-                  <div className="Electric-parkings-btn">
-                    <button
-                      onClick={() => navigate(`/parkings/${parking._id}`)}
-                      className="Electric-parking-btn">
-                      See Parking
-                    </button>
-                  </div>
-                </div>
-              ))}
-          </div>
+        <div className="">
+          <ShowParkings parkings={allParkings} />
           <div className="Pagination">
             <PagePagination setPage={setPage} count={count} />
           </div>

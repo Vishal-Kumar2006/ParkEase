@@ -73,10 +73,11 @@ const AllParkings = () => {
         setQuery={setQuery}
         handleSubmit={handleSubmit}
       />
+
       {allParkings.length == 0 || allParkings == null ? (
         <LoadParking />
       ) : (
-        <div className="show-All-Parking">
+        <div className="">
           <ShowParkings parkings={allParkings} />
           <div className="Pagination">
             <PagePagination setPage={setPage} count={count} />

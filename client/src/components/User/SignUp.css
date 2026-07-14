@@ -17,6 +17,7 @@
 .sign-up-form {
   display: flex;
   flex-direction: column;
+  gap: 0.6rem;
 }
 
 .inputSection {
@@ -28,19 +29,19 @@
 .input-label {
   text-align: start;
   justify-content: start;
-  font-size: 1.2rem;
-  color: #2facffe7;
+  font-size: 1rem;
+  color: rgba(0, 33, 56, 0.906);
 }
 
 .sign-up-input {
   font-size: 1.2rem;
-  height: 3rem;
   width: 30rem;
-  padding-left: 1rem;
+  padding: 0.8rem;
   border-radius: 0.4rem;
-  border: 1px solid black;
   color: rgb(0, 0, 0);
   outline: none;
+  border: none;
+  background-color: #2facff3c;
 }
 
 .sign-up-btn {
@@ -64,15 +65,21 @@
   color: rgb(239, 255, 186);
 }
 
+.sign-up p {
+  color: rgba(0, 0, 255, 0.506);
+  cursor: pointer;
+
+  text-decoration: underline;
+  margin-top: 1.2rem;
+}
+
 @media screen and (max-width: 760px) {
   .sign-up-input {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    width: 19rem;
+    font-size: 1rem;
   }
 
   .input-label {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 }
 
@@ -87,12 +94,13 @@
   }
 
   .sign-up-form {
+    margin: 0;
     width: 90%;
-    margin: 2rem;
+    gap: 1.2rem;
   }
 
   .inputSection {
-    margin: 0.5rem 0;
+    margin: 0;
     width: 100%;
   }
 
@@ -100,12 +108,11 @@
     text-align: start;
     justify-content: start;
     font-size: 1rem;
-    color: #2facffe7;
   }
 
   .sign-up-input {
     font-size: 1rem;
-    width: 100%;
+    width: 90%;
     min-width: 90%;
   }
 
