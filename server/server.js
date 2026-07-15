@@ -11,6 +11,11 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 const cookieParser = require("cookie-parser");
 
+const Parking = require("./models/parking");
+const Booking = require("./models/booking");
+const Review = require("./models/review");
+const User = require("./models/user");
+
 dotenv.config();
 
 const app = express();

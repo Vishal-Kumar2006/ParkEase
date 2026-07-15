@@ -15,13 +15,13 @@
   border-radius: 5%;
   height: 20rem;
   width: 20rem;
-  border: 2px solid rgb(13, 0, 0);
 }
 
 .user-photo {
   border-radius: 5%;
   height: 20rem;
   width: 20rem;
+  object-fit: cover;
 }
 
 .profile-data-info {
