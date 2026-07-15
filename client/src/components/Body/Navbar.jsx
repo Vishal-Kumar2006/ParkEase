@@ -67,7 +67,7 @@ const Navbar = () => {
           </NavLink>
         ) : (
           <NavLink
-            to="/user/login"
+            to="/user/signup"
             className="nav-option"
             onClick={() => setMenuOpen(!menuOpen)}>
             <AccountBoxIcon />

@@ -30,7 +30,7 @@ const AllParkings = () => {
         })
         .catch((error) => {
           if (error.response && error.response.status === 401) {
-            navigate("/user/login");
+            navigate("/user/signup");
           }
         });
     } else {
@@ -44,7 +44,7 @@ const AllParkings = () => {
         })
         .catch((error) => {
           if (error.response && error.response.status === 401) {
-            navigate("/user/login");
+            navigate("/user/signup");
           }
         });
     }
@@ -60,7 +60,7 @@ const AllParkings = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
-          navigate("/user/login");
+          navigate("/user/signup");
         }
       });
   };

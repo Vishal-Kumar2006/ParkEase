@@ -18,7 +18,14 @@ const ShowBookings = ({ parkings, bookings }) => {
         if (!parking) return null;
 
         return (
-          <div key={booking._id} className="booking-card">
+          <div
+            key={booking._id}
+            className="booking-card"
+            onClick={() =>
+              navigate(`/show-booking/${booking._id}`, {
+                state: { booking, parking },
+              })
+            }>
             <img src={parking.image} alt={parking.name} />
             <div className="card-details">
               <h3>{parking.name}</h3>

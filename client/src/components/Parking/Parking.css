@@ -76,6 +76,10 @@
   color: rgba(0, 0, 0, 0.8);
 }
 
+.view-parking-sub-details p {
+  margin: 0;
+}
+
 .parking-slots-div {
   background-color: rgb(255, 255, 255);
   margin-top: 1rem;

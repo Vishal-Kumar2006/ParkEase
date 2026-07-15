@@ -21,7 +21,6 @@ const UpdateParking = lazy(
 // All User Routes
 const Profile = lazy(() => import("./components/User/Profile.jsx"));
 const SignUp = lazy(() => import("./components/User/SignUp.jsx"));
-const Login = lazy(() => import("./components/User/Login.jsx"));
 
 // All Booking Routes
 const Book = lazy(() => import("./components/Booking/Book.jsx"));
@@ -48,7 +47,6 @@ const App = () => {
           {/* All User Routes */}
           <Route path="/user/profile" element={<Profile />} />
           <Route path="/user/signup" element={<SignUp />} />
-          <Route path="/user/login" element={<Login />} />
 
           {/* All Booking Routes */}
           <Route path="/booking/:id" element={<Book />} />

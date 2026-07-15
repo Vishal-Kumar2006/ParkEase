@@ -27,7 +27,7 @@ const Book = () => {
       .catch((error) => {
         if (error.response?.status === 401) {
           console.error("Unauthorized access. Redirecting to login...");
-          navigate("/user/login");
+          navigate("/user/signup");
         } else {
           console.error("Error fetching data:", error);
         }
@@ -63,7 +63,7 @@ const Book = () => {
   const handleBooking = async () => {
     if (!user) {
       alert("You need to log in to book a parking slot.");
-      return navigate("/user/login");
+      return navigate("/user/signup");
     }
 
     if (selectedSlots.length === 0) {
@@ -174,12 +174,12 @@ const Book = () => {
             <div className="slots-container-grid">
               {avilableSlots.map((slot, index) => (
                 <div
+                  onClick={() => handleSlot(slot)}
                   style={{ cursor: "pointer" }}
                   className={`slots-container-single-grid ${selectedSlots.includes(slot) ? "grid-booked" : "grid-available"}`}>
                   <button
                     style={{ cursor: "pointer" }}
                     key={index}
-                    onClick={() => handleSlot(slot)}
                     className={`parking-slot-btn ${selectedSlots.includes(slot) ? "booked" : "available"}`}>
                     {selectedSlots.includes(slot) ? (
                       <CarRepairIcon className="slot-btn" />

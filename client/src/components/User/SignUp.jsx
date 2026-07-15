@@ -19,7 +19,6 @@ const SignUp = () => {
 
   useEffect(() => {
     if (user == null) return;
-    alert("You are already logged in, to again logged in logout first");
     navigate("/user/profile");
   }, [user, navigate]);
 
@@ -56,40 +55,56 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let imageUrl = "";
 
-    if (imageFile) {
-      imageUrl = await uploadImage();
-    }
+    if (isSignUpState) {
+      let imageUrl = "";
 
-    const payload = {
-      ...formData,
-      photo: imageUrl,
-    };
+      if (imageFile) {
+        imageUrl = await uploadImage();
+      }
 
-    try {
-      const response = await axios.post(`${API_URL}/user/signup`, payload, {
-        withCredentials: true,
-      });
+      const payload = {
+        ...formData,
+        photo: imageUrl,
+      };
 
-      setUser(response.data.user);
+      try {
+        const response = await axios.post(`${API_URL}/user/signup`, payload, {
+          withCredentials: true,
+        });
 
-      alert("User Created Successfully");
-      navigate("/user/login");
-    } catch (error) {
-      console.error("Signup Error:", error.response?.data || error.message);
-      alert(
-        `Signup failed: ${
-          error.response?.data.message || error.message.message
-        }`,
-      );
+        setUser(response.data.user);
+
+        alert("User Created Successfully");
+        navigate("/user/login");
+      } catch (error) {
+        console.error("Signup Error:", error.response?.data || error.message);
+        alert(
+          `Signup failed: ${
+            error.response?.data.message || error.message.message
+          }`,
+        );
+      }
+    } else {
+      try {
+        const response = await axios.post(`${API_URL}/user/login`, formData, {
+          withCredentials: true,
+        });
+        setUser(response.data.user);
+        alert("Login Successful");
+        navigate("/parkings");
+      } catch (error) {
+        console.error("Login Error:", error.response?.data || error.message);
+        alert(
+          error.response?.data?.message || "Login failed. Please try again.",
+        );
+      }
     }
   };
 
   return (
     <div className="sign-up-page">
       <h2 className="sign-up-heading">
-        {" "}
         {isSignUpState ? "Sign Up" : "Log In"} to ParkEase
       </h2>
       <form onSubmit={handleSubmit} className="sign-up-form">

@@ -17,7 +17,7 @@ const Parking = () => {
   useEffect(() => {
     if (!user || user == null) {
       alert("Please login first");
-      navigate("/user/login");
+      navigate("/user/signup");
     }
   }, []);
 
@@ -32,7 +32,7 @@ const Parking = () => {
       .catch((error) => {
         if (error.response?.status === 401) {
           console.error("Unauthorized access. Redirecting to login...");
-          navigate("/user/login");
+          navigate("/user/signup");
         } else {
           console.error("Error fetching data:", error);
         }

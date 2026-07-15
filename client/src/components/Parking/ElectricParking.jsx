@@ -27,7 +27,7 @@ const ElectricParking = () => {
         })
         .catch((error) => {
           if (error.response && error.response.status === 401) {
-            navigate("/user/login");
+            navigate("/user/signup");
           }
         });
     } else {
@@ -41,7 +41,7 @@ const ElectricParking = () => {
         })
         .catch((error) => {
           if (error.response && error.response.status === 401) {
-            navigate("/user/login");
+            navigate("/user/signup");
           }
         });
     }
@@ -61,7 +61,7 @@ const ElectricParking = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
-          navigate("/user/login");
+          navigate("/user/signup");
         }
       });
   };

@@ -52,8 +52,6 @@ const Booking = () => {
           </div>
         </div>
 
-        <hr />
-
         <div className="booking-info">
           <h4>Booked Slots</h4>
           <div className="slots">

@@ -81,6 +81,7 @@
 .parking-sub-details div p {
   font-size: 1.1rem;
   color: rgba(37, 37, 37, 0.8);
+  margin: 0;
 }
 
 .parking-date-div {

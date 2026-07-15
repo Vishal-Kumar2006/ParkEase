@@ -25,7 +25,7 @@ const Profile = () => {
   // Step 1: Check if the user is Logged in
   useEffect(() => {
     if (!user) {
-      navigate("/user/login");
+      navigate("/user/signup");
     }
   }, []);
 
@@ -38,10 +38,10 @@ const Profile = () => {
           setUserData(res.data.user);
           setUserDataLoading(false);
         } else {
-          navigate("/user/login");
+          navigate("/user/signup");
         }
       })
-      .catch(() => navigate("/user/login"));
+      .catch(() => navigate("/user/signup"));
   }, [user, navigate]);
 
   // Step 2: Collect Parking's data Created by User
@@ -108,7 +108,7 @@ const Profile = () => {
       .post(`${API_URL}/user/logout`, {}, { withCredentials: true })
       .then(() => {
         setUser(null);
-        navigate("/user/login");
+        navigate("/user/signup");
       })
       .catch((err) => console.log(err));
   };

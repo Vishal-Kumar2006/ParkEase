@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./NewParking.css";
 import API_URL from "../../config/api";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import CarRepairIcon from "@mui/icons-material/CarRepair";
+import Checkbox from "@mui/material/Checkbox";
 
 const NewParking = () => {
   const { user } = useAuth();
@@ -24,7 +27,7 @@ const NewParking = () => {
   useEffect(() => {
     if (!user) {
       alert("Please login first");
-      navigate("/user/login");
+      navigate("/user/signup");
     }
   }, []);
 
@@ -48,7 +51,6 @@ const NewParking = () => {
     );
 
     const result = await res.json();
-    console.log("Cloudinary response:", result);
 
     if (!res.ok) {
       throw new Error(result.error?.message || "Image upload failed");
@@ -112,7 +114,7 @@ const NewParking = () => {
       console.error("Error creating parking:", error);
       if (error.response && error.response.status === 401) {
         alert("Unauthorized! Please log in");
-        navigate("/user/login");
+        navigate("/user/signup");
       } else {
         alert("Failed to create parking.");
       }
@@ -122,95 +124,123 @@ const NewParking = () => {
   return (
     <div className="NewParking">
       <h2 className="NewParking-heading">Create New Parking</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="newParking-input">
-          <label>Parking Name:</label>
+      <form onSubmit={handleSubmit} className="new-parking-form">
+        <div className="newParking-singleInput-div">
+          <label className="newParking-label">Parking Name</label>
           <input
             type="text"
             name="name"
-            className="input"
+            className="newParking-input"
+            placeholder="Enter Parking Name"
             value={parkingData.name}
             onChange={handleChange}
             required
           />
         </div>
 
-        <div className="newParking-input">
-          <label>Image :</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImageFile(e.target.files[0])}
-            className="input"
-          />
-        </div>
-
-        <div className="newParking-input">
-          <label>Location:</label>
+        <div className="newParking-singleInput-div">
+          <label className="newParking-label">Parking Location</label>
           <input
             type="text"
             name="location"
-            className="input"
+            placeholder="Enter Parking Location"
+            className="newParking-input"
             value={parkingData.location}
             onChange={handleChange}
             required
           />
         </div>
 
-        <div className="newParking-input">
-          <label>Price Per Hour:</label>
-          <input
-            type="number"
-            name="pricePerHour"
-            className="input"
-            value={parkingData.pricePerHour}
-            onChange={handleChange}
-            required
-          />
+        <div className="newParking-dualInput-div">
+          <div className="">
+            <label className="newParking-label">Select Parking Image </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files[0])}
+              className="newParking-dual-input"
+              id="newParking-Image"
+            />
+          </div>
+
+          <div className="">
+            <label className="newParking-label">Per Hour Charges</label>
+            <input
+              type="number"
+              name="pricePerHour"
+              className="newParking-dual-input"
+              value={parkingData.pricePerHour}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
 
-        <div className="newParking-dual-input">
-          <div className="newParking-input check">
-            <label>Open Status</label>
+        <div className="newParking-dualInput-div">
+          <div className="form-check form-switch">
             <input
+              className="form-check-input newParking-input"
               type="checkbox"
+              role="switch"
+              id="isOpenSwitch"
               name="isOpen"
-              className="check-input"
               checked={parkingData.isOpen}
               onChange={handleChange}
             />
+            <label
+              className="form-check-label newParking-label"
+              htmlFor="isOpenSwitch">
+              Open Status
+            </label>
           </div>
 
-          <div className="newParking-input check">
-            <label>Is Electric Parking</label>
+          <div className="form-check form-switch">
             <input
+              className="form-check-input newParking-input"
               type="checkbox"
+              role="switch"
+              id="isOpenSwitch"
               name="isElectric"
-              className="check-input"
               checked={parkingData.isElectric}
               onChange={handleChange}
             />
+            <label
+              className="form-check-label newParking-label"
+              htmlFor="isOpenSwitch">
+              Is Electric Parking
+            </label>
           </div>
         </div>
+
         {/* ✅ Slots Section */}
-        <div className="slots-container">
-          <h3>24-Hour Slots</h3>
-          <div className="slots-grid">
+        <div className="parking-slots-div">
+          <h4>Fix 24 hour Available Parking Slot</h4>
+          <div className="slots-container-grid">
             {parkingData.totalSlots.map((slot, index) => (
-              <button
-                key={index}
-                className={`slot-btn ${slot ? "available" : "booked"}`}
+              <div
                 onClick={(e) => {
                   e.preventDefault();
                   toggleSlot(index);
-                }}>
-                {index} to {index + 1} {slot ? "🟢" : "🔴"}
-              </button>
+                }}
+                className={`slots-container-single-grid ${slot ? "grid-available" : "grid-booked"}`}>
+                <button
+                  key={index}
+                  className={`parking-slot-btn ${slot ? "available" : "booked"}`}>
+                  {slot ? (
+                    <DirectionsCarIcon className="slot-btn" />
+                  ) : (
+                    <CarRepairIcon className="slot-btn" />
+                  )}
+                </button>
+                <p className="">
+                  {index} - {index + 1}
+                </p>
+              </div>
             ))}
           </div>
         </div>
 
-        <button type="submit" className="newParking-btn">
+        <button type="submit" className="create-newParking-btn">
           Create Parking
         </button>
       </form>
