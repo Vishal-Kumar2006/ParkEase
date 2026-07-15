@@ -39,11 +39,12 @@
   transition: color 0.3s;
 }
 
-.nav-option img {
+.user-image {
   height: 3.5rem;
   width: 3.5rem;
   margin: 0 1rem;
-  border: 2px solid black;
+  border: none;
+  object-fit: cover;
   border-radius: 50%;
 }
 

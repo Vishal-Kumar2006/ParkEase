@@ -61,9 +61,13 @@ const Navbar = () => {
         {user ? (
           <NavLink
             to="/user/profile"
-            className="nav-option"
+            className="nav-option user-image"
             onClick={() => setMenuOpen(!menuOpen)}>
-            {user.photo ? <img src={user.photo} /> : <p>Profile</p>}
+            {user.photo ? (
+              <img src={user.photo} className="user-image" />
+            ) : (
+              <p>Profile</p>
+            )}
           </NavLink>
         ) : (
           <NavLink
