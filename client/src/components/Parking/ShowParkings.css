@@ -52,7 +52,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  margin: 0.5rem 0;
+  margin: 0;
 }
 
 .parking-sub-details div {
@@ -62,7 +62,8 @@
 
 .parking-name {
   font-size: 1.2rem;
-  color: rgba(40, 40, 40, 0.613);
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 700;
 }
 
 .parking-status {
@@ -78,9 +79,29 @@
   color: rgb(113, 0, 0);
 }
 
+.parking-user-details {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.parking-user-details img {
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1.5px solid white;
+}
+
+.parking-user-details h3 {
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+}
+
 .parking-sub-details div p {
-  font-size: 1.1rem;
-  color: rgba(37, 37, 37, 0.8);
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.75);
   margin: 0;
 }
 

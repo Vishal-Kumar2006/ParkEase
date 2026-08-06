@@ -10,6 +10,7 @@ async function fetchAllParking(req, res) {
 
   try {
     const allPakings = await Parking.find()
+      .populate("user", "name photo")
       .skip((page - 1) * limit)
       .limit(limit);
 
@@ -32,6 +33,7 @@ async function fetchElectricParking(req, res) {
   try {
     const [allParkings, count] = await Promise.all([
       Parking.find({ isElectric: true })
+        .populate("user", "name photo")
         .skip((page - 1) * limit)
         .limit(limit),
       Parking.countDocuments({ isElectric: true }),
@@ -64,6 +66,7 @@ async function searchParking(req, res) {
         $options: "i",
       },
     })
+      .populate("user", "name photo")
       .skip((page - 1) * limit)
       .limit(limit)
       .sort({ createdAt: -1 });
@@ -96,6 +99,7 @@ async function searchElectricParking(req, res) {
         $options: "i",
       },
     })
+      .populate("user", "name photo")
       .skip((page - 1) * limit)
       .limit(limit)
       .sort({ createdAt: -1 });

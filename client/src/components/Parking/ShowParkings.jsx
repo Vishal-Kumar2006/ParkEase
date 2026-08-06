@@ -35,6 +35,17 @@ const ShowParkings = ({ parkings }) => {
                 )}
               </p>
             </div>
+            <div className="parking-user-details">
+              {parking.user.photo ? (
+                <img src={parking.user.photo} alt="Parking User Image" />
+              ) : (
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png"
+                  alt="Parking User Image"
+                />
+              )}
+              <h3>{parking.user.name}</h3>
+            </div>
             <div className="parking-sub-details">
               <div className="">
                 <p className="parking-address">
