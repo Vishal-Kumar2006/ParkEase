@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import HomeCard from "./HomeCard.jsx";
+import Reveal from "../Body/Reveal.jsx";
 import "./Home.css";
 import "./HomeCard.css";
 
@@ -140,23 +141,28 @@ const Home = () => {
         <p>Hassle-free parking at your convenience</p>
 
         <div className="featured-parkings">
-          <div
-            className="parking-list parking-list-links"
-            onClick={() => navigate("/parkings")}>
-            <HomeCard card={allParking} />
-          </div>
+          <Reveal>
+            <div
+              className="parking-list parking-list-links"
+              onClick={() => navigate("/parkings")}>
+              <HomeCard card={allParking} />
+            </div>
+          </Reveal>
+          <Reveal>
+            <div
+              className="parking-list parking-list-links"
+              onClick={() => navigate("/electricParking")}>
+              <HomeCard card={electricParking} />
+            </div>
+          </Reveal>
 
-          <div
-            className="parking-list parking-list-links"
-            onClick={() => navigate("/electricParking")}>
-            <HomeCard card={electricParking} />
-          </div>
-
-          <div
-            className="parking-list parking-list-links"
-            onClick={() => navigate("/parkings/new")}>
-            <HomeCard card={newParking} />
-          </div>
+          <Reveal>
+            <div
+              className="parking-list parking-list-links"
+              onClick={() => navigate("/parkings/new")}>
+              <HomeCard card={newParking} />
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -165,9 +171,11 @@ const Home = () => {
         <h2>Popular Parking Spots</h2>
         <div className="featured-parkings">
           {parkingSpots.map((spot, index) => (
-            <div className="parking-list" key={index}>
-              <HomeCard key={index} card={spot} />
-            </div>
+            <Reveal>
+              <div className="parking-list" key={index}>
+                <HomeCard key={index} card={spot} />
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -177,9 +185,11 @@ const Home = () => {
         <h2>How It Works?</h2>
         <div className="featured-parkings">
           {parkingWorks.map((spot, index) => (
-            <div className="parking-list" key={index}>
-              <HomeCard key={index} card={spot} />
-            </div>
+            <Reveal>
+              <div className="parking-list" key={index}>
+                <HomeCard key={index} card={spot} />
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -189,9 +199,11 @@ const Home = () => {
         <h2>Why Choose Our Parking?</h2>
         <div className="featured-parkings">
           {features.map((spot, index) => (
-            <div className="parking-list" key={index}>
-              <HomeCard key={index} card={spot} />
-            </div>
+            <Reveal>
+              <div className="parking-list" key={index}>
+                <HomeCard key={index} card={spot} />
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>

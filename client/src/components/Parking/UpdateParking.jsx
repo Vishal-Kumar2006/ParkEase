@@ -63,102 +63,109 @@ const UpdateParking = () => {
 
   return (
     <div className="NewParking">
-      <h2 className="NewParking-heading">Update Parking</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="newParking-input">
-          <label>Parking Name:</label>
-          <input
-            type="text"
-            name="name"
-            className="input"
-            value={parkingData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <Reveal>
+        <h2 className="NewParking-heading">Update Parking</h2>
+      </Reveal>
 
-        <div className="newParking-input">
-          <label>Image URL:</label>
-          <input
-            type="text"
-            name="image"
-            className="input"
-            value={parkingData.image}
-            onChange={handleChange}
-            placeholder="Optional (Default Image Used)"
-          />
-        </div>
-
-        <div className="newParking-input">
-          <label>Location:</label>
-          <input
-            type="text"
-            name="location"
-            className="input"
-            value={parkingData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="newParking-input">
-          <label>Price Per Hour:</label>
-          <input
-            type="number"
-            name="pricePerHour"
-            className="input"
-            value={parkingData.pricePerHour}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="newParking-dual-input">
-          <div className="newParking-input check">
-            <label>Open Status</label>
+      <Reveal>
+        <form onSubmit={handleSubmit}>
+          <div className="newParking-input">
+            <label>Parking Name:</label>
             <input
-              type="checkbox"
-              name="isOpen"
-              className="check-input"
-              checked={parkingData.isOpen}
+              type="text"
+              name="name"
+              className="input"
+              value={parkingData.name}
               onChange={handleChange}
+              required
             />
           </div>
 
-          <div className="newParking-input check">
-            <label>Is Electric Parking</label>
+          <div className="newParking-input">
+            <label>Image URL:</label>
             <input
-              type="checkbox"
-              name="isElectric"
-              className="check-input"
-              checked={parkingData.isElectric}
+              type="text"
+              name="image"
+              className="input"
+              value={parkingData.image}
               onChange={handleChange}
+              placeholder="Optional (Default Image Used)"
             />
           </div>
-        </div>
 
-        {/* ✅ Slots Section */}
-        <div className="slots-container">
-          <h3>24-Hour Slots</h3>
-          <div className="slots-grid">
-            {parkingData.totalSlots.map((slot, index) => (
-              <button
-                key={index}
-                className={`slot-btn ${slot ? "available" : "booked"}`}
-                onClick={(e) => {
-                  e.preventDefault(); // Prevent form submission
-                  toggleSlot(index);
-                }}>
-                {index} to {index + 1} {slot ? "🟢" : "🔴"}
-              </button>
-            ))}
+          <div className="newParking-input">
+            <label>Location:</label>
+            <input
+              type="text"
+              name="location"
+              className="input"
+              value={parkingData.location}
+              onChange={handleChange}
+              required
+            />
           </div>
-        </div>
 
-        <button type="submit" className="newParking-btn">
-          Update Parking
-        </button>
-      </form>
+          <div className="newParking-input">
+            <label>Price Per Hour:</label>
+            <input
+              type="number"
+              name="pricePerHour"
+              className="input"
+              value={parkingData.pricePerHour}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="newParking-dual-input">
+            <div className="newParking-input check">
+              <label>Open Status</label>
+              <input
+                type="checkbox"
+                name="isOpen"
+                className="check-input"
+                checked={parkingData.isOpen}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="newParking-input check">
+              <label>Is Electric Parking</label>
+              <input
+                type="checkbox"
+                name="isElectric"
+                className="check-input"
+                checked={parkingData.isElectric}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          {/* ✅ Slots Section */}
+          <Reveal>
+            <div className="slots-container">
+              <h3>24-Hour Slots</h3>
+              <div className="slots-grid">
+                {parkingData.totalSlots.map((slot, index) => (
+                  <button
+                    key={index}
+                    className={`slot-btn ${slot ? "available" : "booked"}`}
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent form submission
+                      toggleSlot(index);
+                    }}>
+                    {index} to {index + 1} {slot ? "🟢" : "🔴"}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <button type="submit" className="newParking-btn">
+            Update Parking
+          </button>
+        </form>
+      </Reveal>
     </div>
   );
 };

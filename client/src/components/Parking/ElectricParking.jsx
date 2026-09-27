@@ -6,6 +6,7 @@ import API_URL from "../../config/api";
 import PagePagination from "../Body/PagePagination";
 import SearchPage from "../Body/SearchPage";
 import ShowParkings from "./ShowParkings";
+import Reveal from "../Body/Reveal.jsx";
 import "./AllParking.css";
 
 const ElectricParking = () => {
@@ -69,12 +70,14 @@ const ElectricParking = () => {
 
   return (
     <div>
-      <SearchPage
-        placeHolder={"Search Electric Parking by Location"}
-        quequeryrry={query}
-        setQuery={setQuery}
-        handleSubmit={handleSubmit}
-      />
+      <Reveal>
+        <SearchPage
+          placeHolder={"Search Electric Parking by Location"}
+          quequeryrry={query}
+          setQuery={setQuery}
+          handleSubmit={handleSubmit}
+        />
+      </Reveal>
 
       {allParkings.length == 0 || allParkings == null ? (
         <LoadParking />
@@ -82,7 +85,9 @@ const ElectricParking = () => {
         <div className="">
           <ShowParkings parkings={allParkings} />
           <div className="Pagination">
-            <PagePagination setPage={setPage} count={count} />
+            <Reveal>
+              <PagePagination setPage={setPage} count={count} />
+            </Reveal>
           </div>
         </div>
       )}

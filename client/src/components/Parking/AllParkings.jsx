@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import LoadParking from "../Loading/LoadParking";
 import ShowParkings from "./ShowParkings";
 import API_URL from "../../config/api";
-import ReviewForm from "../Review/ReviewForm";
 import PagePagination from "../Body/PagePagination";
 import SearchPage from "../Body/SearchPage";
+import Reveal from "../Body/Reveal.jsx";
 import "./AllParking.css";
 
 const AllParkings = () => {
@@ -67,12 +67,14 @@ const AllParkings = () => {
 
   return (
     <div>
-      <SearchPage
-        placeHolder={"Search Parking by Location"}
-        quequeryrry={query}
-        setQuery={setQuery}
-        handleSubmit={handleSubmit}
-      />
+      <Reveal>
+        <SearchPage
+          placeHolder={"Search Parking by Location"}
+          quequeryrry={query}
+          setQuery={setQuery}
+          handleSubmit={handleSubmit}
+        />
+      </Reveal>
 
       {allParkings == null || allParkings.length == 0 ? (
         <LoadParking />
@@ -80,7 +82,9 @@ const AllParkings = () => {
         <div className="">
           <ShowParkings parkings={allParkings} />
           <div className="Pagination">
-            <PagePagination setPage={setPage} count={count} />
+            <Reveal>
+              <PagePagination setPage={setPage} count={count} />
+            </Reveal>
           </div>
         </div>
       )}

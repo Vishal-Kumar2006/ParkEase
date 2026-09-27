@@ -41,6 +41,7 @@ const ReviewHome = ({ parkingId }) => {
   return (
     <div className="ReviewHome">
       <ReviewForm parkingId={parkingId} onReviewAdded={handleReviewCreated} />
+
       <AllReviews reviews={reviews} onDeleteReview={handleReviewDeleted} />
     </div>
   );

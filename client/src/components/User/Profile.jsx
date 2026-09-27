@@ -6,6 +6,7 @@ import ShowParkings from "../Parking/ShowParkings.jsx";
 import ShowBookings from "../Booking/ShowBookings.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
 import API_URL from "../../config/api.js";
+import Reveal from "../Body/Reveal.jsx";
 
 const Profile = () => {
   // All Storage area
@@ -123,30 +124,34 @@ const Profile = () => {
     <div className="profile">
       {/* Profile Data of User */}
       <div className="profile-data">
-        <div className="profile-image">
-          <img
-            className="user-photo"
-            src={
-              userData?.photo ||
-              "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-            }
-            alt="User Image"
-          />
-        </div>
-        <div className="profile-data-info">
-          <h2 className="user-name">{userData?.name || "User Name"}</h2>
-          <div className="parking-and-booking">
-            <div className="parking-data">
-              <h2>{parkings.length ? parkings.length : 0} </h2>
-              <p>Parkings </p>
-            </div>
+        <Reveal>
+          <div className="profile-image">
+            <img
+              className="user-photo"
+              src={
+                userData?.photo ||
+                "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+              }
+              alt="User Image"
+            />
+          </div>
+        </Reveal>
+        <Reveal>
+          <div className="profile-data-info">
+            <h2 className="user-name">{userData?.name || "User Name"}</h2>
+            <div className="parking-and-booking">
+              <div className="parking-data">
+                <h2>{parkings.length ? parkings.length : 0} </h2>
+                <p>Parkings </p>
+              </div>
 
-            <div className="booking-data">
-              <h2>{bookings.length ? bookings.length : 0} </h2>
-              <p>Bookings </p>
+              <div className="booking-data">
+                <h2>{bookings.length ? bookings.length : 0} </h2>
+                <p>Bookings </p>
+              </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       {/* Parkings created by this user */}
@@ -182,9 +187,11 @@ const Profile = () => {
         </button>
       </div>
 
-      <button onClick={handleLogOut} className="log-out-btn">
-        Log Out
-      </button>
+      <Reveal>
+        <button onClick={handleLogOut} className="log-out-btn">
+          Log Out
+        </button>
+      </Reveal>
     </div>
   );
 };

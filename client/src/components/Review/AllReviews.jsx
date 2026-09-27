@@ -1,4 +1,5 @@
 import Review from "./Review.jsx";
+import Reveal from "../Body/Reveal.jsx";
 import "./AllReview.css";
 
 const AllReviews = ({ reviews, onDeleteReview }) => {
@@ -13,11 +14,13 @@ const AllReviews = ({ reviews, onDeleteReview }) => {
           </h4>
           <hr />
           {reviews.map((review) => (
-            <Review
-              key={review._id}
-              review={review}
-              onDelete={onDeleteReview}
-            />
+            <Reveal>
+              <Review
+                key={review._id}
+                review={review}
+                onDelete={onDeleteReview}
+              />
+            </Reveal>
           ))}
         </>
       )}

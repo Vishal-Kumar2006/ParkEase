@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Reveal from "../Body/Reveal.jsx";
 import "./ShowBookings.css";
 
 const ShowBookings = ({ parkings, bookings }) => {
@@ -18,37 +19,39 @@ const ShowBookings = ({ parkings, bookings }) => {
         if (!parking) return null;
 
         return (
-          <div
-            key={booking._id}
-            className="booking-card"
-            onClick={() =>
-              navigate(`/show-booking/${booking._id}`, {
-                state: { booking, parking },
-              })
-            }>
-            <img src={parking.image} alt={parking.name} />
-            <div className="card-details">
-              <h3>{parking.name}</h3>
-              <p>
-                <b>Location : </b> {parking.location}
-              </p>
-              <p>
-                <b>Booking Status :</b> {booking.status}
-              </p>
-              <p>
-                <b>Total Amount:</b> ₹{booking.totalAmount}
-              </p>
+          <Reveal>
+            <div
+              key={booking._id}
+              className="booking-card"
+              onClick={() =>
+                navigate(`/show-booking/${booking._id}`, {
+                  state: { booking, parking },
+                })
+              }>
+              <img src={parking.image} alt={parking.name} />
+              <div className="card-details">
+                <h3>{parking.name}</h3>
+                <p>
+                  <b>Location : </b> {parking.location}
+                </p>
+                <p>
+                  <b>Booking Status :</b> {booking.status}
+                </p>
+                <p>
+                  <b>Total Amount:</b> ₹{booking.totalAmount}
+                </p>
 
-              <button
-                onClick={() =>
-                  navigate(`/show-booking/${booking._id}`, {
-                    state: { booking, parking },
-                  })
-                }>
-                View Details
-              </button>
+                <button
+                  onClick={() =>
+                    navigate(`/show-booking/${booking._id}`, {
+                      state: { booking, parking },
+                    })
+                  }>
+                  View Details
+                </button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         );
       })}
     </div>

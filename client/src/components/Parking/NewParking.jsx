@@ -6,7 +6,7 @@ import "./NewParking.css";
 import API_URL from "../../config/api";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import CarRepairIcon from "@mui/icons-material/CarRepair";
-import Checkbox from "@mui/material/Checkbox";
+import Reveal from "../Body/Reveal";
 
 const NewParking = () => {
   const { user } = useAuth();
@@ -123,122 +123,135 @@ const NewParking = () => {
 
   return (
     <div className="NewParking">
-      <h2 className="NewParking-heading">Create New Parking</h2>
+      <Reveal>
+        <h2 className="NewParking-heading">Create New Parking</h2>
+      </Reveal>
+
       <form onSubmit={handleSubmit} className="new-parking-form">
-        <div className="newParking-singleInput-div">
-          <label className="newParking-label">Parking Name</label>
-          <input
-            type="text"
-            name="name"
-            className="newParking-input"
-            placeholder="Enter Parking Name"
-            value={parkingData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="newParking-singleInput-div">
-          <label className="newParking-label">Parking Location</label>
-          <input
-            type="text"
-            name="location"
-            placeholder="Enter Parking Location"
-            className="newParking-input"
-            value={parkingData.location}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="newParking-dualInput-div">
-          <div className="">
-            <label className="newParking-label">Select Parking Image </label>
+        <Reveal>
+          <div className="newParking-singleInput-div">
+            <label className="newParking-label">Parking Name</label>
             <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setImageFile(e.target.files[0])}
-              className="newParking-dual-input"
-              id="newParking-Image"
-            />
-          </div>
-
-          <div className="">
-            <label className="newParking-label">Per Hour Charges</label>
-            <input
-              type="number"
-              name="pricePerHour"
-              className="newParking-dual-input"
-              value={parkingData.pricePerHour}
+              type="text"
+              name="name"
+              className="newParking-input"
+              placeholder="Enter Parking Name"
+              value={parkingData.name}
               onChange={handleChange}
               required
             />
           </div>
-        </div>
+        </Reveal>
 
-        <div className="newParking-dualInput-div">
-          <div className="form-check form-switch">
+        <Reveal>
+          <div className="newParking-singleInput-div">
+            <label className="newParking-label">Parking Location</label>
             <input
-              className="form-check-input newParking-input"
-              type="checkbox"
-              role="switch"
-              id="isOpenSwitch"
-              name="isOpen"
-              checked={parkingData.isOpen}
+              type="text"
+              name="location"
+              placeholder="Enter Parking Location"
+              className="newParking-input"
+              value={parkingData.location}
               onChange={handleChange}
+              required
             />
-            <label
-              className="form-check-label newParking-label"
-              htmlFor="isOpenSwitch">
-              Open Status
-            </label>
           </div>
+        </Reveal>
 
-          <div className="form-check form-switch">
-            <input
-              className="form-check-input newParking-input"
-              type="checkbox"
-              role="switch"
-              id="isOpenSwitch"
-              name="isElectric"
-              checked={parkingData.isElectric}
-              onChange={handleChange}
-            />
-            <label
-              className="form-check-label newParking-label"
-              htmlFor="isOpenSwitch">
-              Is Electric Parking
-            </label>
-          </div>
-        </div>
+        <Reveal>
+          <div className="newParking-dualInput-div">
+            <div className="">
+              <label className="newParking-label">Select Parking Image </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImageFile(e.target.files[0])}
+                className="newParking-dual-input"
+                id="newParking-Image"
+              />
+            </div>
 
-        {/* ✅ Slots Section */}
-        <div className="parking-slots-div">
-          <h4>Fix 24 hour Available Parking Slot</h4>
-          <div className="slots-container-grid" key={"slots-container-grid"}>
-            {parkingData.totalSlots.map((slot, index) => (
-              <div
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggleSlot(index);
-                }}
-                className={`slots-container-single-grid ${slot ? "grid-available" : "grid-booked"}`}>
-                <button
-                  key={index}
-                  className={`parking-slot-btn ${slot ? "available" : "booked"}`}>
-                  {slot ? (
-                    <DirectionsCarIcon className="slot-btn" />
-                  ) : (
-                    <CarRepairIcon className="slot-btn" />
-                  )}
-                </button>
-                <p className="">
-                  {index} - {index + 1}
-                </p>
-              </div>
-            ))}
+            <div className="">
+              <label className="newParking-label">Per Hour Charges</label>
+              <input
+                type="number"
+                name="pricePerHour"
+                className="newParking-dual-input"
+                value={parkingData.pricePerHour}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
-        </div>
+        </Reveal>
+
+        <Reveal>
+          <div className="newParking-dualInput-div">
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input newParking-input"
+                type="checkbox"
+                role="switch"
+                id="isOpenSwitch"
+                name="isOpen"
+                checked={parkingData.isOpen}
+                onChange={handleChange}
+              />
+              <label
+                className="form-check-label newParking-label"
+                htmlFor="isOpenSwitch">
+                Open Status
+              </label>
+            </div>
+
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input newParking-input"
+                type="checkbox"
+                role="switch"
+                id="isOpenSwitch"
+                name="isElectric"
+                checked={parkingData.isElectric}
+                onChange={handleChange}
+              />
+              <label
+                className="form-check-label newParking-label"
+                htmlFor="isOpenSwitch">
+                Is Electric Parking
+              </label>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          {/* ✅ Slots Section */}
+          <div className="parking-slots-div">
+            <h4>Fix 24 hour Available Parking Slot</h4>
+            <div className="slots-container-grid" key={"slots-container-grid"}>
+              {parkingData.totalSlots.map((slot, index) => (
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleSlot(index);
+                  }}
+                  className={`slots-container-single-grid ${slot ? "grid-available" : "grid-booked"}`}>
+                  <button
+                    key={index}
+                    className={`parking-slot-btn ${slot ? "available" : "booked"}`}>
+                    {slot ? (
+                      <DirectionsCarIcon className="slot-btn" />
+                    ) : (
+                      <CarRepairIcon className="slot-btn" />
+                    )}
+                  </button>
+                  <p className="">
+                    {index} - {index + 1}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
 
         <button type="submit" className="create-newParking-btn">
           Create Parking
