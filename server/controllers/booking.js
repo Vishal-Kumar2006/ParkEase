@@ -55,7 +55,21 @@ async function getBookingByUserId(req, res) {
     if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
     const bookings = await Booking.find({ userId: userId });
-    res.status(201).json(bookings);
+    const optimizedBookings = bookings.map((booking) => {
+      const bookingObj = booking.toObject();
+
+      return {
+        ...bookingObj,
+        image: bookingObj.image
+          ? bookingObj.image.replace(
+              "/upload/",
+              "/upload/w_400,h_300,c_fill,q_auto,f_auto/",
+            )
+          : null,
+      };
+    });
+
+    res.status(201).json({ bookings: optimizedBookings });
   } catch (error) {
     res.status(500).json({ message: "Error creating parking", error });
   }

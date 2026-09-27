@@ -113,9 +113,6 @@
   height: 100%;
   cursor: pointer;
   transition: 0.2s;
-  animation: appear 1s ease-in-out;
-  animation-timeline: view();
-  animation-range: entry 0% cover 15%;
 }
 
 .booking-slot-btn {

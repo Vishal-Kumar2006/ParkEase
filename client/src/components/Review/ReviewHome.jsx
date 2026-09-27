@@ -12,7 +12,7 @@ const ReviewHome = ({ parkingId }) => {
     const res = await axios.get(`${API_URL}/reviews/parking/${parkingId}`, {
       withCredentials: true,
     });
-    setReviews(res.data);
+    setReviews(res.data.reviews);
   };
 
   useEffect(() => {

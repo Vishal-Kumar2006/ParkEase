@@ -9,15 +9,47 @@ async function fetchAllParking(req, res) {
   }
 
   try {
-    const allPakings = await Parking.find()
+    const allParkings = await Parking.find()
       .populate("user", "name photo")
       .skip((page - 1) * limit)
       .limit(limit);
 
+    const optimizedParkings = allParkings.map((parking) => {
+      const parkingObj = parking.toObject();
+
+      return {
+        ...parkingObj,
+
+        image: parkingObj.image
+          ? parkingObj.image.replace(
+              "/upload/",
+              "/upload/w_400,h_300,c_fill,q_auto,f_auto/",
+            )
+          : null,
+
+        user: parkingObj.user
+          ? {
+              ...parkingObj.user,
+
+              photo: parkingObj.user.photo
+                ? parkingObj.user.photo.replace(
+                    "/upload/",
+                    "/upload/w_100,h_100,c_fill,q_auto,f_auto/",
+                  )
+                : null,
+            }
+          : null,
+      };
+    });
+
     const count = await Parking.countDocuments();
     const totalPages = Math.ceil(count / limit);
 
-    res.status(200).json({ allPakings, totalPages, count });
+    res.status(200).json({
+      optimizedParkings,
+      totalPages,
+      count,
+    });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -39,8 +71,36 @@ async function fetchElectricParking(req, res) {
       Parking.countDocuments({ isElectric: true }),
     ]);
 
+    const optimizedParkings = allParkings.map((parking) => {
+      const parkingObj = parking.toObject();
+
+      return {
+        ...parkingObj,
+
+        image: parkingObj.image
+          ? parkingObj.image.replace(
+              "/upload/",
+              "/upload/w_400,h_300,c_fill,q_auto,f_auto/",
+            )
+          : null,
+
+        user: parkingObj.user
+          ? {
+              ...parkingObj.user,
+
+              photo: parkingObj.user.photo
+                ? parkingObj.user.photo.replace(
+                    "/upload/",
+                    "/upload/w_100,h_100,c_fill,q_auto,f_auto/",
+                  )
+                : null,
+            }
+          : null,
+      };
+    });
+
     return res.status(200).json({
-      allParkings,
+      allParkings: optimizedParkings,
       totalPages: Math.ceil(count / limit),
       currentPage: page,
       totalItems: count,
@@ -60,7 +120,7 @@ async function searchParking(req, res) {
     return res.status(400).json({ message: "Invalid page number" });
   }
   try {
-    const allPakings = await Parking.find({
+    const allParkings = await Parking.find({
       location: {
         $regex: location,
         $options: "i",
@@ -71,6 +131,34 @@ async function searchParking(req, res) {
       .limit(limit)
       .sort({ createdAt: -1 });
 
+    const optimizedParkings = allParkings.map((parking) => {
+      const parkingObj = parking.toObject();
+
+      return {
+        ...parkingObj,
+
+        image: parkingObj.image
+          ? parkingObj.image.replace(
+              "/upload/",
+              "/upload/w_400,h_300,c_fill,q_auto,f_auto/",
+            )
+          : null,
+
+        user: parkingObj.user
+          ? {
+              ...parkingObj.user,
+
+              photo: parkingObj.user.photo
+                ? parkingObj.user.photo.replace(
+                    "/upload/",
+                    "/upload/w_100,h_100,c_fill,q_auto,f_auto/",
+                  )
+                : null,
+            }
+          : null,
+      };
+    });
+
     const count = await Parking.countDocuments({
       location: {
         $regex: location,
@@ -79,7 +167,7 @@ async function searchParking(req, res) {
     });
     const totalPages = Math.ceil(count / limit);
 
-    res.status(200).json({ allPakings, totalPages, count });
+    res.status(200).json({ allParkings: optimizedParkings, totalPages, count });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -93,7 +181,7 @@ async function searchElectricParking(req, res) {
     return res.status(400).json({ message: "Invalid page number" });
   }
   try {
-    const allPakings = await Parking.find({
+    const allParkings = await Parking.find({
       location: {
         $regex: location,
         $options: "i",
@@ -104,6 +192,34 @@ async function searchElectricParking(req, res) {
       .limit(limit)
       .sort({ createdAt: -1 });
 
+    const optimizedParkings = allParkings.map((parking) => {
+      const parkingObj = parking.toObject();
+
+      return {
+        ...parkingObj,
+
+        image: parkingObj.image
+          ? parkingObj.image.replace(
+              "/upload/",
+              "/upload/w_400,h_300,c_fill,q_auto,f_auto/",
+            )
+          : null,
+
+        user: parkingObj.user
+          ? {
+              ...parkingObj.user,
+
+              photo: parkingObj.user.photo
+                ? parkingObj.user.photo.replace(
+                    "/upload/",
+                    "/upload/w_100,h_100,c_fill,q_auto,f_auto/",
+                  )
+                : null,
+            }
+          : null,
+      };
+    });
+
     const count = await Parking.countDocuments({
       isElectric: true,
       location: {
@@ -113,7 +229,7 @@ async function searchElectricParking(req, res) {
     });
     const totalPages = Math.ceil(count / limit);
 
-    res.status(200).json({ allPakings, totalPages, count });
+    res.status(200).json({ allParkings: optimizedParkings, totalPages, count });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

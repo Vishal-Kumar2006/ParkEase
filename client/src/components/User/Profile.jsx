@@ -36,6 +36,7 @@ const Profile = () => {
       .then((res) => {
         if (res.data.user) {
           setUserData(res.data.user);
+
           setUserDataLoading(false);
         } else {
           navigate("/user/signup");
@@ -63,11 +64,11 @@ const Profile = () => {
   useEffect(() => {
     try {
       axios
-        .get(`${API_URL}/bookings/getBooking_byUserId`, {
+        .get(`${API_URL}/bookings/getBooking-byUserId`, {
           withCredentials: true,
         })
         .then((res) => {
-          setBookings(res.data);
+          setBookings(res.data.bookings);
         })
         .catch((error) => {
           setBookings(null);

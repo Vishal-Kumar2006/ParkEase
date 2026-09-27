@@ -25,7 +25,7 @@ const AllParkings = () => {
           withCredentials: true,
         })
         .then((response) => {
-          setAllParkings(response.data.allPakings);
+          setAllParkings(response.data.optimizedParkings);
           setCount(response.data.totalPages);
         })
         .catch((error) => {
@@ -39,7 +39,7 @@ const AllParkings = () => {
           `${API_URL}/parkings/search-parking?location=${query}?&page=${page}`,
         )
         .then((response) => {
-          setAllParkings(response.data.allPakings);
+          setAllParkings(response.data.optimizedParkings);
           setCount(response.data.totalPages);
         })
         .catch((error) => {
@@ -55,7 +55,7 @@ const AllParkings = () => {
     axios
       .get(`${API_URL}/parkings/search-parking?location=${query}&page=${page}`)
       .then((response) => {
-        setAllParkings(response.data.allPakings);
+        setAllParkings(response.data.allParkings);
         setCount(response.data.totalPages);
       })
       .catch((error) => {
@@ -74,7 +74,7 @@ const AllParkings = () => {
         handleSubmit={handleSubmit}
       />
 
-      {allParkings.length == 0 || allParkings == null ? (
+      {allParkings == null || allParkings.length == 0 ? (
         <LoadParking />
       ) : (
         <div className="">

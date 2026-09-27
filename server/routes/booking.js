@@ -7,7 +7,7 @@ const {
 } = require("../controllers/booking.js");
 
 router.post("/book", handleBooking);
-router.get("/getBooking_byUserId", getBookingByUserId);
+router.get("/getBooking-byUserId", getBookingByUserId);
 
 router.get("/:id", getBookingById);
 

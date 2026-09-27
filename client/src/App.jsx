@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useRef } from "react";
+import Lenis from "lenis";
 import Navbar from "./components/Body/Navbar.jsx";
 import Footer from "./components/Body/Footer.jsx";
 import "./App.css";
@@ -28,6 +29,27 @@ const Booking = lazy(() => import("./components/Booking/Booking.jsx"));
 const NotFound = lazy(() => import("./components/Body/NotFound.jsx")); // Handle unknown routes
 
 const App = () => {
+  const lenisRef = useRef(null);
+
+  // Initialize Lenis
+  useEffect(() => {
+    const lenis = new Lenis();
+    lenisRef.current = lenis;
+    let animationFrameId;
+    function raf(time) {
+      lenis.raf(time);
+      animationFrameId = requestAnimationFrame(raf);
+    }
+    animationFrameId = requestAnimationFrame(raf);
+
+    // Cleanup
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
+
   return (
     <div className="App">
       <Navbar />

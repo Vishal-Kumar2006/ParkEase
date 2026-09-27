@@ -8,14 +8,11 @@
 .parking-card {
   background-color: #00ff6656;
   border-radius: 1rem 1rem 0 0;
-  animation: appear 1s ease-in-out;
-  animation-timeline: view();
-  animation-range: entry 0% cover 20%;
-  transition: 0.2s ease-in-out;
+  transition-duration: 0.3s;
 }
 
 .parking-card:hover {
-  box-shadow: 0 0 10px rgb(0, 12, 92);
+  box-shadow: 0 0 8px rgb(9, 9, 9);
   cursor: pointer;
 }
 

@@ -14,7 +14,14 @@ const ShowParkings = ({ parkings }) => {
           onClick={() => navigate(`/parkings/${parking._id}`)}>
           <div className="parking-img-div">
             {parking.image ? (
-              <img src={parking.image} alt="Parking" className="parking-img" />
+              <img
+                src={parking.image}
+                width={400}
+                height={300}
+                loading="lazy"
+                alt="Parking"
+                className="parking-img"
+              />
             ) : (
               <img
                 src="https://thumbs.dreamstime.com/b/web-324671543.jpg"
@@ -37,7 +44,13 @@ const ShowParkings = ({ parkings }) => {
             </div>
             <div className="parking-user-details">
               {parking.user.photo ? (
-                <img src={parking.user.photo} alt="Parking User Image" />
+                <img
+                  src={parking.user.photo}
+                  width={40}
+                  height={40}
+                  loading="lazy"
+                  alt="Parking User Image"
+                />
               ) : (
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png"

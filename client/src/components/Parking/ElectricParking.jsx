@@ -36,7 +36,8 @@ const ElectricParking = () => {
           `${API_URL}/parkings/search-electric-parking?location=${query}?&page=${page}`,
         )
         .then((response) => {
-          setAllParkings(response.data.allPakings);
+          console.log(response.data);
+          setAllParkings(response.data.allParkings);
           setCount(response.data.totalPages);
         })
         .catch((error) => {
@@ -55,7 +56,7 @@ const ElectricParking = () => {
       )
       .then((response) => {
         setAllParkings(
-          response.data.allPakings.filter((parking) => parking.isElectric),
+          response.data.allParkings.filter((parking) => parking.isElectric),
         );
         setCount(response.data.totalPages);
       })

@@ -215,7 +215,7 @@ const NewParking = () => {
         {/* ✅ Slots Section */}
         <div className="parking-slots-div">
           <h4>Fix 24 hour Available Parking Slot</h4>
-          <div className="slots-container-grid">
+          <div className="slots-container-grid" key={"slots-container-grid"}>
             {parkingData.totalSlots.map((slot, index) => (
               <div
                 onClick={(e) => {

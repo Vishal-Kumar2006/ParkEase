@@ -37,8 +37,24 @@ const getReviewByParkingId = async (req, res) => {
       "userId",
       "name photo",
     );
+    const optimizedReview = reviews.map((review) => {
+      const reviewObj = review.toObject();
 
-    res.status(200).json(reviews);
+      return {
+        ...reviewObj,
+        userId: reviewObj.userId
+          ? {
+              ...reviewObj.userId,
+              photo: reviewObj.userId.photo.replace(
+                "/upload/",
+                "/upload/w_100,h_100,c_fill,q_auto,f_auto/",
+              ),
+            }
+          : null,
+      };
+    });
+
+    res.status(200).json({ reviews: optimizedReview });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Something went wrong." });

@@ -88,9 +88,10 @@ const Book = () => {
         },
       );
 
-      alert("Booking successful!");
-      navigate("/parkings"); // Redirect to user bookings page
-    } catch (error) {
+      console.log(response.data.booking.parkingId);
+      alert("Booking Sucessfull");
+      navigate(`/parkings/${response.data.booking.parkingId}`);
+    } catch (errro) {
       console.error("Error booking slot:", error);
       alert("Booking failed. Try again.");
     }

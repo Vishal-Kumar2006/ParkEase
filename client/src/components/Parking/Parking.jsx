@@ -121,7 +121,7 @@ const Parking = () => {
 
           <div className="parking-slots-div">
             <h4>24 Hour's Parking Slot</h4>
-            <div className="slots-container-grid">
+            <div className="slots-container-grid" key={"slots-container"}>
               {parking.totalSlots.map((slot, index) => (
                 <div
                   className={`slots-container-single-grid ${slot ? "grid-available" : "grid-booked"}`}>
