@@ -6,6 +6,7 @@ import API_URL from "../../config/api";
 import "../Parking/Parking.css";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import CarRepairIcon from "@mui/icons-material/CarRepair";
+const Spinner = lazy(() => import("../Body/Spinner.jsx"));
 
 const Book = () => {
   const { id } = useParams();
@@ -48,7 +49,7 @@ const Book = () => {
     setAvilableSlots(updatedSlots);
   }, [parking]);
 
-  if (!parking) return <h2>Loading...</h2>;
+  if (!parking) return <Spinner />;
 
   const handleSlot = (slot) => {
     setSelectedSlots(

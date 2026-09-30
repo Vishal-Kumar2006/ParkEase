@@ -1,6 +1,9 @@
+import Spinner from "../Body/Spinner.jsx";
+
 const LoadUser = () => {
   return (
     <div className="profile">
+      <Spinner />
       <div className="profile-data">
         <img
           className="user-photo"

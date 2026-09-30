@@ -1,14 +1,18 @@
 import "./LoadParking.css";
+import Spinner from "../Body/Spinner.jsx";
 
 const LoadParking = () => {
   const Card = () => {
     return (
-      <div className={`parking-card-loading`}>
-        <div className="parking-img-loading"></div>
-        <div className="detail-loading"></div>
-        <p className="parking-address-loading"></p>
-        <p className="parking-address-loading-half"></p>
-      </div>
+      <>
+        <Spinner />
+        <div className={`parking-card-loading`}>
+          <div className="parking-img-loading"></div>
+          <div className="detail-loading"></div>
+          <p className="parking-address-loading"></p>
+          <p className="parking-address-loading-half"></p>
+        </div>
+      </>
     );
   };
 

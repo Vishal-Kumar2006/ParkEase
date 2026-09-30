@@ -28,6 +28,8 @@ const Book = lazy(() => import("./components/Booking/Book.jsx"));
 const Booking = lazy(() => import("./components/Booking/Booking.jsx"));
 const NotFound = lazy(() => import("./components/Body/NotFound.jsx")); // Handle unknown routes
 
+const Spinner = lazy(() => import("../src/components/Body/Spinner.jsx"));
+
 const App = () => {
   const lenisRef = useRef(null);
 
@@ -55,7 +57,7 @@ const App = () => {
       <Navbar />
 
       {/* Suspense to handle lazy loading fallback */}
-      <Suspense fallback={<h2>Loading...</h2>}>
+      <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<Home />} />
 

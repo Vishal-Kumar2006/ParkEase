@@ -7,6 +7,7 @@ import ShowBookings from "../Booking/ShowBookings.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
 import API_URL from "../../config/api.js";
 import Reveal from "../Body/Reveal.jsx";
+import Spinner from "../Body/Spinner.jsx";
 
 const Profile = () => {
   // All Storage area
@@ -117,7 +118,7 @@ const Profile = () => {
 
   // If User is loggedin and it's data is loading
   if (!userData && userDataLoading) {
-    return <h2>Loading...</h2>;
+    return <Spinner />;
   }
 
   return (

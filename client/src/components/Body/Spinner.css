@@ -1,0 +1,6 @@
+.Spinner {
+  position: fixed;
+  top: 40%;
+  left: 43%;
+  z-index: 100;
+}

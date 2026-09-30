@@ -8,6 +8,7 @@ import API_URL from "../../config/api.js";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import CarRepairIcon from "@mui/icons-material/CarRepair";
 import Reveal from "../Body/Reveal.jsx";
+import Spinner from "../Body/Spinner.jsx";
 
 const Parking = () => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Parking = () => {
   }, [id]);
 
   if (!parking) {
-    return <h2>Loading...</h2>;
+    return <Spinner />;
   }
 
   return (
